@@ -400,7 +400,7 @@ oops.first // => Anne
 					</ul>
 				</section>
 				<section>
-					<h2>Constructeur</h2>
+					<h2>Prototype</h2>
 					<pre>
 						<code class='javascript'>
 function Person(first, last) {
@@ -422,8 +422,227 @@ john.greet()    // 'Salut je m’appelle John'
 						</code>
 					</pre>
 				</section>
+				<section>
+					<h2>Prototype (Don't)</h2>
+					<pre>
+						<code class='javascript'>
+function Person(first, last) {
+  this.first = first;
+  this.last = last;
+  this.fullName = function fullName() {
+    return this.first + ' ' + this.last;
+  }
+  this.greet = function greet() {
+    alert('Salut je m’appelle ' + this.first);
+  }
+}
+var john = new Person('John', 'Smith');
+john.fullName() // => 'John Smith'
+john.greet()    // 'Salut je m’appelle John'
+						</code>
+					</pre>
+					<blockquote>Pas bon on copie le truc dans chaque constructeur</blockquote>
+				</section>
+				<section>
+					<h2>Les classes ES6</h2>
+					<pre>
+						<code class='javascript'>
+class TodoItem extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      editing: false
+    };
+  }
+
+  handleDoubleClick() {
+    this.setState({ editing: true });
+  }
+  …
+}
+						</code>
+					</pre>
+					<blockquote class='fragment'>Attention il s'agit de sucre syntaxique pas d'une classe comme en Java ou .NET. Le JS reste un langage prototypale.</blockquote>
+				</section>
+				<section>
+					<h2>La chaîne d'appel d'une méthode</h2>
+					<code>obj.prop</code> ou <code>obj['prop']</code> (c'est équivalent)
+					<ol>
+						<li class='fragment'>On part de l’objet indexé (obj)</li>
+						<li class='fragment'>Si on trouve prop dans ses own properties, on s’arrête là</li>
+						<li class='fragment'>Sinon, on passe sur le prototype du niveau supérieur : celui du constructeur de l’objet en cours*</li>
+						<li class='fragment'>On reprend à l’étape 2, sauf si on était déjà sur Object.prototype, auquel cas le lookup est fini, et échoue (undefined).</li>
+					</ol>
+					<footer>*conceptuellement, <code>constructor.prototype</code> ou <code>__proto__</code></footer>
+				</section>
+				<section data-background='https://i.ytimg.com/vi/kJw-LivvBMo/maxresdefault.jpg'>
+					<h2>La preuve en live...</h2>
+					<pre>
+						<code class='javascript'>
+function Person(first, last) {
+  this.first = first;
+  this.last = last;
+}
+Person.prototype.fullName = function fullName() {
+  return this.first + ' ' + this.last;
+};
+const davidLopez = new Person('David', 'Lopez');
+
+davidLopez.first      // => 'David',         own property
+davidLopez.fullName() // => 'David Lopez', Person.prototype
+davidLopez.toString() // => '[object Object]', Object.prototype
+
+Person.prototype.toString = function personToString() {
+  return '#Person<' + this.fullName() + '>';
+};
+
+davidLopez.toString() // => '#PersonDavid Lopez '
+						</code>
+					</pre>
+
+				</section>
+
 
 			</section>
+			<section>
+				<section data-background='https://media.giphy.com/media/aVrzyzV3q1lMk/giphy.gif'><h1>Closure</h1></section>
+				<section >
+					<h2>Closure simple</h2>
+					<pre>
+						<code class='javascript'>
+function publicFx() {
+  let dateAppel = Date.now();
+  return function() { console.log(dateAppel); };
+}
+let privilegedFx1 = publicFx();
+// Attendre un bref instant
+let privilegedFx2 = publicFx();
+
+// privilegedFx(1,2) sont en fait les fonctions internes construites au
+// sein de publicFx, qui grâce aux règles de portée "voient"
+// dateAppel.  Elles sont *closed over* par publicFx, ce qui fait
+// que les valeurs de dateAppel au moment où les fonctions ont été
+// renvoyéees sont préservées
+privilegedFx1(); // => affiche la dateAppel du moment de la création de la fonction privilegedFx1!
+privilegedFx2(); // => affiche la dateAppel d'après !
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Les modules sont une utilisation des closures</h2>
+					<pre><code class="javascript">
+function yourModule(require, module, exports) {
+
+  let widgets = {};
+  let util = require('util');
+  let Widget = require('widgets/base');
+
+  function CoolWidget(elt) { … }
+  util.inherits(CoolWidget, Widget);
+  // …
+
+  module.exports = Widget;
+}
+					</code></pre>
+					<blockquote>Dans node on ne voit pas la fonction enrobante...</blockquote>
+				</section>
+				<section data-background='https://sourcemaking.com/files/v2/landings/DesignPatterns-cover.png'>
+					<h2 style='background-color:rgba(1,1,1, 0.5);'>A la base de tous les design pattern JS</h2>
+					<ul style='background-color:rgba(1,1,1, 0.5);'>
+						<li>Décorateur</li>
+						<li>Façade</li>
+						<li>Mémoïsation</li>
+						<li>Singleton</li>
+						<li>Benchmarking</li>
+						<li>Logging</li>
+						<li>Throttling / Debouncing</li>
+						<li>etc.</li>
+					</ul>
+				</section>
+				<section data-background='https://sourcemaking.com/files/v2/landings/DesignPatterns-cover.png'>
+					<h2 style='background-color:rgba(1,1,1, 0.5);'>A la base de tous les design pattern JS</h2>
+
+				</section>
+				<section data-background='http://995642590.r.lightningbase-cdn.com/wp-content/uploads/2013/05/HR-Double-Bind-article-by-John-Sumser-on-HR-Examiner-425x282px.jpg'>
+					<h2 style='background-color:rgba(1,1,1, 0.5);'>Le binding</h2>
+
+				</section>
+				<section data-background='http://995642590.r.lightningbase-cdn.com/wp-content/uploads/2013/05/HR-Double-Bind-article-by-John-Sumser-on-HR-Examiner-425x282px.jpg'>
+					<h2>Le problème</h2>
+					<pre>
+						<code class='javascript'>
+var name = 'Mr X';
+let obj = {
+  name: 'Joe Lopez',
+  greet: function greet(whom) {
+    console.log(this.name + ' salue ' + whom);
+  },
+  greetAll: function greetAll(first, second, last) {
+    [first, second, last].forEach(this.greet);
+  }
+};
+obj.greet("salut les lopezs de France");
+// => 'Joe Lopez salut les lopezs de France !'
+let fx = obj.greet;
+fx("l’atelier") // => 'Mr X salut les lopezs de France'
+obj.greetAll('David', 'Joe'); // => 'Mr X salue David', 'Mr X salue Joe
+						</code>
+					</pre>
+				</section>
+				<section data-background='http://995642590.r.lightningbase-cdn.com/wp-content/uploads/2013/05/HR-Double-Bind-article-by-John-Sumser-on-HR-Examiner-425x282px.jpg'>
+					<h2>Comment faire ? La closure?</h2>
+					<pre>
+						<code class='javascript'>
+const obj = {
+  // …
+  greetAll: function greetAll(first, second, last) {
+    var that = this;
+    [first, second, last].forEach(function(name) {
+      that.greet(name);
+    });
+  }
+}
+						</code>
+					</pre>
+				</section>
+				<section data-background='https://media.giphy.com/media/KXY5lB8yOarLy/giphy.gif'>
+					<h2>Comment faire ? ES6 style?</h2>
+					<pre>
+						<code class='javascript'>
+const obj = {
+  // …
+  greetAll(first, second, last) {
+    [first, second, last].forEach(name => this.greet(name));
+	//Ultra fat
+  }
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>call et apply</h2>
+					<pre>
+						<code class='javascript'>
+
+// fx.call(ctx[, arg1[, arg2…]])
+
+let fx = obj.greet;
+fx.call(obj, 'les singes')
+
+let x = { 0: 'Zero', 1: 'One', length: 2 };
+Array.prototype.join.call(x, '-') // 'Zero-One'
+
+// fx.apply(ctx[, argArray]) -- Gros potentiel d’astuces !
+
+fx.apply(obj, ['']) // => 'Joe salue l’atelier'
+Array.prototype.push.apply(x, ['Two', 'Three', 'Four']) // => 5
+x // => { 0: 'Zero', 1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', length: 5 }
+</code>
+</pre>
+
+				</section>
+			</section>
+			<section></section>
 			<section data-background='https://media.giphy.com/media/cxgLwcgy5qoXm/giphy.gif'>
 				<h1>ES6 / 2015</h1>
 			</section>
