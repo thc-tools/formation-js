@@ -45,9 +45,58 @@
 
 		<div class="reveal">
 		    <div class="slides">
-		        <section>Single Horizontal Slide</section>
-		        <section>
-		            <section>Vertical Slide 1</section>
+		        <section><h1>Javascript</h1></section>
+				<section>
+					<section><h1>Les bases</h1></section>
+					<section>
+						<h2>Les objets</h2>
+						<pre>
+							<code class='javascript'>
+let obj = { first: 'David', last: 'Lopez', age: 77 };
+obj.first  // => 'David'
+obj['age'] // => 42
+
+obj.first = 'pierr';
+obj['first'] // => 'pierr'
+
+obj[77] = 'roberto';
+obj[77]   // => 'roberto'
+obj['77'] // => 'roberto'
+obj.77    // => SyntaxError
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h2>Les variables</h2>
+
+					</section>
+					<section>
+						<h2>Les boucles</h2>
+						<pre>
+							<code class='javascript'>
+const ARRAY = [1,2,3,4];
+for(let i = 0, _l=ARRAY.length; i < _l; i++ ){console.log(ARRAY[i])}
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h2>Les fonctions</h2>
+						<pre>
+							<code class='javascript'>
+function maFonction() {
+	return 'test';
+}
+maFonction() // test;
+const a = () => 'test';
+a(); //test
+							</code>
+						</pre>
+					</section>
+				</section>
+		        <section data-state="theme-color-blue-yellow">
+		            <section>
+						<h1>Prototypes</h1>
+					</section>
 		            <section>Vertical Slide 2</section>
 		        </section>
 		    </div>
