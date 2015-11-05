@@ -44,16 +44,22 @@
 	<div class="reveal">
 		<div class="slides">
 			<section data-background='#ffe599'><h1>Javascript</h1></section>
+			<section data-background='https://cdn.nextinpact.com/images/bd/news/124984.png'>
+				<style scoped>
+				      h1#jquery { color: red; font-weight: bold; background-color: yellow;}
+				</style>
+				<h1 id='jquery'>JS !== jQuery</h1>
+			</section>
 			<section>
-				<section><h1>Les bases</h1></section>
+				<section data-background='https://media.giphy.com/media/vKZKZ0I9nCAGA/giphy.gif'><h1>Les bases</h1></section>
 				<section data-markdown>
-					## Les variables
+## Les variables
 
-					- `const`  Variable constante qui ne peut plus être modifiée
-					- `var`  portée globale ou locale a une fonction
-					- `let` portée du block courant `{}`
+- `const`  Variable constante qui ne peut plus être modifiée
+- `var`  portée globale ou locale a une fonction
+- `let` portée du block courant `{}`
 
-					> A retenir on utlise `const` au maximum et `let` dans les autres cas
+> A retenir on utlise `const` au maximum et `let` dans les autres cas
 
 				</section>
 				<section>
@@ -336,7 +342,7 @@ person.langs            // => ['fr', 'en', undefined, undefined]
 
 			</section>
 			<section data-state="theme-color-blue-yellow">
-				<section>
+				<section data-background='https://media.giphy.com/media/RHUGfUYnjNuMw/giphy.gif'>
 					<h1>Prototypes / Constructor</h1>
 				</section>
 				<section>
@@ -350,7 +356,7 @@ person.langs            // => ['fr', 'en', undefined, undefined]
 					</ul>
 				</section>
 				<section>
-					<h2>Constructeur ?</h2>
+					<h2>Constructeur</h2>
 					<ul>
 					    <li>Fonctions servant à initialiser un nouvel objet. Le nom du constructeur est un peu comme « le nom de la classe »…</li>
 					    <li>Toute fonction peut servir de constructeur : il suffit de l’appeler avec l’opérateur new.</li>
@@ -359,6 +365,9 @@ person.langs            // => ['fr', 'en', undefined, undefined]
 					</ul>
 				</section>
 				<section>
+					<h2>Constructeur</h2>
+					<pre>
+						<code class='javascript'>
 function Person(first, last) {
   this.first = first;
   this.last = last;
@@ -377,7 +386,46 @@ function LopezPerson(first, last) {
 }
 var oops = new LopezPerson('Henry', 'Lopez');
 oops.first // => Anne
+						</code>
+					</pre>
 				</section>
+
+				<section>
+					<h2>Prototypes</h2>
+					<ul>
+					    <li>Tout constructeur a un prototype : un objet qui définit les propriétés (et donc méthodes) partagées par tous les objets que produit ce constructeur.</li>
+					    <li>Le prototype est « vivant » : si on le triture après l’appel au constructeur, ça marche quand même !</li>
+					    <li>Techniquement, y’a plein d’autres trucs dans un prototype (réf. au constructeur, gestion de propriétés…).</li>
+						<li>On verra, plutôt vous verrez...</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Constructeur</h2>
+					<pre>
+						<code class='javascript'>
+function Person(first, last) {
+  this.first = first;
+  this.last = last;
+}
+
+// On augmente l'existant…
+Person.prototype.fullName = function fullName() {
+  return this.first + ' ' + this.last;
+}
+Person.prototype.greet = function greet() {
+  alert('Salut je m’appelle ' + this.first);
+}
+
+var john = new Person('John', 'Smith');
+john.fullName() // => 'John Smith'
+john.greet()    // 'Salut je m’appelle John'
+						</code>
+					</pre>
+				</section>
+
+			</section>
+			<section data-background='https://media.giphy.com/media/cxgLwcgy5qoXm/giphy.gif'>
+				<h1>ES6 / 2015</h1>
 			</section>
 		</div>
 	</div>
