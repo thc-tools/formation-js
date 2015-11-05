@@ -9,132 +9,174 @@
 	<meta name="description" content="Une formation sur le JS">
 	<meta name="author" content="Pierre Besson">
 
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-	<link href='https://fonts.googleapis.com/css?family=Merriweather:700|Source+Sans+Pro:300,600,300italic,600italic|Source+Code+Pro:400,600' rel='stylesheet' type='text/css'>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
 	<link rel="stylesheet" href="css/reveal.css">
-	<link rel="stylesheet" href="css/animate.min.css">
-	<link rel="stylesheet" href="css/theme/sky.css" id="theme-basis">
-	<link rel="stylesheet" href="css/theme/pw15.css" id="theme">
+	<link rel="stylesheet" href="css/theme/black.css" id="theme">
 
-	<!-- For syntax highlighting -->
-	<link rel="stylesheet" href="lib/css/tomorrow.css">
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
 
-	<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+	<!-- Printing and PDF exports -->
 	<script>
-	if( window.location.search.match( /print-pdf/gi ) ) {
-		var link = document.createElement( 'link' );
-		link.rel = 'stylesheet';
-		link.type = 'text/css';
-		link.href = 'css/print/pdf.css';
-		document.getElementsByTagName( 'head' )[0].appendChild( link );
-	}
+	var link = document.createElement( 'link' );
+	link.rel = 'stylesheet';
+	link.type = 'text/css';
+	link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+	document.getElementsByTagName( 'head' )[0].appendChild( link );
 	</script>
 
 	<!--[if lt IE 9]>
 	<script src="lib/js/html5shiv.js"></script>
 	<![endif]-->
+	<link href='https://fonts.googleapis.com/css?family=Merriweather:700|Source+Sans+Pro:300,600,300italic,600italic|Source+Code+Pro:400,600' rel='stylesheet' type='text/css'>
+
 
 </head>
 
-<body id="prioFix">
+<body>
 
 
-		<div class="reveal">
-		    <div class="slides">
-		        <section><h1>Javascript</h1></section>
-				<section>
-					<section><h1>Les bases</h1></section>
-					<section>
-						<h2>Les objets</h2>
-						<pre>
-							<code class='javascript'>
-let obj = { first: 'David', last: 'Lopez', age: 77 };
-obj.first  // => 'David'
-obj['age'] // => 42
+	<div class="reveal">
+		<div class="slides">
+			<section data-background='#ffe599'><h1>Javascript</h1></section>
+			<section>
+				<section><h1>Les bases</h1></section>
+				<section data-markdown>
+					## Les variables
 
-obj.first = 'pierr';
-obj['first'] // => 'pierr'
+					- `const`  Variable constante qui ne peut plus être modifiée
+					- `var`  portée globale ou locale a une fonction
+					- `let` portée du block courant `{}`
 
-obj[77] = 'roberto';
-obj[77]   // => 'roberto'
-obj['77'] // => 'roberto'
-obj.77    // => SyntaxError
-							</code>
-						</pre>
-					</section>
-					<section>
-						<h2>Les variables</h2>
+					> A retenir on utlise `const` au maximum et `let` dans les autres cas
 
-					</section>
-					<section>
-						<h2>Les boucles</h2>
-						<pre>
-							<code class='javascript'>
-const ARRAY = [1,2,3,4];
-for(let i = 0, _l=ARRAY.length; i < _l; i++ ){console.log(ARRAY[i])}
-							</code>
-						</pre>
-					</section>
-					<section>
-						<h2>Les fonctions</h2>
-						<pre>
-							<code class='javascript'>
-function maFonction() {
-	return 'test';
-}
-maFonction() // test;
-const a = () => 'test';
-a(); //test
-							</code>
-						</pre>
-					</section>
 				</section>
-		        <section data-state="theme-color-blue-yellow">
-		            <section>
-						<h1>Prototypes</h1>
-					</section>
-		            <section>Vertical Slide 2</section>
-		        </section>
-		    </div>
+				<section>
+					<h2>Les strings</h2>
+					<pre>
+						<code class='javascript'>
+							'déjà' < 'demain'              // => false
+							'déjà'.localeCompare('demain') // => -1 ('déjà' avant 'demain')
+
+							'déjà !'.toLocaleUpperCase()      // => 'DÉJÀ !'
+							'ÇA POUTRE'.toLocaleLowerCase()   // => 'ça poutre'
+
+							'one,two,three'.split(',')        // => ['one', 'two', 'three']
+							'one,,two,three'.split(/\W+/)     // => ['one', 'two']
+
+							'hello'.substring(1)      // => 'ello'
+							'hello'.slice(1, -2)      // => 'el' -> [1;length-2[
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Les dates</h2>
+					<pre>
+						<code class='javascript'>
+							new Date                   //  maintenant !
+							new Date(y,m,d[,h,m,s,ms]) // Valeur découpée. (un peu lourd...)
+
+							date.getFullYear()  // JAMAIS
+							date.getMonth()     // NAZE Java-like qui démarre à… zéro (janvier). #ugly
+							date.getDay()       // PERDUUUU ! C'est le DOW (Day Of Week), 0 = dim., 6 = s
+							date.getDate()      // Le jour du mois.  Super logique.
+							date.getHours()
+							date.getMinutes()
+							date.getSeconds()
+							date.getMilliseconds() // "Milliseconds", un seul mot : une seule initiale.
+
+							// Heure locale du navigateur/système.  On a les mêmes en getUTCXxx()…
+						</code>
+					</pre>
+				</section>
+				<section>
+					<blockquote>
+						A retenir : Momentjs (on voit ça plus tard...)
+					</blockquote>
+				</section>
+
+				<section>
+					<h2>Les objets</h2>
+					<pre>
+						<code class='javascript'>
+							let obj = { first: 'David', last: 'Lopez', age: 77 };
+							obj.first  // => 'David'
+							obj['age'] // => 42
+
+							obj.first = 'pierr';
+							obj['first'] // => 'pierr'
+
+							obj[77] = 'roberto';
+							obj[77]   // => 'roberto'
+							obj['77'] // => 'roberto'
+							obj.77    // => SyntaxError
+						</code>
+					</pre>
+				</section>
+
+				<section>
+					<h2>Les boucles</h2>
+					<pre>
+						<code class='javascript'>
+							const ARRAY = [1,2,3,4];
+							for(let i = 0, _l=ARRAY.length; i < _l; i++ ){console.log(ARRAY[i])}
+							ARRAY.forEach(function(element, idx){console.log(elt, i)});
+							ARRAY.map(function(element, idx){console.log(elt, i)});
+							// transforme le tableau
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Les fonctions</h2>
+					<pre>
+						<code class='javascript'>
+							function maFonction() {
+								return 'test';
+							}
+							maFonction() // test;
+							const a = () => 'test';
+							a(); //test
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section data-state="theme-color-blue-yellow">
+				<section>
+					<h1>Prototypes</h1>
+				</section>
+				<section>Vertical Slide 2</section>
+			</section>
 		</div>
-		<script src="lib/js/head.min.js"></script>
+	</div>
+	<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
 
 		<script>
-
-		// Full list of configuration options available here:
-		// https://github.com/hakimel/reveal.js#configuration
-		Reveal.initialize({
-			controls: true,
-			progress: true,
-			history: true,
-			center: true,
-
-			width: 980,
-
-			theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-			transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
-
-			// Parallax scrolling
-			// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-			// parallaxBackgroundSize: '2100px 900px',
-
-			// Optional libraries used to extend on reveal.js
-			dependencies: [
-				{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-				{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-				{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-				{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-				{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-				{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-			]
-		});
-
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
 		</script>
 
-	</body>
-	</html>
+
+</body>
+</html>
