@@ -71,7 +71,7 @@
 
 'hello'.substring(1)      // => 'ello'
 'hello'.slice(1, -2)      // => 'el' -> [1;length-2[
-</code>
+						</code>
 					</pre>
 				</section>
 				<section>
@@ -208,8 +208,34 @@ data.slice(-2, -1) // => [2]
 let arr1 = ['one', 'two'], arr2 = ['three', 'four'];
 arr1.push(...arr2) // => 4
 arr1                // => ['one', 'two', 'three', 'four']
+// for…in itère sur LES PROPRIÉTÉS ÉNUMÉRABLES de N’IMPORTE QUEL OBJET
+var arr = ['hello', 'world', , 'cool'];
+for (var k in arr){ console.log(k)}; // => 0, 1, 3
 
 
+						</code>
+					</pre>
+				</section>
+				<section>
+					<pre>
+						<h2>Haloween pour les tableaux ...</h2>
+						<code class='javascript'>
+// Toi aussi, déguise-toi en tableau !
+
+var fakeArray = { 0: '!', 1: 'ça torche', 2: 'JavaScript', length: 3 };
+
+fakeArray.join = [].join; fakeArray.reverse = [].reverse;
+fakeArray.reverse().join(' ');
+// => 'JavaScript ça torche !'
+
+// Ou alors :
+fakeArray.__proto__ = Array.prototype;
+fakeArray.reverse().join(' ');
+// => 'JavaScript ça torche !'
+
+// Méthodes « génériques » utilisables: hn
+// concat, join, pop, push, reverse, shift,
+// slice, sort, splice, toString, unshift.
 						</code>
 					</pre>
 				</section>
@@ -230,21 +256,128 @@ ARRAY.map(function(element, idx){console.log(elt, i)});
 					<h2>Les fonctions</h2>
 					<pre>
 						<code class='javascript'>
-							function maFonction() {
-								return 'test';
-							}
-							maFonction() // test;
-							const a = () => 'test';
-							a(); //test
+function maFonction() {
+	return 'test';
+}
+maFonction() // test;
+const a = () => 'test';
+a(); //test
 						</code>
 					</pre>
 				</section>
+
+				<section>
+					<h2>JS c'est logique ...</h2>
+					<pre>
+						<code>
+== ou === ?!
+
+42 == '42'        // => true  -- Argh, ça sent le PHP, là…
+null == undefined // => true  -- hmmm…
+null == 0         // => false -- heureusement !
+0 == undefined    // => false -- heureusement !
+0 == false        // => true  -- Façon C…
+1 == true         // => true  -- Façon C…
+42 == true        // => false -- Watcha ?! (x == ToNumber(y), ES3 §11.9.3)
+'0' == false      // => true  -- Woah !
+'' == false       // => true  -- Yowza ! 8-O  On y reviendra…
+NaN == NaN        // => false -- Bin oué, c’est le principe…
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>En fait si ...</h2>
+					<pre>
+						<code>
+// avec ===, fini de jouer : vérif valeur ET TYPE !
+
+42 === '42'        // => false
+null === undefined // => false
+null === 0         // => false
+0 === undefined    // => false
+0 === false        // => false
+'0' === false      // => false
+NaN === NaN        // => false -- rien à faire !
+						</code>
+					</pre>
+					<blockquote>
+						On utilise toujours le <b>===</b>
+					</blockquote>
+				</section>
+				<section>
+					<h2>in et delete</h2>
+					<pre>
+						<code class='javascript'>
+
+let person = { name: 'Joe', langs: ['fr', 'en'] };
+
+'name' in person        // => true
+person.age = 35;
+'age' in person         // => true
+person.age = null;
+'age' in person         // => true
+delete person.age
+'age' in person         // => false
+person.age              // => undefined
+
+0 in person.langs       // => true
+'0' in person.langs     // => true
+person.langs[3] = 'de';
+2 in person.langs       // => false
+3 in person.langs       // => true
+delete person.langs[3]
+person.langs            // => ['fr', 'en', undefined, undefined]
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Falsy / Truthy</h2>
+				</section>
+
 			</section>
 			<section data-state="theme-color-blue-yellow">
 				<section>
-					<h1>Prototypes</h1>
+					<h1>Prototypes / Constructor</h1>
 				</section>
-				<section>Vertical Slide 2</section>
+				<section>
+					<h2>Classes ?</h2>
+					<ul>
+						<li>Avant ES6 pas de classe</li>
+						<li>JS est un langage prototypale</li>
+						<li>En JS tout est un objet</li>
+						<li>Une propriété est identifié par un doubler nom / valeur</li>
+						<li>Une propriété peut être une fonction</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Constructeur ?</h2>
+					<ul>
+					    <li>Fonctions servant à initialiser un nouvel objet. Le nom du constructeur est un peu comme « le nom de la classe »…</li>
+					    <li>Toute fonction peut servir de constructeur : il suffit de l’appeler avec l’opérateur new.</li>
+					    <li>Elle dispose alors d’une variable implicite this, qui représente la nouvelle « instance ».</li>
+					    <li>L’objet créé référence son constructeur : constructor.</li>
+					</ul>
+				</section>
+				<section>
+function Person(first, last) {
+  this.first = first;
+  this.last = last;
+}
+
+var joeLopezPerson = new Person('Joe', 'Lopez');
+var davidLopezz = new Person('David', 'lopez');
+joeLopezPerson.first // => 'Joe'
+davidLopezz.first   // => 'David'
+
+// Si on jouait aux cons ?!
+function LopezPerson(first, last) {
+  this.first = first;
+  this.last = last;
+  return { first: 'Anne', last: 'Pas Lopez' };
+}
+var oops = new LopezPerson('Henry', 'Lopez');
+oops.first // => Anne
+				</section>
 			</section>
 		</div>
 	</div>
