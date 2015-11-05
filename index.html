@@ -60,17 +60,37 @@
 					<h2>Les strings</h2>
 					<pre>
 						<code class='javascript'>
-							'déjà' < 'demain'              // => false
-							'déjà'.localeCompare('demain') // => -1 ('déjà' avant 'demain')
+'déjà' < 'demain'              // => false
+'déjà'.localeCompare('demain') // => -1 ('déjà' avant 'demain')
 
-							'déjà !'.toLocaleUpperCase()      // => 'DÉJÀ !'
-							'ÇA POUTRE'.toLocaleLowerCase()   // => 'ça poutre'
+'déjà !'.toLocaleUpperCase()      // => 'DÉJÀ !'
+'ÇA POUTRE'.toLocaleLowerCase()   // => 'ça poutre'
 
-							'one,two,three'.split(',')        // => ['one', 'two', 'three']
-							'one,,two,three'.split(/\W+/)     // => ['one', 'two']
+'one,two,three'.split(',')        // => ['one', 'two', 'three']
+'one,,two,three'.split(/\W+/)     // => ['one', 'two']
 
-							'hello'.substring(1)      // => 'ello'
-							'hello'.slice(1, -2)      // => 'el' -> [1;length-2[
+'hello'.substring(1)      // => 'ello'
+'hello'.slice(1, -2)      // => 'el' -> [1;length-2[
+</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Les dates</h2>
+					<pre>
+						<code class='javascript'>
+new Date                   //  maintenant !
+new Date(y,m,d[,h,m,s,ms]) // Valeur découpée. (un peu lourd...)
+
+date.getFullYear()  // JAMAIS
+date.getMonth()     // NAZE Java-like qui démarre à… zéro (janvier). #ugly
+date.getDay()       // PERDUUUU ! C'est le DOW (Day Of Week), 0 = dim., 6 = s
+date.getDate()      // Le jour du mois.  Super logique.
+date.getHours()
+date.getMinutes()
+date.getSeconds()
+date.getMilliseconds() // "Milliseconds", un seul mot : une seule initiale.
+
+// Heure locale du navigateur/système.  On a les mêmes en getUTCXxx()…
 						</code>
 					</pre>
 				</section>
@@ -78,19 +98,18 @@
 					<h2>Les dates</h2>
 					<pre>
 						<code class='javascript'>
-							new Date                   //  maintenant !
-							new Date(y,m,d[,h,m,s,ms]) // Valeur découpée. (un peu lourd...)
+// "J'ai bien lu la doc"
+date.getTime()  // => ex. 1290852603042
 
-							date.getFullYear()  // JAMAIS
-							date.getMonth()     // NAZE Java-like qui démarre à… zéro (janvier). #ugly
-							date.getDay()       // PERDUUUU ! C'est le DOW (Day Of Week), 0 = dim., 6 = s
-							date.getDate()      // Le jour du mois.  Super logique.
-							date.getHours()
-							date.getMinutes()
-							date.getSeconds()
-							date.getMilliseconds() // "Milliseconds", un seul mot : une seule initiale.
+// "#superSmart"
++date
 
-							// Heure locale du navigateur/système.  On a les mêmes en getUTCXxx()…
+// Et sinon…
+new Date(1301733937452)
+
+// Mais aussi (car souci pour partir de composantes UTC) :
+Date.UTC(y, m, d, h, mn, s, ms) // => numérique
+
 						</code>
 					</pre>
 				</section>
@@ -104,33 +123,109 @@
 					<h2>Les objets</h2>
 					<pre>
 						<code class='javascript'>
-							let obj = { first: 'David', last: 'Lopez', age: 77 };
-							obj.first  // => 'David'
-							obj['age'] // => 42
+let obj = { first: 'David', last: 'Lopez', age: 77 };
+obj.first  // => 'David'
+obj['age'] // => 42
 
-							obj.first = 'pierr';
-							obj['first'] // => 'pierr'
+obj.first = 'pierr';
+obj['first'] // => 'pierr'
 
-							obj[77] = 'roberto';
-							obj[77]   // => 'roberto'
-							obj['77'] // => 'roberto'
-							obj.77    // => SyntaxError
+obj[77] = 'roberto';
+obj[77]   // => 'roberto'
+obj['77'] // => 'roberto'
+obj.77    // => SyntaxError
 						</code>
 					</pre>
 				</section>
+				<section>
+					<h2>Les objets avec ES6</h2>
+					<pre>
+						<code class='javascript'>
+let defaults = { first: 'John', last: 'Doe', age: 42 };
+let trainer  = { last: 'Smith', age: 35 };
+trainer      = { ...defaults, ...trainer, age: 36 }
+// => { first: 'John', last: 'Smith', age: 36 }
+trainers['a'+ 12] = 'Gino';
+trainers.a12;
+// Gino
+						</code>
+					<pre>
+				</section>
+				<section>
+					<h2>Les tableaux</h2>
+					<pre>
+						<code class='javascript'>
+let names = ['John', 'David', 'Rodrigo'];
 
+names.length
+// => 3. R/W : astuce pour réutiliser un tableau!
+
+names[0]
+// => 'John'
+
+names[12] = 'Pierre';
+names.length
+// => 13
+
+names[9]
+// => undefined (comme 10 et 11): c'est appellé "sparse array"
+						</code>
+					</pre>
+				</section>
+				<section>
+					<pre>
+						<h2>Les tableaux</h2>
+						<code class='javascript'>
+let data = [1, 2, 3];
+
+// arr1.concat(arg…) -> arr2 [déroule sur 1 niveau, ni "shallow" ni "deep"]
+data.concat(4, 5, 6)     // => [1, 2, 3, 4, 5, 6]
+data.concat([4, 5, 6])   // => [1, 2, 3, 4, 5, 6]
+data.concat(4, [5, 6])   // => [1, 2, 3, 4, 5, 6]
+data.concat([4, [5, 6]]) // => [1, 2, 3, 4, [5, 6]] -- 2 niveaux !
+data                     // => [1, 2, 3] -- intact !
+
+// arr.join([sep = ',']) -> String
+data.join()   // => '1,2,3'
+data.join('') // => '123' -- Fréquent en construisant du HTML
+
+// arr1.slice(signedBegin[, signedEnd = length]) -> arr2 -- négatif ok partout !
+data.slice(1)      // => [2, 3]
+data.slice(1, 1)   // => []
+data.slice(1, 2)   // => [2]
+data.slice(1, -1)  // => [2]
+data.slice(-2)     // => [2, 3]
+data.slice(-2, 2)  // => [2]
+data.slice(-2, -1) // => [2]
+						</code>
+					</pre>
+				</section>
+				<section>
+					<pre>
+						<h2>Les tableaux en ES6</h2>
+						<code class='javascript'>
+
+let arr1 = ['one', 'two'], arr2 = ['three', 'four'];
+arr1.push(...arr2) // => 4
+arr1                // => ['one', 'two', 'three', 'four']
+
+
+						</code>
+					</pre>
+				</section>
 				<section>
 					<h2>Les boucles</h2>
 					<pre>
 						<code class='javascript'>
-							const ARRAY = [1,2,3,4];
-							for(let i = 0, _l=ARRAY.length; i < _l; i++ ){console.log(ARRAY[i])}
-							ARRAY.forEach(function(element, idx){console.log(elt, i)});
-							ARRAY.map(function(element, idx){console.log(elt, i)});
-							// transforme le tableau
+const ARRAY = [1,2,3,4];
+for(let i = 0, _l=ARRAY.length; i < _l; i++ ){console.log(ARRAY[i])}
+ARRAY.forEach(function(element, idx){console.log(elt, i)});
+ARRAY.map(function(element, idx){console.log(elt, i)});
+// transforme le tableau
 						</code>
 					</pre>
 				</section>
+
 				<section>
 					<h2>Les fonctions</h2>
 					<pre>
