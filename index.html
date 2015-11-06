@@ -44,33 +44,39 @@
 	<div class="reveal">
 		<div class="slides">
 			<section data-background='#ffe599'><h1>Javascript</h1></section>
+			<section data-background='https://cdn.nextinpact.com/images/bd/news/124984.png'>
+				<style scoped>
+				      h1#jquery { color: red; font-weight: bold; background-color: yellow;}
+				</style>
+				<h1 id='jquery'>JS !== jQuery</h1>
+			</section>
 			<section>
-				<section><h1>Les bases</h1></section>
+				<section data-background='https://media.giphy.com/media/vKZKZ0I9nCAGA/giphy.gif'><h1>Les bases</h1></section>
 				<section data-markdown>
-					## Les variables
+## Les variables
 
-					- `const`  Variable constante qui ne peut plus être modifiée
-					- `var`  portée globale ou locale a une fonction
-					- `let` portée du block courant `{}`
+- `const`  Variable constante qui ne peut plus être modifiée
+- `var`  portée globale ou locale a une fonction
+- `let` portée du block courant `{}`
 
-					> A retenir on utlise `const` au maximum et `let` dans les autres cas
+> A retenir on utlise `const` au maximum et `let` dans les autres cas
 
 				</section>
 				<section>
 					<h2>Les strings</h2>
 					<pre>
 						<code class='javascript'>
-							'déjà' < 'demain'              // => false
-							'déjà'.localeCompare('demain') // => -1 ('déjà' avant 'demain')
+'déjà' < 'demain'              // => false
+'déjà'.localeCompare('demain') // => -1 ('déjà' avant 'demain')
 
-							'déjà !'.toLocaleUpperCase()      // => 'DÉJÀ !'
-							'ÇA POUTRE'.toLocaleLowerCase()   // => 'ça poutre'
+'déjà !'.toLocaleUpperCase()      // => 'DÉJÀ !'
+'ÇA POUTRE'.toLocaleLowerCase()   // => 'ça poutre'
 
-							'one,two,three'.split(',')        // => ['one', 'two', 'three']
-							'one,,two,three'.split(/\W+/)     // => ['one', 'two']
+'one,two,three'.split(',')        // => ['one', 'two', 'three']
+'one,,two,three'.split(/\W+/)     // => ['one', 'two']
 
-							'hello'.substring(1)      // => 'ello'
-							'hello'.slice(1, -2)      // => 'el' -> [1;length-2[
+'hello'.substring(1)      // => 'ello'
+'hello'.slice(1, -2)      // => 'el' -> [1;length-2[
 						</code>
 					</pre>
 				</section>
@@ -78,19 +84,38 @@
 					<h2>Les dates</h2>
 					<pre>
 						<code class='javascript'>
-							new Date                   //  maintenant !
-							new Date(y,m,d[,h,m,s,ms]) // Valeur découpée. (un peu lourd...)
+new Date                   //  maintenant !
+new Date(y,m,d[,h,m,s,ms]) // Valeur découpée. (un peu lourd...)
 
-							date.getFullYear()  // JAMAIS
-							date.getMonth()     // NAZE Java-like qui démarre à… zéro (janvier). #ugly
-							date.getDay()       // PERDUUUU ! C'est le DOW (Day Of Week), 0 = dim., 6 = s
-							date.getDate()      // Le jour du mois.  Super logique.
-							date.getHours()
-							date.getMinutes()
-							date.getSeconds()
-							date.getMilliseconds() // "Milliseconds", un seul mot : une seule initiale.
+date.getFullYear()  // JAMAIS
+date.getMonth()     // NAZE Java-like qui démarre à… zéro (janvier). #ugly
+date.getDay()       // PERDUUUU ! C'est le DOW (Day Of Week), 0 = dim., 6 = s
+date.getDate()      // Le jour du mois.  Super logique.
+date.getHours()
+date.getMinutes()
+date.getSeconds()
+date.getMilliseconds() // "Milliseconds", un seul mot : une seule initiale.
 
-							// Heure locale du navigateur/système.  On a les mêmes en getUTCXxx()…
+// Heure locale du navigateur/système.  On a les mêmes en getUTCXxx()…
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Les dates</h2>
+					<pre>
+						<code class='javascript'>
+// "J'ai bien lu la doc"
+date.getTime()  // => ex. 1290852603042
+
+// "#superSmart"
++date
+
+// Et sinon…
+new Date(1301733937452)
+
+// Mais aussi (car souci pour partir de composantes UTC) :
+Date.UTC(y, m, d, h, mn, s, ms) // => numérique
+
 						</code>
 					</pre>
 				</section>
@@ -104,52 +129,649 @@
 					<h2>Les objets</h2>
 					<pre>
 						<code class='javascript'>
-							let obj = { first: 'David', last: 'Lopez', age: 77 };
-							obj.first  // => 'David'
-							obj['age'] // => 42
+let obj = { first: 'David', last: 'Lopez', age: 77 };
+obj.first  // => 'David'
+obj['age'] // => 42
 
-							obj.first = 'pierr';
-							obj['first'] // => 'pierr'
+obj.first = 'pierr';
+obj['first'] // => 'pierr'
 
-							obj[77] = 'roberto';
-							obj[77]   // => 'roberto'
-							obj['77'] // => 'roberto'
-							obj.77    // => SyntaxError
+obj[77] = 'roberto';
+obj[77]   // => 'roberto'
+obj['77'] // => 'roberto'
+obj.77    // => SyntaxError
 						</code>
 					</pre>
 				</section>
+				<section>
+					<h2>Les objets avec ES6</h2>
+					<pre>
+						<code class='javascript'>
+let defaults = { first: 'John', last: 'Doe', age: 42 };
+let trainer  = { last: 'Smith', age: 35 };
+trainer      = { ...defaults, ...trainer, age: 36 }
+// => { first: 'John', last: 'Smith', age: 36 }
+trainers['a'+ 12] = 'Gino';
+trainers.a12;
+// Gino
+						</code>
+					<pre>
+				</section>
+				<section>
+					<h2>Les tableaux</h2>
+					<pre>
+						<code class='javascript'>
+let names = ['John', 'David', 'Rodrigo'];
 
+names.length
+// => 3. R/W : astuce pour réutiliser un tableau!
+
+names[0]
+// => 'John'
+
+names[12] = 'Pierre';
+names.length
+// => 13
+
+names[9]
+// => undefined (comme 10 et 11): c'est appellé "sparse array"
+						</code>
+					</pre>
+				</section>
+				<section>
+					<pre>
+						<h2>Les tableaux</h2>
+						<code class='javascript'>
+let data = [1, 2, 3];
+
+// arr1.concat(arg…) -> arr2 [déroule sur 1 niveau, ni "shallow" ni "deep"]
+data.concat(4, 5, 6)     // => [1, 2, 3, 4, 5, 6]
+data.concat([4, 5, 6])   // => [1, 2, 3, 4, 5, 6]
+data.concat(4, [5, 6])   // => [1, 2, 3, 4, 5, 6]
+data.concat([4, [5, 6]]) // => [1, 2, 3, 4, [5, 6]] -- 2 niveaux !
+data                     // => [1, 2, 3] -- intact !
+
+// arr.join([sep = ',']) -> String
+data.join()   // => '1,2,3'
+data.join('') // => '123' -- Fréquent en construisant du HTML
+
+// arr1.slice(signedBegin[, signedEnd = length]) -> arr2 -- négatif ok partout !
+data.slice(1)      // => [2, 3]
+data.slice(1, 1)   // => []
+data.slice(1, 2)   // => [2]
+data.slice(1, -1)  // => [2]
+data.slice(-2)     // => [2, 3]
+data.slice(-2, 2)  // => [2]
+data.slice(-2, -1) // => [2]
+						</code>
+					</pre>
+				</section>
+				<section>
+					<pre>
+						<h2>Les tableaux en ES6</h2>
+						<code class='javascript'>
+
+let arr1 = ['one', 'two'], arr2 = ['three', 'four'];
+arr1.push(...arr2) // => 4
+arr1                // => ['one', 'two', 'three', 'four']
+// for…in itère sur LES PROPRIÉTÉS ÉNUMÉRABLES de N’IMPORTE QUEL OBJET
+var arr = ['hello', 'world', , 'cool'];
+for (var k in arr){ console.log(k)}; // => 0, 1, 3
+
+
+						</code>
+					</pre>
+				</section>
+				<section>
+					<pre>
+						<h2>Haloween pour les tableaux ...</h2>
+						<code class='javascript'>
+// Toi aussi, déguise-toi en tableau !
+
+var fakeArray = { 0: '!', 1: 'ça torche', 2: 'JavaScript', length: 3 };
+
+fakeArray.join = [].join; fakeArray.reverse = [].reverse;
+fakeArray.reverse().join(' ');
+// => 'JavaScript ça torche !'
+
+// Ou alors :
+fakeArray.__proto__ = Array.prototype;
+fakeArray.reverse().join(' ');
+// => 'JavaScript ça torche !'
+
+// Méthodes « génériques » utilisables: hn
+// concat, join, pop, push, reverse, shift,
+// slice, sort, splice, toString, unshift.
+						</code>
+					</pre>
+				</section>
 				<section>
 					<h2>Les boucles</h2>
 					<pre>
 						<code class='javascript'>
-							const ARRAY = [1,2,3,4];
-							for(let i = 0, _l=ARRAY.length; i < _l; i++ ){console.log(ARRAY[i])}
-							ARRAY.forEach(function(element, idx){console.log(elt, i)});
-							ARRAY.map(function(element, idx){console.log(elt, i)});
-							// transforme le tableau
+const ARRAY = [1,2,3,4];
+for(let i = 0, _l=ARRAY.length; i < _l; i++ ){console.log(ARRAY[i])}
+ARRAY.forEach(function(element, idx){console.log(elt, i)});
+ARRAY.map(function(element, idx){console.log(elt, i)});
+// transforme le tableau
 						</code>
 					</pre>
 				</section>
+
 				<section>
 					<h2>Les fonctions</h2>
 					<pre>
 						<code class='javascript'>
-							function maFonction() {
-								return 'test';
-							}
-							maFonction() // test;
-							const a = () => 'test';
-							a(); //test
+function maFonction() {
+	return 'test';
+}
+maFonction() // test;
+const a = () => 'test';
+a(); //test
 						</code>
 					</pre>
 				</section>
+
+				<section>
+					<h2>JS c'est logique ...</h2>
+					<pre>
+						<code>
+== ou === ?!
+
+42 == '42'        // => true  -- Argh, ça sent le PHP, là…
+null == undefined // => true  -- hmmm…
+null == 0         // => false -- heureusement !
+0 == undefined    // => false -- heureusement !
+0 == false        // => true  -- Façon C…
+1 == true         // => true  -- Façon C…
+42 == true        // => false -- Watcha ?! (x == ToNumber(y), ES3 §11.9.3)
+'0' == false      // => true  -- Woah !
+'' == false       // => true  -- Yowza ! 8-O  On y reviendra…
+NaN == NaN        // => false -- Bin oué, c’est le principe…
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>En fait si ...</h2>
+					<pre>
+						<code>
+// avec ===, fini de jouer : vérif valeur ET TYPE !
+
+42 === '42'        // => false
+null === undefined // => false
+null === 0         // => false
+0 === undefined    // => false
+0 === false        // => false
+'0' === false      // => false
+NaN === NaN        // => false -- rien à faire !
+						</code>
+					</pre>
+					<blockquote>
+						On utilise toujours le <b>===</b>
+					</blockquote>
+				</section>
+				<section>
+					<h2>in et delete</h2>
+					<pre>
+						<code class='javascript'>
+
+let person = { name: 'Joe', langs: ['fr', 'en'] };
+
+'name' in person        // => true
+person.age = 35;
+'age' in person         // => true
+person.age = null;
+'age' in person         // => true
+delete person.age
+'age' in person         // => false
+person.age              // => undefined
+
+0 in person.langs       // => true
+'0' in person.langs     // => true
+person.langs[3] = 'de';
+2 in person.langs       // => false
+3 in person.langs       // => true
+delete person.langs[3]
+person.langs            // => ['fr', 'en', undefined, undefined]
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Falsy / Truthy</h2>
+				</section>
+
 			</section>
 			<section data-state="theme-color-blue-yellow">
-				<section>
-					<h1>Prototypes</h1>
+				<section data-background='https://media.giphy.com/media/Yxoeu3U5wVYVG/giphy.gif'>
+					<h1>Les outils</h1>
 				</section>
-				<section>Vertical Slide 2</section>
+				<section data-background='https://nodejs.org/static/images/logos/nodejs-green.png'>
+				</section>
+				<section data-background='http://www.kolhamevaser.com/wp-content/uploads/2015/05/Schechter.Bavel_.TowerofBavel.jpg'>
+					<h1>Babel</h1>
+				</section>
+				<section data-background='https://media.giphy.com/media/pjQTX3sfnKnx6/giphy.gif'>
+					<h1>Debug</h1>
+				</section>
+			</section>
+			<section data-state="theme-color-blue-yellow">
+				<section data-background='https://media.giphy.com/media/RHUGfUYnjNuMw/giphy.gif'>
+					<h1>Prototypes / Constructor</h1>
+				</section>
+				<section>
+					<h2>Classes ?</h2>
+					<ul>
+						<li>Avant ES6 pas de classe</li>
+						<li>JS est un langage prototypale</li>
+						<li>En JS tout est un objet</li>
+						<li>Une propriété est identifié par un doubler nom / valeur</li>
+						<li>Une propriété peut être une fonction</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Constructeur</h2>
+					<ul>
+					    <li>Fonctions servant à initialiser un nouvel objet. Le nom du constructeur est un peu comme « le nom de la classe »…</li>
+					    <li>Toute fonction peut servir de constructeur : il suffit de l’appeler avec l’opérateur new.</li>
+					    <li>Elle dispose alors d’une variable implicite this, qui représente la nouvelle « instance ».</li>
+					    <li>L’objet créé référence son constructeur : constructor.</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Constructeur</h2>
+					<pre>
+						<code class='javascript'>
+function Person(first, last) {
+  this.first = first;
+  this.last = last;
+}
+
+var joeLopezPerson = new Person('Joe', 'Lopez');
+var davidLopezz = new Person('David', 'lopez');
+joeLopezPerson.first // => 'Joe'
+davidLopezz.first   // => 'David'
+
+// Si on jouait aux cons ?!
+function LopezPerson(first, last) {
+  this.first = first;
+  this.last = last;
+  return { first: 'Anne', last: 'Pas Lopez' };
+}
+var oops = new LopezPerson('Henry', 'Lopez');
+oops.first // => Anne
+						</code>
+					</pre>
+				</section>
+
+				<section>
+					<h2>Prototypes</h2>
+					<ul>
+					    <li>Tout constructeur a un prototype : un objet qui définit les propriétés (et donc méthodes) partagées par tous les objets que produit ce constructeur.</li>
+					    <li>Le prototype est « vivant » : si on le triture après l’appel au constructeur, ça marche quand même !</li>
+					    <li>Techniquement, y’a plein d’autres trucs dans un prototype (réf. au constructeur, gestion de propriétés…).</li>
+						<li>On verra, plutôt vous verrez...</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Prototype</h2>
+					<pre>
+						<code class='javascript'>
+function Person(first, last) {
+  this.first = first;
+  this.last = last;
+}
+
+// On augmente l'existant…
+Person.prototype.fullName = function fullName() {
+  return this.first + ' ' + this.last;
+}
+Person.prototype.greet = function greet() {
+  alert('Salut je m’appelle ' + this.first);
+}
+
+var john = new Person('John', 'Smith');
+john.fullName() // => 'John Smith'
+john.greet()    // 'Salut je m’appelle John'
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Prototype (Don't)</h2>
+					<pre>
+						<code class='javascript'>
+function Person(first, last) {
+  this.first = first;
+  this.last = last;
+  this.fullName = function fullName() {
+    return this.first + ' ' + this.last;
+  }
+  this.greet = function greet() {
+    alert('Salut je m’appelle ' + this.first);
+  }
+}
+var john = new Person('John', 'Smith');
+john.fullName() // => 'John Smith'
+john.greet()    // 'Salut je m’appelle John'
+						</code>
+					</pre>
+					<blockquote>Pas bon on copie le truc dans chaque constructeur</blockquote>
+				</section>
+				<section>
+					<h2>Les classes ES6</h2>
+					<pre>
+						<code class='javascript'>
+class TodoItem extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      editing: false
+    };
+  }
+
+  handleDoubleClick() {
+    this.setState({ editing: true });
+  }
+  …
+}
+						</code>
+					</pre>
+					<blockquote class='fragment'>Attention il s'agit de sucre syntaxique pas d'une classe comme en Java ou .NET. Le JS reste un langage prototypale.</blockquote>
+				</section>
+				<section>
+					<h2>La chaîne d'appel d'une méthode</h2>
+					<code>obj.prop</code> ou <code>obj['prop']</code> (c'est équivalent)
+					<ol>
+						<li class='fragment'>On part de l’objet indexé (obj)</li>
+						<li class='fragment'>Si on trouve prop dans ses own properties, on s’arrête là</li>
+						<li class='fragment'>Sinon, on passe sur le prototype du niveau supérieur : celui du constructeur de l’objet en cours*</li>
+						<li class='fragment'>On reprend à l’étape 2, sauf si on était déjà sur Object.prototype, auquel cas le lookup est fini, et échoue (undefined).</li>
+					</ol>
+					<footer>*conceptuellement, <code>constructor.prototype</code> ou <code>__proto__</code></footer>
+				</section>
+				<section data-background='https://i.ytimg.com/vi/kJw-LivvBMo/maxresdefault.jpg'>
+					<h2>La preuve en live...</h2>
+					<pre>
+						<code class='javascript'>
+function Person(first, last) {
+  this.first = first;
+  this.last = last;
+}
+Person.prototype.fullName = function fullName() {
+  return this.first + ' ' + this.last;
+};
+const davidLopez = new Person('David', 'Lopez');
+
+davidLopez.first      // => 'David',         own property
+davidLopez.fullName() // => 'David Lopez', Person.prototype
+davidLopez.toString() // => '[object Object]', Object.prototype
+
+Person.prototype.toString = function personToString() {
+  return '#Person<' + this.fullName() + '>';
+};
+
+davidLopez.toString() // => '#PersonDavid Lopez '
+						</code>
+					</pre>
+
+				</section>
+
+
+			</section>
+			<section>
+				<section data-background='https://media.giphy.com/media/aVrzyzV3q1lMk/giphy.gif'><h1>Closure</h1></section>
+				<section >
+					<h2>Closure simple</h2>
+					<pre>
+						<code class='javascript'>
+function publicFx() {
+  let dateAppel = Date.now();
+  return function() { console.log(dateAppel); };
+}
+let privilegedFx1 = publicFx();
+// Attendre un bref instant
+let privilegedFx2 = publicFx();
+
+// privilegedFx(1,2) sont en fait les fonctions internes construites au
+// sein de publicFx, qui grâce aux règles de portée "voient"
+// dateAppel.  Elles sont *closed over* par publicFx, ce qui fait
+// que les valeurs de dateAppel au moment où les fonctions ont été
+// renvoyéees sont préservées
+privilegedFx1(); // => affiche la dateAppel du moment de la création de la fonction privilegedFx1!
+privilegedFx2(); // => affiche la dateAppel d'après !
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Les modules sont une utilisation des closures</h2>
+					<pre><code class="javascript">
+function yourModule(require, module, exports) {
+
+  let widgets = {};
+  let util = require('util');
+  let Widget = require('widgets/base');
+
+  function CoolWidget(elt) { … }
+  util.inherits(CoolWidget, Widget);
+  // …
+
+  module.exports = Widget;
+}
+					</code></pre>
+					<blockquote>Dans node on ne voit pas la fonction enrobante...</blockquote>
+				</section>
+				<section data-background='https://sourcemaking.com/files/v2/landings/DesignPatterns-cover.png'>
+					<h2 style='background-color:rgba(1,1,1, 0.5);'>A la base de tous les design pattern JS</h2>
+					<ul style='background-color:rgba(1,1,1, 0.5);'>
+						<li>Décorateur</li>
+						<li>Façade</li>
+						<li>Mémoïsation</li>
+						<li>Singleton</li>
+						<li>Benchmarking</li>
+						<li>Logging</li>
+						<li>Throttling / Debouncing</li>
+						<li>etc.</li>
+					</ul>
+				</section>
+				<section data-background='https://sourcemaking.com/files/v2/landings/DesignPatterns-cover.png'>
+					<h2 style='background-color:rgba(1,1,1, 0.5);'>A la base de tous les design pattern JS</h2>
+
+				</section>
+				<section data-background='http://995642590.r.lightningbase-cdn.com/wp-content/uploads/2013/05/HR-Double-Bind-article-by-John-Sumser-on-HR-Examiner-425x282px.jpg'>
+					<h2 style='background-color:rgba(1,1,1, 0.5);'>Le binding</h2>
+
+				</section>
+				<section data-background='http://995642590.r.lightningbase-cdn.com/wp-content/uploads/2013/05/HR-Double-Bind-article-by-John-Sumser-on-HR-Examiner-425x282px.jpg'>
+					<h2>Le problème</h2>
+					<pre>
+						<code class='javascript'>
+var name = 'Mr X';
+let obj = {
+  name: 'Joe Lopez',
+  greet: function greet(whom) {
+    console.log(this.name + ' salue ' + whom);
+  },
+  greetAll: function greetAll(first, second, last) {
+    [first, second, last].forEach(this.greet);
+  }
+};
+obj.greet("salut les lopezs de France");
+// => 'Joe Lopez salut les lopezs de France !'
+let fx = obj.greet;
+fx("l’atelier") // => 'Mr X salut les lopezs de France'
+obj.greetAll('David', 'Joe'); // => 'Mr X salue David', 'Mr X salue Joe
+						</code>
+					</pre>
+				</section>
+				<section data-background='http://995642590.r.lightningbase-cdn.com/wp-content/uploads/2013/05/HR-Double-Bind-article-by-John-Sumser-on-HR-Examiner-425x282px.jpg'>
+					<h2>Comment faire ? La closure?</h2>
+					<pre>
+						<code class='javascript'>
+const obj = {
+  // …
+  greetAll: function greetAll(first, second, last) {
+    var that = this;
+    [first, second, last].forEach(function(name) {
+      that.greet(name);
+    });
+  }
+}
+						</code>
+					</pre>
+				</section>
+				<section data-background='https://media.giphy.com/media/KXY5lB8yOarLy/giphy.gif'>
+					<h2>Comment faire ? ES6 style?</h2>
+					<pre>
+						<code class='javascript'>
+const obj = {
+  // …
+  greetAll(first, second, last) {
+    [first, second, last].forEach(name => this.greet(name));
+	//Ultra fat
+  }
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>call et apply</h2>
+					<pre>
+						<code class='javascript'>
+
+// fx.call(ctx[, arg1[, arg2…]])
+
+let fx = obj.greet;
+fx.call(obj, 'les singes')
+
+let x = { 0: 'Zero', 1: 'One', length: 2 };
+Array.prototype.join.call(x, '-') // 'Zero-One'
+
+// fx.apply(ctx[, argArray]) -- Gros potentiel d’astuces !
+
+fx.apply(obj, ['']) // => 'Joe salue l’atelier'
+Array.prototype.push.apply(x, ['Two', 'Three', 'Four']) // => 5
+x // => { 0: 'Zero', 1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', length: 5 }
+</code>
+</pre>
+
+				</section>
+			</section>
+			<section data-background='http://104.236.204.173/wp-content/uploads/2015/05/async.jpg'>
+				<section>
+					<h1 style='background-color:rgba(1,1,1, 0.5);'>JS = async</h1>
+				</section>
+				<section>
+					<h1 style='background-color:rgba(1,1,1, 0.5);'>Callback</h1>
+				</section>
+				<section>
+					<H2 style='background-color:rgba(1,1,1, 0.5);'>Les promesses</H2>
+					<pre class='javascript'><code>
+caches.match('/data.json').then(function(response) {
+  if (!response) throw Error("No data");
+  return response.json();
+}).then(function(data) {
+  // don't overwrite newer network data
+  if (!networkDataReceived) {
+    updatePage(data);
+  }
+}).catch(function() {
+  // we didn't get cached data, the network is our last hope:
+  return networkUpdate;
+}).catch(showErrorMessage).then(stopSpinner);
+					</code></pre>
+				</section>
+			</section>
+			<section data-background='https://media.giphy.com/media/cxgLwcgy5qoXm/giphy.gif'>
+				<section>
+					<h1>ES6 / 2015</h1>
+				</section>
+				<section>
+					<h2>Les modules de node</h2>
+					<pre>
+						<code class='javascript'>
+require('mon_module');
+require('./mon_module_locale');
+</code>
+
+
+					</pre>
+				</section>
+				<section>
+					<h2>Les modules de Papa</h2>
+					<pre>
+						<code class='javascript'>
+import * as types from '../constants/ActionTypes';
+
+export function addTodo(text) {
+  return { type: types.ADD_TODO, text };
+}
+import React, { PropTypes, Component } from 'react';
+import classnames from 'classnames';
+import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../constants/TodoFilters';
+import 'http://material.js'
+…
+export default Footer;
+export const ADD_TODO = 'ADD_TODO';
+export const DELETE_TODO = 'DELETE_TODO';
+export const EDIT_TODO = 'EDIT_TODO';
+
+</code>
+
+
+					</pre>
+				</section>
+
+				<section>
+					<h2>Destruct</h2>
+					<pre>
+						<code class='javascript'>
+const { activeCount } = this.props;
+…
+const { filter: selectedFilter, onShow } = this.props;
+const [, filters] = output.props.children;
+…
+const [,, clear] = output.props.children;
+var { op: a, lhs: { op: b }, rhs: c } = getASTNode();
+Détails
+</code>
+
+
+					</pre>
+				</section>
+
+			</section>
+			<section data-background='https://avatars2.githubusercontent.com/u/2565403?v=3&s=400'>
+				<section>
+					<h1 style='background-color:rgba(1,1,1, 0.5);'>LODASH / UNDERSCORE</h1>
+
+				</section>
+				<section>
+					<h2 style='background-color:rgba(1,1,1, 0.5);'>on ne réinvente pas la roue</h2>
+				</section>
+				<section>
+					<h2 style='background-color:rgba(1,1,1, 0.5);'>Les trucs utiles</h2>
+					<ul>
+						<li>Est ce que ma variable est un nombre / function / tableau <code>lodash/lang</code></li>
+						<li>Filtrer, trier, reduce.... <code>lodash/{collection/object/array}</code></li>
+						<li>Plein de fonctions prêtes à l'emploi <code>lodash/function</code></li>
+					</ul>
+				</section>
+			</section>
+			<section data-background='https://avatars2.githubusercontent.com/u/2565403?v=3&s=400'>
+				<section>
+					<h1 style='background-color:rgba(1,1,1, 0.5);'>MOMENT</h1>
+
+				</section>
+				<section>
+					<h2 style='background-color:rgba(1,1,1, 0.5);'>on ne réinvente pas la roue</h2>
+				</section>
+				<section>
+					<h2 style='background-color:rgba(1,1,1, 0.5);'>Les trucs utiles</h2>
+					<ul>
+						<li>formatter des dates</li>
+						<li>Manipuler des dates</li>
+						<li>Timezone...</li>
+					</ul>
+				</section>
 			</section>
 		</div>
 	</div>
