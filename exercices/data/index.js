@@ -21,7 +21,7 @@ export const MAP_MARQUES_KLEE = {
     },
     hp: {
         present: true,
-        wanted: true
+        wanted: false
     },
     acer: {
         present: false,
