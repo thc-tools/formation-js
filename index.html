@@ -339,6 +339,80 @@ person.langs            // => ['fr', 'en', undefined, undefined]
 				<section>
 					<h2>Falsy / Truthy</h2>
 				</section>
+				<section>
+					<h2>XML</h2>
+					<pre>
+					<code class='xml'>
+<menu id="file" value="File">
+  <popup>
+    <menuitem value="New" onclick="CreateNewDoc()" />
+    <menuitem value="Open" onclick="OpenDoc()" />
+    <menuitem value="Close" onclick="CloseDoc()" />
+  </popup>
+</menu>
+					</code>
+				</pre>
+
+				</section>
+				<section>
+					<h2>JSON</h2>
+					<pre>
+					<code class='javascript'>
+{
+    "menu": {
+        "id": "file",
+        "value": "File",
+        "popup": {
+            "menuitem": [
+                { "value": "New", "onclick": "CreateNewDoc()" },
+                { "value": "Open", "onclick": "OpenDoc()" },
+                { "value": "Close", "onclick": "CloseDoc()" }
+            ]
+        }
+    }
+}
+					</code>
+				</pre>
+
+				</section>
+
+
+				<section>
+					<h2>Oublions jQuery</h2>
+					<pre>
+					<code class='javascript'>
+//Avant
+const monElement = $('[data-my-selector]');
+const monElement = document.querySelector('[data-my-selector]');
+					</code>
+				</pre>
+
+				</section>
+				<section>
+					<h2>90% de jQuery en 15 lignes</h2>
+					<pre>
+					<code class='javascript'>
+/* bling.js */
+
+window.$ = document.querySelectorAll.bind(document);
+
+Node.prototype.on = window.on = function (name, fn) {
+  this.addEventListener(name, fn);
+}
+
+NodeList.prototype.__proto__ = Array.prototype;
+
+NodeList.prototype.on = NodeList.prototype.addEventListener = function (name, fn) {
+  this.forEach(function (elem, i) {
+    elem.on(name, fn);
+  });
+}
+				</code>
+<blockquote>Voir <a href='https://gist.github.com/paulirish/12fb951a8b893a454b32'>le gist de Paul Irish</a></blockquote>
+			</pre>
+
+				</section>
+
 
 			</section>
 			<section data-state="theme-color-blue-yellow">
@@ -346,6 +420,24 @@ person.langs            // => ['fr', 'en', undefined, undefined]
 					<h1>Les outils</h1>
 				</section>
 				<section data-background='https://nodejs.org/static/images/logos/nodejs-green.png'>
+				</section>
+				<section data-background='https://nodejs.org/static/images/logos/nodejs-green.png'>
+					<h2 style='background-color:rgba(1,1,1, 0.5);'>Node.js</h2>
+					<ul>
+						<li>JS côté serveur</li>
+						<li>Apporte plein d'outils sous forme de modules</li>
+						<li><a href='npmjs.com'>npm</a> (node package module)</li>
+					</ul>
+				</section>
+				<section data-background='https://nodejs.org/static/images/logos/nodejs-green.png'>
+					<h2 style='background-color:rgba(1,1,1, 0.5);'>Node.js</h2>
+					<ul>
+						<li>package.json</li>
+						<li>node_modules</li>
+						<li><code>npm install -g ma-dependance-globale</code></li>
+						<li><code>npm install -g rimraf</code></li>
+						<li><code>npm install --save ma-dependance</code></li>
+					</ul>
 				</section>
 				<section data-background='http://www.kolhamevaser.com/wp-content/uploads/2015/05/Schechter.Bavel_.TowerofBavel.jpg'>
 					<h1>Babel</h1>
@@ -655,29 +747,57 @@ x // => { 0: 'Zero', 1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', length: 5 }
 
 				</section>
 			</section>
-			<section data-background='http://104.236.204.173/wp-content/uploads/2015/05/async.jpg'>
-				<section>
+			<section >
+				<section data-background='http://104.236.204.173/wp-content/uploads/2015/05/async.jpg'>
 					<h1 style='background-color:rgba(1,1,1, 0.5);'>JS = async</h1>
 				</section>
 				<section>
-					<h1 style='background-color:rgba(1,1,1, 0.5);'>Callback</h1>
+					<h2 style='background-color:rgba(1,1,1, 0.5);'>Callback</h2>
+					<pre>
+						<code>
+function delayedAlert() {
+  window.setTimeout(slowAlert, 2000);
+}
+
+function slowAlert() {
+  alert("That was really slow!");
+}
+					</code></pre>
+				</section>
+				<section>
+					<h2>Les promesses</h2>
+					<p>
+						Une promesse a un état (pending, fullfilled, rejected)
+						Elle est asynchrone, et se termine soit par un succès soit par une erreur et renvoi une nouvelle promesse.
+					</p>
+					<code class='javascript'>promise.then(successCb,errorCb).then(otherSuccess, otherCb).catch(errorHandlingFn)</code>
+
+				</section>
+				<section>
+					<h2>Les promesses</h2>
+					<pre><code class='javascript'>
+const myPromise = new Promise((resolve, reject) => {
+	ajaxCall({success: resolve, error: reject});
+})
+
+Promise.resolve([1,2,3,4]);
+
+Promise.reject('ma super erreur')
+
+					</code></pre>
+
 				</section>
 				<section>
 					<H2 style='background-color:rgba(1,1,1, 0.5);'>Les promesses</H2>
 					<pre class='javascript'><code>
-caches.match('/data.json').then(function(response) {
-  if (!response) throw Error("No data");
-  return response.json();
-}).then(function(data) {
-  // don't overwrite newer network data
-  if (!networkDataReceived) {
-    updatePage(data);
-  }
-}).catch(function() {
-  // we didn't get cached data, the network is our last hope:
-  return networkUpdate;
-}).catch(showErrorMessage).then(stopSpinner);
-					</code></pre>
+fetch('/users.json')
+  .then(function(response) {
+    return response.json()
+  }).then(function(json) {
+    console.log('parsed json', json)
+  }).catch(function(ex) {
+    console.log('parsing failed', ex)
+  })					</code></pre>
 				</section>
 			</section>
 			<section data-background='https://media.giphy.com/media/cxgLwcgy5qoXm/giphy.gif'>
@@ -688,8 +808,13 @@ caches.match('/data.json').then(function(response) {
 					<h2>Les modules de node</h2>
 					<pre>
 						<code class='javascript'>
-require('mon_module');
+//Dans un fichier
+module.exports = monObjetAExporter;
+
+//Utilisation
 require('./mon_module_locale');
+//Utilisation d'un module npm
+require('mon_module');
 </code>
 
 
@@ -737,6 +862,61 @@ Détails
 
 					</pre>
 				</section>
+				<section>
+					<h2>Les strings interploation et multi lignes</h2>
+					<pre>
+						<code class='javascript'>
+const person = { first: 'Thomas', last: 'Anderson', age: 25, nickname: 'Neo' };
+
+// Interpolation de JS quelconque
+console.log(`${person.first} aka ${person.nickname}`)
+// => 'Thomas aka Neo'
+
+// Multi-ligne !
+const markup = `<li>
+${person.first} ${person.last}, age ${person.age}
+</li>`;
+
+					</code>
+
+
+					</pre>
+				</section>
+				<section>
+					<h2>Valeur par défaut dans une fonction</h2>
+					<pre>
+						<code class='javascript'>
+function add(source, numToAdd = 1){
+	return source + numToAdd;
+}
+						</code>
+
+
+					</pre>
+				</section>
+				<section>
+					<h2>Les objets</h2>
+					<pre>
+						<code class='javascript'>
+function editTodo(id, text) {
+  return { type: types.EDIT_TODO, id, text };
+  //On créé un objet avec pour clef le nom de la variable.
+}
+const FILTERS = {
+  [maVar1]: 'All',
+  [maVar2]: 'Active',
+  [maVar3]: 'Completed'
+};
+						</code>
+
+
+					</pre>
+				</section>
+				<section>
+					<h2>ES6 / 2015</h2>
+					<blockquote>Surtout du sucre syntaxique dans son utilisation</blockquote>
+				</section>
+
 
 			</section>
 			<section data-background='https://avatars2.githubusercontent.com/u/2565403?v=3&s=400'>
@@ -756,21 +936,42 @@ Détails
 					</ul>
 				</section>
 			</section>
-			<section data-background='https://avatars2.githubusercontent.com/u/2565403?v=3&s=400'>
+			<section data-background='http://cdn.londonandpartners.com/visit/london-organisations/big-ben/63602-640x360-bigben_tilt_640.jpg'>
 				<section>
-					<h1 style='background-color:rgba(1,1,1, 0.5);'>MOMENT</h1>
-
+					<h1 style='background-color:rgba(1,1,1, 0.5);'><a href='http://momentjs.com'>MOMENT</a></h1>
 				</section>
 				<section>
 					<h2 style='background-color:rgba(1,1,1, 0.5);'>on ne réinvente pas la roue</h2>
+		        	<iframe webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="http://momentjs.com/" src="http://momentjs.com/" height='50%'  width='80%'></iframe>
 				</section>
 				<section>
 					<h2 style='background-color:rgba(1,1,1, 0.5);'>Les trucs utiles</h2>
 					<ul>
-						<li>formatter des dates</li>
-						<li>Manipuler des dates</li>
+						<li>formatter des dates <code>moment().format('L')</code></li>
+						<li>Manipuler des dates <code>moment(maDate).add('days', 1)</code></li>
 						<li>Timezone...</li>
 					</ul>
+					<blockquote>Si tu manipules des dates tu utilises momentjs</blockquote>
+				</section>
+			</section>
+			<section data-background='http://cdn.londonandpartners.com/visit/london-organisations/big-ben/63602-640x360-bigben_tilt_640.jpg'>
+				<section>
+					<h1 style='background-color:rgba(1,1,1, 0.5);'><a href='https://github.com/get-focus/formation-js/tree/master/exercices'>Exercices</a></h1>
+				</section>
+				<section>
+					<h2 style='background-color:rgba(1,1,1, 0.5);'>Utilisation des modules</h2>
+				</section>
+				<section>
+					<h2 style='background-color:rgba(1,1,1, 0.5);'>Utilisation de la fonction reduce d'un tableau</h2>
+				</section>
+				<section>
+					<h2 style='background-color:rgba(1,1,1, 0.5);'>Les trucs utiles</h2>
+					<ul>
+						<li>formatter des dates <code>moment().format('L')</code></li>
+						<li>Manipuler des dates <code>moment(maDate).add('days', 1)</code></li>
+						<li>Timezone...</li>
+					</ul>
+					<blockquote>Si tu manipules des dates tu utilises momentjs</blockquote>
 				</section>
 			</section>
 		</div>
