@@ -59,7 +59,7 @@
 - `var`  portée globale ou locale a une fonction
 - `let` portée du block courant `{}`
 
-> A retenir on utlise `const` au maximum et `let` dans les autres cas
+> A retenir on utilise `const` au maximum et `let` dans les autres cas
 
 				</section>
 				<section>
@@ -345,9 +345,9 @@ person.langs            // => ['fr', 'en', undefined, undefined]
 					<code class='xml'>
 <menu id="file" value="File">
   <popup>
-    <menuitem value="New" onclick="CreateNewDoc()" />
-    <menuitem value="Open" onclick="OpenDoc()" />
-    <menuitem value="Close" onclick="CloseDoc()" />
+    <menuitem value="New" onclick="CreateNewDoc()"></menuitem>
+    <menuitem value="Open" onclick="OpenDoc()" ></menuitem>
+    <menuitem value="Close" onclick="CloseDoc()" ></menuitem>
   </popup>
 </menu>
 					</code>
@@ -383,6 +383,8 @@ person.langs            // => ['fr', 'en', undefined, undefined]
 					<code class='javascript'>
 //Avant
 const monElement = $('[data-my-selector]');
+
+//Après
 const monElement = document.querySelector('[data-my-selector]');
 					</code>
 				</pre>
@@ -456,7 +458,7 @@ NodeList.prototype.on = NodeList.prototype.addEventListener = function (name, fn
 						<li>Avant ES6 pas de classe</li>
 						<li>JS est un langage prototypale</li>
 						<li>En JS tout est un objet</li>
-						<li>Une propriété est identifiée par un doubler nom / valeur</li>
+						<li>Une propriété est identifiée par une paire nom / valeur</li>
 						<li>Une propriété peut être une fonction</li>
 					</ul>
 				</section>
@@ -598,16 +600,13 @@ davidLopez.fullName() // => 'David Lopez', Person.prototype
 davidLopez.toString() // => '[object Object]', Object.prototype
 
 Person.prototype.toString = function personToString() {
-  return '#Person<' + this.fullName() + '>';
+  return '#Person ' + this.fullName();
 };
 
-davidLopez.toString() // => '#PersonDavid Lopez '
+davidLopez.toString() // => "#Person David Lopez"
 						</code>
 					</pre>
-
 				</section>
-
-
 			</section>
 			<section>
 				<section data-background='https://media.giphy.com/media/aVrzyzV3q1lMk/giphy.gif'><h1>Closure</h1></section>
@@ -686,11 +685,11 @@ let obj = {
     [first, second, last].forEach(this.greet);
   }
 };
-obj.greet("salut les lopezs de France");
+obj.greet("les lopezs de France");
 // => 'Joe Lopez salut les lopezs de France !'
 let fx = obj.greet;
-fx("l’atelier") // => 'Mr X salut les lopezs de France'
-obj.greetAll('David', 'Joe'); // => 'Mr X salue David', 'Mr X salue Joe
+fx("l’atelier") // => '"Mr X salue l’atelier"'
+obj.greetAll('David', 'Joe'); // => 'Mr X salue David, Mr X salue Joe, Mr X salue undefined'
 						</code>
 					</pre>
 				</section>
@@ -767,7 +766,7 @@ function slowAlert() {
 				<section>
 					<h2>Les promesses</h2>
 					<p>
-						Une promesse a un état (pending, fullfilled, rejected)
+						Une promesse a un état (pending, fullfilled, rejected).<br>
 						Elle est asynchrone, et se termine soit par un succès soit par une erreur et renvoie une nouvelle promesse.
 					</p>
 					<code class='javascript'>promise.then(successCb,errorCb).then(otherSuccess, otherCb).catch(errorHandlingFn)</code>
