@@ -4,9 +4,7 @@ Ecrire un fichier `exercice1.js` qui importe la variable `NOM_SAUCE` depuis le f
 
 Ce fichier devra également exposer par défault la fonction par défault de `module/frites.js`.
 
-# Reducers
-
-Ecrire un fichier `exercice2.js` qui expose une fonction `reduceArray` qui prend le tableau
+# Arrays, map, filter et reducer
 
 ```javascript
 [
@@ -19,12 +17,21 @@ Ecrire un fichier `exercice2.js` qui expose une fonction `reduceArray` qui prend
         type: 'backend'
     },
     {
-        nom: 'Javasript',
-        type: 'fronted+backend',
+        nom: 'Javascript',
+        type: 'frontend+backend',
         swag: 'infini'
     }
 ]
 ```
+
+1 - Ecrire une fonction qui prend en entrée le tableau précédent, et retourne un tableau de string des noms des langages
+
+2 - Ecrire une fonction qui prend en entrée le tableau précédent, et retourne un tableau filtré sur les langages backend uniquement
+
+3- Ecrire une fonction qui prend en entrée le tableau précédent et retourne les noms des langages concaténés.
+
+Ecrire un fichier `exercice2.js` qui expose une fonction `reduceArray` qui prend le tableau
+
 
  et retourne une chaine de caractères concaténant l'ensemble des noms des objets du tableau, séparés par une virgule (`'C#JAVAJAVASCRIPT'`).
 
