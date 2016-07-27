@@ -42,8 +42,7 @@ const superbeObjet = {
 
 superbeObjet.direBonjour();
 superbeObjet.direBonjour.call({});
-superbeObjet.direBonjour.bind({name: 'Thomas'})();
-superbeObjet.direBonjour.bind({name: 'Thomas'}).call({}));
+superbeObjet.direBonjour.call({name: 'Thomas'});
 ```
 Comment expliquez-vous les résultats obtenus ?
 
