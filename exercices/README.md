@@ -72,6 +72,6 @@ Promise.resolve([{nom : 'Bazire', statut : 'Stagiaire', entreprise: 'Klee'}, {no
 ```
 et qui renvoie une promesse du type 
 ```javascript
-Promise.resolve([{nom : 'Bazire', autre: {statut : 'Stagiaire', entreprise: 'Klee'}}, {nom : 'Pierre', statut : 'FocusPapa', entreprise: 'Klee'}])
+Promise.resolve([{nom : 'Bazire', autre: {statut : 'Stagiaire', entreprise: 'Klee'}}, {nom : 'Pierre', autre: {statut : 'FocusPapa', entreprise: 'Klee'}}])
 ```
 (filtrage sur l'entreprise + chgt de la structure de l'objet)
