@@ -1,0 +1,26 @@
+{
+  "name": "formation-focus4",
+  "version": "1.0.0",
+  "description": "Exercices de formation",
+  "main": "index.ts",
+  "dependencies": {
+    "@types/fetch-mock": "^5.8.2",
+    "@types/lodash": "4.14.62",
+    "@types/node": "^7.0.13",
+    "fetch-mock": "^5.10.0",
+    "isomorphic-fetch": "^2.2.1",
+    "lodash": "4.17.4",
+    "mobx": "^3.1.9",
+    "ts-node": "3.0.2",
+    "typescript": "2.2.2",
+    "tape": "4.9.1",
+    "tap-spec": "5.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "ts-node exercice1.ts",
+    "correction": "tape -r ts-node/register correction.ts | tap-spec"
+  },
+  "author": "",
+  "license": "ISC"
+}
