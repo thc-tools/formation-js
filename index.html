@@ -227,7 +227,7 @@ for (var k of arr){ console.log(k)}; // => hello, world, undefined, cool
 				</section>
 				<section>
 					<pre>
-						<h2>Haloween pour les tableaux ...</h2>
+						<h2>"Déguiser" un objet en tableau<h2>
 						<code class='javascript'>
 // Toi aussi, déguise-toi en tableau !
 
@@ -277,26 +277,26 @@ a(); //test
 				</section>
 
 				<section>
-					<h2>JS c'est logique ...</h2>
+					<h2>Quelques pièges de comparaisons en JS ...</h2>
 					<pre>
 						<code>
 == ou === ?!
 
-42 == '42'        // => true  -- Argh, ça sent le PHP, là…
-null == undefined // => true  -- hmmm…
-null == 0         // => false -- heureusement !
-0 == undefined    // => false -- heureusement !
-0 == false        // => true  -- Façon C…
-1 == true         // => true  -- Façon C…
-42 == true        // => false -- Watcha ?! (x == ToNumber(y), ES3 §11.9.3)
-'0' == false      // => true  -- Woah !
-'' == false       // => true  -- Yowza ! 8-O  On y reviendra…
-NaN == NaN        // => false -- Bin oué, c’est le principe…
+42 == '42'        // => true  -- 
+null == undefined // => true  -- 
+null == 0         // => false -- 
+0 == undefined    // => false -- 
+0 == false        // => true  -- 
+1 == true         // => true  -- 
+42 == true        // => false -- 
+'0' == false      // => true  -- 
+'' == false       // => true  -- 
+NaN == NaN        // => false -- 
 						</code>
 					</pre>
 				</section>
 				<section>
-					<h2>En fait si ...</h2>
+					<h2>Pour éviter les écueils, utiliser ===</h2>
 					<pre>
 						<code>
 // avec ===, fini de jouer : vérif valeur ET TYPE !
@@ -310,9 +310,6 @@ null === 0         // => false
 NaN === NaN        // => false -- rien à faire !
 						</code>
 					</pre>
-					<blockquote>
-						On utilise toujours le <b>===</b>
-					</blockquote>
 				</section>
 				<section>
 					<h2>in et delete</h2>
@@ -394,35 +391,9 @@ const monElement = document.querySelector('[data-my-selector]');
 				</pre>
 
 				</section>
-				<section>
-					<h2>90% de jQuery en 15 lignes</h2>
-					<pre>
-					<code class='javascript'>
-/* bling.js */
-
-window.$ = document.querySelectorAll.bind(document);
-
-Node.prototype.on = window.on = function (name, fn) {
-  this.addEventListener(name, fn);
-}
-
-NodeList.prototype.__proto__ = Array.prototype;
-
-NodeList.prototype.on = NodeList.prototype.addEventListener = function (name, fn) {
-  this.forEach(function (elem, i) {
-    elem.on(name, fn);
-  });
-}
-				</code>
-<blockquote>Voir <a href='https://gist.github.com/paulirish/12fb951a8b893a454b32'>le gist de Paul Irish</a></blockquote>
-			</pre>
-
-				</section>
-
-
 			</section>
 			<section data-state="theme-color-blue-yellow">
-				<section data-background='https://media.giphy.com/media/Yxoeu3U5wVYVG/giphy.gif'>
+				<section data-background=''>
 					<h1>Les outils</h1>
 				</section>
 				<section data-background='https://nodejs.org/static/images/logos/nodejs-green.png'>
@@ -452,7 +423,7 @@ NodeList.prototype.on = NodeList.prototype.addEventListener = function (name, fn
 			    		<h1 style='background-color:rgba(1,1,1, 0.5);'><a href='https://webpack.github.io/'>Webpack</a></h1>
 				</section>
 
-				<section data-background='https://media.giphy.com/media/pjQTX3sfnKnx6/giphy.gif'>
+				<section data-background=''>
 					<h1>Debug</h1>
 				</section>
 			</section>
@@ -556,7 +527,7 @@ john.fullName() // => 'John Smith'
 john.greet()    // 'Salut je m’appelle John'
 						</code>
 					</pre>
-					<blockquote>Pas bon... on copie le truc dans chaque constructeur</blockquote>
+					<blockquote>Mauvaise pratique: on copie la fonction dans chaque constructeur</blockquote>
 				</section>
 				<section>
 					<h2>Les classes ES6</h2>
@@ -590,7 +561,7 @@ class TodoItem extends Component {
 					</ol>
 					<footer>*conceptuellement, <code>constructor.prototype</code> ou <code>__proto__</code></footer>
 				</section>
-				<section data-background='https://i.ytimg.com/vi/kJw-LivvBMo/maxresdefault.jpg'>
+				<section data-background=''>
 					<h2>La preuve en live...</h2>
 					<pre>
 						<code class='javascript'>
@@ -617,7 +588,7 @@ davidLopez.toString() // => "#Person David Lopez"
 				</section>
 			</section>
 			<section>
-				<section data-background='https://media.giphy.com/media/aVrzyzV3q1lMk/giphy.gif'><h1>Closure</h1></section>
+				<section data-background=''><h1>Closure</h1></section>
 				<section >
 					<h2>Closure simple</h2>
 					<pre>
@@ -702,7 +673,7 @@ const obj = {
 						</code>
 					</pre>
 				</section>
-				<section data-background='https://media.giphy.com/media/KXY5lB8yOarLy/giphy.gif'>
+				<section data-background=''>
 					<h2>Comment faire ? ES6 style?</h2>
 					<pre>
 						<code class='javascript'>
@@ -740,7 +711,7 @@ xy // => { 0: 'Zero', 1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', length: 5 }
 			</section>
 			<section >
 				<section data-background='http://104.236.204.173/wp-content/uploads/2015/05/async.jpg'>
-					<h1 style='background-color:rgba(1,1,1, 0.5);'>JS = async</h1>
+					<h1 style='background-color:rgba(1,1,1, 0.5);'>JS et asynchronisme</h1>
 				</section>
 				<section>
 					<h2 style='background-color:rgba(1,1,1, 0.5);'>Callback</h2>
@@ -792,7 +763,7 @@ fetch('/users.json')
 				</section>
 			</section>
 			<section >
-				<section data-background='https://media.giphy.com/media/cxgLwcgy5qoXm/giphy.gif'>
+				<section data-background=''>
 					<h1>ES6 / 2015</h1>
 				</section>
 				<section>
@@ -903,15 +874,9 @@ const FILTERS = {
 
 					</pre>
 				</section>
-				<section>
-					<h2>ES6 / 2015</h2>
-					<blockquote>Surtout du sucre syntaxique dans son utilisation</blockquote>
-				</section>
-
-
 			</section>
 			<section >
-				<section data-background='http://i.giphy.com/YHvwPgwojjsFa.gif'>
+				<section data-background=''>
 					<h1 style='background-color:rgba(1,1,1, 0.5);'>LODASH / UNDERSCORE</h1>
 
 				</section>
