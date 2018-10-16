@@ -9,12 +9,12 @@ tape(ex1, test => {
     console.log(ex1);
     test.deepEqual(getNames(languages), ['C#', 'Java', 'Javascript'], "Recuperation des noms de langages");
     const backEndResult = [{
-        nom: 'Java',
+        nom: 'C#',
         type: 'backend'
     },
     {
-        nom: 'Javascript',
-        type: 'frontend+backend'
+        nom: 'Java',
+        type: 'backend'
     }]
     test.deepEqual(getBackendLanguage(languages), backEndResult, "Recuperation des langages Backend uniquement");
     test.deepEqual(getConcatedNames(languages), 'C# : Java : Javascript', "Concaténation des noms des langages, séparés par ' : ' ");
