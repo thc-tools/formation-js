@@ -1,3 +1,5 @@
+import * as _ from 'lodash';
+
 // Arrays, map, filter et reducer
 export const languages = [
   {
@@ -15,18 +17,18 @@ export const languages = [
 ];
 // 1 - Ecrire une fonction qui prend en entrée le tableau précédent, et retourne un tableau de string des noms des langages
 const getNames = (languages) => {
-  return ['C#', 'Java', 'Javascript'];
+    return ['C#', 'Java', 'Javascript'];
 };
 
 //2 - Ecrire une fonction qui prend en entrée le tableau précédent, et retourne un tableau filtré sur les langages backend uniquement
 const getBackendLanguage = (languages) => {
     return [{
-        nom: 'Java',
+        nom: 'C#',
         type: 'backend'
     },
     {
-        nom: 'Javascript',
-        type: 'frontend+backend'
+        nom: 'Java',
+        type: 'backend'
     }];
 };
 

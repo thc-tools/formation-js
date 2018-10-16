@@ -21,6 +21,7 @@
     "start": "ts-node exercice1.ts",
     "exercice3": "ts-node exercice3.ts",
     "exercice4": "ts-node exercice4.ts",
+    "exercice5": "ts-node exercice5.ts",
     "correction": "tape -r ts-node/register correction.ts | tap-spec"
   },
   "author": "",

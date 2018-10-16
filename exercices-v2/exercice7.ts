@@ -1,3 +1,5 @@
+// async et await
+
 import fetchMock = require("fetch-mock");
 import "isomorphic-fetch";
 

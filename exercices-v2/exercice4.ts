@@ -1,18 +1,12 @@
 // Lodash
 import * as _ from 'lodash'
 
-const superbeObjet = { 
-    name: 'Rodrigo',
-    direBonjour(){
-      console.log(`Bonjour ${this.name}`)
-    }
-  };
-
 // 1. Exécuter la commande npm run exercice4. Qu'observez-vous ?
 const analyse = () => {
     Promise.resolve('Un message dans une promesse').then(msg => console.log('Message : ', msg));
     console.log('Apres');
 }
+
 analyse();
 
 
@@ -32,16 +26,16 @@ const updateUnitPromise = (promise) => {
 
 // 3 - Ecrire une fonction recevant en entrée la promesse suivante : 
 const teamPromise = Promise.resolve([
-  {nom : 'Bazire', statut : 'Stagiaire', entreprise: 'Klee'},
-  {nom : 'Pierre', statut : 'FocusPapa', entreprise: 'Klee'},
-  {nom:'Stan', statut :'Mascotte', entreprise:'Ailleurs'}])
+  {nom : 'Bazire', autre: {statut : 'Stagiaire', entreprise: 'Klee'}},
+  {nom : 'Pierre', autre: {statut : 'FocusPapa', entreprise: 'Klee'}},
+  {nom:'Stan', autre: {statut :'Mascotte', entreprise:'Ailleurs'}}])
 // et qui renvoie une promesse du type
-//Promise.resolve([{nom : 'Bazire', autre: {statut : 'Stagiaire', entreprise: 'Klee'}}, {nom : 'Pierre', autre: {statut : 'FocusPapa', entreprise: 'Klee'}}])
+//Promise.resolve([{nom : 'Bazire', statut : 'Stagiaire', entreprise: 'Klee'}, {nom : 'Pierre', statut : 'FocusPapa', entreprise: 'Klee'}])
 // (filtrage sur l'entreprise + chgt de la structure de l'objet)
 const updateTeamPromise = (promise) => {
   return Promise.resolve([
-    {nom : 'Bazire', autre: {statut : 'Stagiaire', entreprise: 'Klee'}}, 
-    {nom : 'Pierre', autre: {statut : 'FocusPapa', entreprise: 'Klee'}}]);
+    {nom : 'Bazire', statut : 'Stagiaire', entreprise: 'Klee'}, 
+    {nom : 'Pierre',statut : 'FocusPapa', entreprise: 'Klee'}]);
 }
 
 export {updateUnitPromise, bazirePromise, updateTeamPromise, teamPromise};

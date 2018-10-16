@@ -1,22 +1,28 @@
-// Lodash
+// Constructeur Prototypes
 import * as _ from 'lodash'
 
 const superbeObjet = { 
-    name: 'Rodrigo',
-    direBonjour(){
-      console.log(`Bonjour ${this.name}`)
+    nom: 'Rodrigo',
+    direBonjour: function (){
+      console.log(`Bonjour ${this.nom}`)
     }
   };
 
 const analyse = () => {
     superbeObjet.direBonjour();
     superbeObjet.direBonjour.call({});
-    superbeObjet.direBonjour.call({name: 'Thomas'});
+    superbeObjet.direBonjour.call({nom: 'Thomas'});
 }
+// 1. Exécuter la commande npm run exercice3. Comment expliquez-vous les résultats obtenus ?
 analyse();
 
-// 1. Exécuter la commande npm run exercice3. Comment expliquez-vous les résultats obtenus ?
-// 2 - Ecrire une fonction disant bonjour à l'équipe (['Amélie', 'Thomas', 'Guénolé', 'Pierre']), en utilisant le superbeObjet.
-const helloTeam = () => {
+// 2. Ecrire le contructeur de Personne contenant un nom
+// 3. Ajouter au prototype de Personne la fonction dire bonjour.
+/* 4. Appeler ce constructeur pour chacun des membres de l'équipe, et renvoyer un tableau
+ des personnes de l'équipe après qu'elles aient chsune dit Bonjour. */
+export const team = ['Amelie', 'Thomas', 'Guénolé', 'Pierre'];
+const helloTeam = (array) => {
+  return  [{nom: 'Amelie'}, {nom: 'Thomas'}, {nom: 'Guénolé'}, {nom: 'Pierre'}];
 }
+
 export {helloTeam};
