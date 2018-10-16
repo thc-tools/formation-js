@@ -47,4 +47,8 @@ export const entry3 = [{
 
 // Liste des paires [key, somme(value)]
 export const getKeySum = (object) => {
+    return _.reduce(object, function(result, value, key) {
+        result[value["key"]] = (result[value["key"]] || 0) + value["value"];
+        return result;
+      }, {});
 };
