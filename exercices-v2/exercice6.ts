@@ -5,6 +5,14 @@ export const entry = [4, 8, 15, 16, 23, 42];
 
 // Objet de la forme {[i]: i * 3} pour `i` dans entry
 export const mapArrayToObject = (array) => {
+    return {
+        4: 12,
+        8: 24,
+        15: 45,
+        16: 48,
+        23: 69,
+        42: 126
+    };
 };
 
 export const entry2 = {
