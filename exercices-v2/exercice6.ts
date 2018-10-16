@@ -5,7 +5,6 @@ export const entry = [4, 8, 15, 16, 23, 42];
 
 // Objet de la forme {[i]: i * 3} pour `i` dans entry
 export const mapArrayToObject = (array) => {
-    return _.zipObject(array, _.map(array, (tr:number) => {return 3 * tr}));
 };
 
 export const entry2 = {
