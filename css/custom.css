@@ -1,0 +1,12 @@
+.reveal p,
+.reveal li {
+  font-size: 0.8em !important;
+}
+
+.reveal table {
+  font-size: 0.6em !important;
+}
+
+.reveal h3 {
+  border-bottom: 1px solid pink;
+}

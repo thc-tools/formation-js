@@ -21,6 +21,7 @@
 
     <link rel="stylesheet" href="css/reveal.css" />
     <link rel="stylesheet" href="css/theme/black.css" id="theme" />
+    <link rel="stylesheet" href="css/custom.css" />
 
     <!-- Code syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css" />
@@ -191,7 +192,7 @@
                 <td>Version destinée à devenir la nouvelle norme​</td>
               </tr>
             </table>
-            <p style="font-size: 0.5em">
+            <p style="font-size: 0.6em">
               * ES.Next est un nom dynamique qui fait toujours référence à la
               prochaine version d'ECMAScript, en cours de rédaction. ​ Les
               fonctionnalités d'ES.Next sont plutôt considérées comme des
@@ -209,6 +210,9 @@
               Babel et autres vous permettent de transpiler votre JavaScript en
               une version compatible avec tous les navigateurs.
             </p>
+          </section>
+          <section>
+            <h3>Transpilage​</h3>
             <p style="color: pink">Attention: Transpilage !== compilation</p>
             <p>
               Le JavaScript reste un langage interprété. Aucune phase de
@@ -328,16 +332,14 @@
             <h3>Création d'un objet​</h3>
             <pre>
 				<code class="javascript">
-// Création d'un objet
 const obj = { first: "David", last: "Lopez", age: 77 };
 				</code>
 			</pre>
             <div style="display: flex">
               <div style="flex: 1">
                 <p>
-                  La création d'objet se fait le plus souvent via la syntaxe
-                  JSON. Ici on crée donc une variable contenant un objet avec
-                  trois propriétés:​
+                  Ici on crée donc une variable contenant un objet avec trois
+                  propriétés:​
                 </p>
                 <ul>
                   <li>first​</li>
@@ -441,6 +443,9 @@ obj.77 // => SyntaxError
               Le premier élément se trouve à l'indice 0, le suivant à l'indice 1
               et ainsi de suite.​
             </p>
+          </section>
+          <section>
+            <h3>Présentation​</h3>
             <p>
               La longueur d'une chaîne de caractères est le nombre d'éléments
               qu'elle contient.​
@@ -657,7 +662,7 @@ data.slice(-2, -1) // => [2]​
               méthodes d'itération sur les éléments. Nous allons en présenter
               deux ici:​​
             </p>
-            <table style="font-size: 0.6em">
+            <table>
               <tr>
                 <td>map</td>
                 <td>immutabe</td>
@@ -700,6 +705,9 @@ ARRAY.map(function(element, idx){console.log(element, idx)});​
               L'objet Date possède de nombreuses méthodes pour définir,
               modifier, obtenir des dates. Il ne possède pas de propriétés.​
             </p>
+          </section>
+          <section>
+            <h3>Présentation</h3>
             <p>
               JavaScript gère les dates de façon similaire à Java. (Donc assez
               mal...)​
@@ -768,7 +776,7 @@ date.getMilliseconds() // "Milliseconds", un seul mot : une seule initiale.​
           </section>
           <section>
             <h3>Opérateurs arithmétiques​</h3>
-            <table style="font-size: 0.6em">
+            <table>
               <tr>
                 <td>+</td>
                 <td>Addition</td>
@@ -820,34 +828,18 @@ date.getMilliseconds() // "Milliseconds", un seul mot : une seule initiale.​
           </section>
           <section>
             <h3>Opérateurs arithmétiques​</h3>
-            <table style="font-size: 0.6em">
-              <tr>
-                <td>/</td>
-                <td>Division</td>
-                <td>
-                  Quotient de ces opérandes avec l'opérande gauche comme
-                  numérateur et l'opérande droit comme dénominateur.​
-                </td>
-                <td>
-                  <pre>
-					  <code class="javascript">
-1 / 2 // renvoie 0.5 ​
-2.0 / 0 // renvoie Infinity
-					  </code>
-					</pre>
-                </td>
-              </tr>
+            <table>
               <tr>
                 <td>*</td>
                 <td>Multiplication</td>
                 <td>Produit des opérandes.​</td>
                 <td>
                   <pre>
-					  <code class="javascript">
+					          <code class="javascript">
 2 * 2 // 4 ​
 Infinity * 0 // NaN
-					  </code>
-					</pre>
+                    </code>
+                  </pre>
                 </td>
               </tr>
               <tr>
@@ -886,7 +878,7 @@ Infinity * 0 // NaN
           </section>
           <section>
             <h3>Opérateurs arithmétiques​</h3>
-            <table style="font-size: 0.6em">
+            <table>
               <tr>
                 <td>++</td>
                 <td>Incrément</td>
@@ -947,7 +939,7 @@ b = --a; // a = 1, b = 1
           </section>
           <section>
             <h3>Opérateur d'affectation​</h3>
-            <table style="font-size: 0.6em">
+            <table>
               <tr>
                 <td>
                   <a
@@ -1088,6 +1080,9 @@ b = --a; // a = 1, b = 1
               peut vous renvoyer une valeur native comme Nan, +Infinity etc.​ En
               voici quelques exemples:​
             </p>
+          </section>
+          <section>
+            <h3>Les pièges​</h3>
             <pre>
 				<code class="javascript">
 !42  => false​
@@ -1110,7 +1105,7 @@ b = --a; // a = 1, b = 1
           </section>
           <section>
             <h3>Opérateurs de comparaison​</h3>
-            <table style="font-size: 0.6em">
+            <table>
               <tr>
                 <td>==</td>
                 <td>
@@ -1226,7 +1221,7 @@ NaN === NaN        // => false -- rien à faire !
           </section>
           <section>
             <h3>Opérateurs de logique​</h3>
-            <table style="font-size: 0.6em">
+            <table>
               <tr>
                 <td>&&</td>
                 <td>ET logique</td>
@@ -1290,6 +1285,9 @@ NaN === NaN        // => false -- rien à faire !
               de plusieurs éléments (pour les tableaux) ou de paires
               clés-valeurs (pour les objets).​
             </p>
+          </section>
+          <section>
+            <h3>Présentation​</h3>
             <p>
               L'affectation par décomposition est une expression JavaScript qui
               permet d'extraire des données d'un tableau ou d'un objet grâce à
@@ -1618,6 +1616,9 @@ console.log(z); // ReferenceError: z is not defined, c'est mieux!​
               fonction parente. Et donc avoir accès aux variables de cette
               fonction.​
             </p>
+          </section>
+          <section>
+            <h3>​Présentation​</h3>
             <p>
               De cette manière il est possbile de hierarchiser les portée des
               variables au sein d'un code JS.​
@@ -1646,6 +1647,9 @@ var resultat = fn_interne(5); // donc 8​
 var resultat1 = externe(3)(5); // renvoie 8​
 				</code>
 			</pre>
+          </section>
+          <section>
+            <h3>​Utilisation​</h3>
             <p>
               Dans le cas présenté ci-dessus, on voit que la variable x est
               connu de la fonction nommé interne, celle-ci peut être utilisée
@@ -1755,6 +1759,9 @@ monObjet.fullName(); // => log Michou Dupont. Dans ce cas this === monObjet​
 monObjet.strictFullName(); // => IDEM​
 				</code>
 			</pre>
+          </section>
+          <section>
+            <h3>​​Binding implicite</h3>
             <p>
               Ici on appel explicitement la méthode fullname() au travers de
               l'objet monObjet. Donc le contexte (this) au moment de l'exécution
@@ -1784,6 +1791,9 @@ newStrictFullName(); // => Error!!!!!!!! this vaut undefined​
               contient pas le résultat, mais la fonction elle-même. newFullName
               est donc une fonction prête à être appelée.​
             </p>
+          </section>
+          <section>
+            <h3>Binding implicite​​</h3>
             <p>
               Au moment de l'appel le javascript tente de lui initialisé son
               contexte, et regarde donc qui a appelé la fonction. Sauf qu'ici
@@ -1867,6 +1877,9 @@ obj.greetAll('David', 'Joe', 'Guénolé'); // => 'Mr X salue David, Mr X salue J
               Il suffit de définir une nouvelle variable contenant le ocntexte,
               et de l'utiliser dans une fonction imbriquée (une closure).​
             </p>
+          </section>
+          <section>
+            <h3>Binding implicite – Les solutions​​​</h3>
             <pre>
 				<code class="javascript">
 const obj = {​
@@ -2018,6 +2031,9 @@ function Person(first, last) {​
 }​
 				</code>
 			</pre>
+          </section>
+          <section>
+            <h3>Utilisation</h3>
             <p>
               Jusque là ça ressemble à n'importe quel constructeur, à la
               différence qu'ici les attribut de l'objet son définie
@@ -2103,6 +2119,9 @@ function Person(first, last) {​
 }​
 				</code>
 			</pre>
+          </section>
+          <section>
+            <h3>Utilisation​</h3>
             <p>Puis on ajoute des méthodes au prototype du constructeur​</p>
             <pre>
 				<code class="javascript">
@@ -2157,6 +2176,9 @@ kevin.greet(); // => 'Salut je m’appelle Kevin'​
               FAUX! c'est exactement l'exemple d'une chose à ne PAS faire! (oui
               je te vois venir avec tes idées bizarre! J'ai l’œil moi!)​
             </p>
+          </section>
+          <section>
+            <h3>Les mauvaises pratiques :(​</h3>
             <pre>
 				<code class="javascript">
 function Person(first, last) {​
@@ -2208,6 +2230,9 @@ fakeArray.reverse().join(' ');​
 // slice, sort, splice, toString, unshift.​
 				</code>
 			</pre>
+          </section>
+          <section>
+            <h3>"Déguiser" un objet en tableau​</h3>
             <p>
               Ça peut paraitre inutile, mais c'est exactement ce principe qui a
               permis de créer les polyfill, très utiles pour coder sous IE9 avec
@@ -2217,7 +2242,7 @@ fakeArray.reverse().join(' ');​
         </section>
         <section>
           <section>
-            <h1>> Clase</h1>
+            <h1>> Classe</h1>
           </section>
           <section>
             <h3>Présentation</h3>
@@ -2262,6 +2287,9 @@ class TodoItem extends Component {​
 obj.prop
 				</code>
 			</pre>
+          </section>
+          <section>
+            <h3>Présentation</h3>
             <p>Quelle valeur va s'afficher, et comment est-elle résolue?​</p>
             <ul>
               <li>On part de l'objet indexé obj​</li>
@@ -2347,6 +2375,9 @@ davidLopez.toString() // => "#Person David Lopez"​
               sein du fichiers JS pour tout calcul, mais n'est pas publié sur
               l'extérieur. On vient de rendre une partie du code privé.​
             </p>
+          </section>
+          <section>
+            <h3>Avant ES2015​</h3>
             <pre>
 				<code class="javascript">
 // fichier1.js​
@@ -2399,6 +2430,9 @@ lala.age; // 47​
 	fichier2.js​
 				</code>
 			</pre>
+          </section>
+          <section>
+            <h3>Après ES2015​</h3>
             <p>
               On utilise directement l'instruction export, qui nous permet
               notamment de définir un nom au moment de l'export. Il est possible
@@ -2496,6 +2530,9 @@ monModule.lolo; // 28​
               en deuxième paramètre exécute la callback renseignée en premier
               paramètre.​
             </p>
+          </section>
+          <section>
+            <h3>Les callbacks​</h3>
             <pre>
 				<code class="javascript">
 function delayedAlert() {​
