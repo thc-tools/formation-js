@@ -1,956 +1,2797 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
+  <head>
+    <meta charset="utf-8" />
 
-<head>
-	<meta charset="utf-8">
+    <title>JS, ES6, lodash, ...</title>
 
-	<title>JS, ES6, lodash, ...</title>
+    <meta name="description" content="Une formation sur le JS" />
+    <meta name="author" content="c3dr0x" />
 
-	<meta name="description" content="Une formation sur le JS">
-	<meta name="author" content="Pierre Besson">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
 
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui"
+    />
 
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="css/reveal.css" />
+    <link rel="stylesheet" href="css/theme/black.css" id="theme" />
 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css" />
 
-	<link rel="stylesheet" href="css/reveal.css">
-	<link rel="stylesheet" href="css/theme/black.css" id="theme">
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.type = "text/css";
+      link.href = window.location.search.match(/print-pdf/gi)
+        ? "css/print/pdf.css"
+        : "css/print/paper.css";
+      document.getElementsByTagName("head")[0].appendChild(link);
+    </script>
 
-	<!-- Code syntax highlighting -->
-	<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!--[if lt IE 9]>
+      <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Merriweather:700|Source+Sans+Pro:300,600,300italic,600italic|Source+Code+Pro:400,600"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
 
-	<!-- Printing and PDF exports -->
-	<script>
-	var link = document.createElement( 'link' );
-	link.rel = 'stylesheet';
-	link.type = 'text/css';
-	link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-	document.getElementsByTagName( 'head' )[0].appendChild( link );
-	</script>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <section>
+            <h1>JavaScript</h1>
+            <h2>- Présentation -</h2>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>> Le JS késako ?</h1>
+          </section>
+          <section>
+            <h2>Un langage web</h2>
+            <p>
+              Le JavaScript a été créé en 1995 pour réaliser des petits scripts
+              dans des pages Web afin de les dynamiser. Le langage est
+              nativement supporté par tous les navigateurs Web, ce qui le rend
+              extrêmement populaire. Cependant chaque navigateur à sa propre
+              implémentation du langage, et donc son propre moteur JS (ce sera
+              important pour la suite, enfin presque...)​
+            </p>
+          </section>
+          <section>
+            <h3>Un langage prototype​</h3>
+            <p>
+              Le langage respecte l'ensemble des paradigmes orienté objet, et
+              est basé sur un principe de prototype. La principale différence
+              entre un prototype et une classe étant qu'une classe est
+              entièrement définie au build, un prototype est modifiable tout au
+              long du runtime...​
+            </p>
+            <p>
+              Le JavaScript est un langage interprété. A l'inverse du C ou du
+              Java, il n'est pas compilé, mais lu au fur et à mesure de son
+              exécution pour le moteur JS (le plus souvent un navigateur Web).​
+            </p>
+          </section>
+          <section>
+            <h3>Un langage populaire​</h3>
+            <p>
+              L'utilisation première du JavaScript était de dynamiser des page
+              HTML en créant des scripts qui s'exécutent côté client, donc
+              directement sur le navigateur. L'intérêt est de diminuer les
+              aller-retour client serveur pour les modifications mineurs de
+              contenu Web.​
+            </p>
+            <p>
+              De là vont apparaitre de nombreuses librairies facilitant plus
+              encore ces manipulation de contenu Web. La plus connue d'entre
+              elle n'est autre que JQuery. Cette librairie Simplifie des
+              fonctions complexe d'écoute d'évènement, de manipulation du DOM
+              etc.​
+            </p>
+          </section>
+          <section>
+            <h3>Un langage populaire​</h3>
+            <p style="color: pink">Attention, JS !== JQuery​</p>
+            <p>
+              En effet c'est deux compétences sont régulièrement mélangées.
+              JQuery n'est qu'une librairie qui s'appuie sur le langage
+              JavaScript. Toutes les fonctions JQuery sont bien évidemment
+              faisables en Vanilla JS*.
+            </p>
+            <p style="color: pink">
+              Ce module ne parlera que de JavaScript, pas de JQuery.
+            </p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>> Le JS après 2015​</h1>
+          </section>
+          <section>
+            <h3>Node.js et l'avènement des SPA​</h3>
+            <p>
+              En 2009 sort Node.Js. Il s'agit d'une plateforme logicielle libre
+              qui, couplé a son gestionnaire de paquet NPM, permet de réaliser
+              des application complexe en JavaScript, tel que des serveurs Web
+              par exemple. L'arrivée de Node.js a permis notamment de créer des
+              environnement de développement complexes et outillés (Babel,
+              webpack, grunt, etc.).​
+            </p>
+          </section>
+          <section>
+            <h3>Node.js et l'avènement des SPA​</h3>
+            <p>
+              Depuis lors l'utilisation du JavaScript s'est démocratisée jusqu'à
+              pouvoir créer des applications cross plateforme, compatible sur de
+              nombreux devices :
+            </p>
+            <ul>
+              <li>Application desktop (Electron)</li>
+              <li>Application mobile (Cordova, Phonegap)</li>
+              <li>Application mobile (React native)</li>
+              <li>Serveur Web (Express)</li>
+              <li>
+                Single Page Aplication (Backbone, Angular, React, Vue ...)
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h3>Les évolutions du langage​</h3>
+            <p>
+              Le JavaScript est normé par l'organisation
+              <a href="https://www.ecma-international.org/"
+                >ECMA-internationnal</a
+              >, et implémente notamment les normes
+              <a href="https://262.ecma-international.org/9.0/#Title"
+                >ECMA-262</a
+              >
+              et <a href="https://402.ecma-international.org/4.0/">ECMA-402</a>.
+              La version la plus connu dJavascript est certainement la version
+              ECMAScript 5 qui est sorti en 2009. Mais depuis 2015 la norme
+              évolue annuellement. On notera notamment une très grande
+              différence entre ES5 et ES2015 (aussi appelé ES6).​
+            </p>
+          </section>
+          <section>
+            <h3>Les évolutions du langage​</h3>
+            <table>
+              <tr>
+                <td>ES5 (2009)​</td>
+                <td>
+                  Version la plus connue, supportée par tous les navigateurs​
+                </td>
+              </tr>
+              <tr>
+                <td>ES 2015 (ES6)​</td>
+                <td>Ajoute énormément de modifications au langage​</td>
+              </tr>
+              <tr>
+                <td>...</td>
+                <td>Evolution annuelle de la norme​</td>
+              </tr>
+              <tr>
+                <td>ES 2019​</td>
+                <td>Version actuelle de la norme​</td>
+              </tr>
+              <tr>
+                <td>ES next*​</td>
+                <td>Version destinée à devenir la nouvelle norme​</td>
+              </tr>
+            </table>
+            <p style="font-size: 0.5em">
+              * ES.Next est un nom dynamique qui fait toujours référence à la
+              prochaine version d'ECMAScript, en cours de rédaction. ​ Les
+              fonctionnalités d'ES.Next sont plutôt considérées comme des
+              propositions car la spécification n'a pas encore été finalisée​
+            </p>
+          </section>
+          <section>
+            <h3>Transpilage​</h3>
+            <p>
+              Le langage évoluant annuellement, il est difficile pour les acteur
+              du marché d'être toujours à jours sur l'implémentation des moteurs
+              JavaScript. Pour palier à ce manque, la communauté a créer des
+              "traducteurs" capables de transformer un code écrit dans une
+              version du langage en une autre version. Aussi des outils tel que
+              Babel et autres vous permettent de transpiler votre JavaScript en
+              une version compatible avec tous les navigateurs.
+            </p>
+            <p style="color: pink">Attention: Transpilage !== compilation</p>
+            <p>
+              Le JavaScript reste un langage interprété. Aucune phase de
+              compilation n'est présente. Le langage est simplement traduit,
+              mais reste interprété au runtime par le navigateur.​​​​
+            </p>
+          </section>
+          <section>
+            <h3>Transpilage​</h3>
+            <p>
+              La phase de transpilage devenant de plus en plus fréquente, des
+              surcouches au langage JavaScript ont fait leur apparition.
+              Celles-ci ajoutent de nouvelle fonctionnalités, et des sucres
+              syntaxiques. On pensera notamment au typage du langage avec
+              TypeScript ou Flow. Encore une fois il ne s'agit que d'une
+              surcouche, au final le code est la plupart du temps transpilé en
+              JavaScript, et les types n'existent plus au moment de l’exécution
+              du code. Il s'agit surtout d'un confort de développement.
+            </p>
+            <p>
+              <b>NB:</b> Nous n'aborderons pas les versions typées du langage.
+            </p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>> Les 6 piliers</h1>
+          </section>
+          <section>
+            <h3>Des types ou pas de types ?​</h3>
+            <p>
+              Bon OK on commence déjà par une contradiction. ​Le JavaScript est
+              un langage non-typé.
+            </p>
+            <p>Enfin presque... ​</p>
+            <p>
+              En réalité il existe
+              <a
+                href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Data_structures#Le_type_ind.C3.A9fini"
+                >6 types primitifs</a
+              >
+              en JavaScript, les voici :
+            </p>
+          </section>
+          <section>
+            <table>
+              <tr style="color: pink">
+                <td>boolean</td>
+                <td>null</td>
+              </tr>
+              <tr style="font-size: 0.6em">
+                <td>
+                  Il s'agit du résultat d'une assertion logique. Les valeurs
+                  possibles sont true ou false​
+                </td>
+                <td>type qui ne possède qu'une unique valeur null​</td>
+              </tr>
+              <tr style="color: pink">
+                <td>undefined</td>
+                <td>number</td>
+              </tr>
+              <tr style="font-size: 0.6em">
+                <td>
+                  représente la non-affectation d'une variable (on a donc une
+                  distinction entre une variablee affecté à null, et une
+                  variable non-affectée)​
+                </td>
+                <td>
+                  ce type contient l'ensemble des valeurs numériques (entier,
+                  float, NaN, +Infinity, - Infinity)​
+                </td>
+              </tr>
+              <tr style="color: pink">
+                <td>string</td>
+                <td>symbol</td>
+              </tr>
+              <tr style="font-size: 0.6em">
+                <td>
+                  représente une chaîne de caractères à partir d'un ensemble
+                  d'éléments 16bits non-signés​
+                </td>
+                <td>
+                  type de données uniques et inchangeables (souvent utilisé pour
+                  créer des identifiants)​
+                </td>
+              </tr>
+            </table>
+          </section>
+          <section>
+            <h3>Et donc​</h3>
+            <p>Tout le reste est objet ! ​</p>
+            <p>Oui, oui, même les tableaux.</p>
+            <p>De plus un objet avec une call signature est une fonction.​</p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>> Les objets</h1>
+          </section>
+          <section>
+            <h3>Présentation​</h3>
+            <p>
+              JavaScript est conçu autour d'un paradigme simple, basé sur les
+              objets.​
+            </p>
+            <p>
+              Un objet est constitué d'un ensemble de propriétés. Une propriété
+              est une association entre un nom (aussi appelé clé) et une
+              valeur.​
+            </p>
+            <p>
+              La valeur d'une propriété peut être une fonction, auquel cas la
+              propriété peut être appelée « méthode ».​
+            </p>
+          </section>
+          <section>
+            <h3>Création d'un objet​</h3>
+            <pre>
+				<code class="javascript">
+// Création d'un objet
+const obj = { first: "David", last: "Lopez", age: 77 };
+				</code>
+			</pre>
+            <div style="display: flex">
+              <div style="flex: 1">
+                <p>
+                  La création d'objet se fait le plus souvent via la syntaxe
+                  JSON. Ici on crée donc une variable contenant un objet avec
+                  trois propriétés:​
+                </p>
+                <ul>
+                  <li>first​</li>
+                  <li>last</li>
+                  <li>age​</li>
+                </ul>
+              </div>
+              <div style="flex: 1">
+                <p>Les valeurs de ces propriétés sont respectivement:</p>
+                <ul>
+                  <li>"David"</li>
+                  <li>"Lopez"</li>
+                  <li>77​</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h3>Accéder à une propriété​</h3>
+            <p>
+              Pour accéder à la valeur d'une propriété d'un objet il existe deux
+              syntaxes:​
+            </p>
+            <pre>
+				<code class="javascript">
+objet.propriete
+objet["propriete"]
+				</code>
+			</pre>
+            <p>
+              Celles-ci sont la plupart du temps strictement identiques,
+              exemple:​
+            </p>
+            <pre>
+				<code class="javascript">
+obj.first // => "David"
+obj["age"] // => 77
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Affectation d'une valeur​</h3>
+            <p>
+              L'affectation d'une valeur se fait simplement grâce au symbole "="
+              après l'accès à la-dite propriété.​
+            </p>
+            <pre>
+				<code class="javascript">
+obj.first = "pierr";
+obj.first // => "pierr"
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Affectation d'une valeur​</h3>
+            <p>
+              Les propriétés ne sont pas figée dans le temps. Il est possible de
+              dynamiquement ajouter une propriété à un objet par simple
+              affectation:
+            </p>
+            <pre>
+				<code class="javascript">
+const obj = { first: "david", last: "Lopez", age: 77 };
+obj.fonction = "Maitre du monde";
+obj.fonction // => "Maitre du monde"
+// Et parce que je fais ce que je veux depuis ES2016
+obj["a" + 12] = "Gino";
+obj.a12 // => "Gino"
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Affectation d'une valeur​</h3>
+            <p>Attention au piège si votre propriété est un nombre:​</p>
+            <pre>
+				<code class="javascript">
+obj[77] = "roberto";
+obj[77] // => "roberto"
+obj["77"] // => "roberto"
+obj.77 // => SyntaxError
+				</code>
+			</pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>> Les strings</h1>
+          </section>
+          <section>
+            <h3>Présentation​</h3>
+            <p>
+              Le type String de JavaScript est utilisé pour représenter des
+              données textuelles.​
+            </p>
+            <p>
+              C'est un ensemble d'"éléments" de valeurs non signées sur 16 bits
+              (unités de codage UTF-16).​
+            </p>
+            <p>
+              Chaque élément occupe une position dans la chaîne de caractères.
+              Le premier élément se trouve à l'indice 0, le suivant à l'indice 1
+              et ainsi de suite.​
+            </p>
+            <p>
+              La longueur d'une chaîne de caractères est le nombre d'éléments
+              qu'elle contient.​
+            </p>
+            <p>
+              Une String est immuable : il est impossible de la modifier une
+              fois créée. Il est cependant possible de recréer une string à
+              partir d'une autre string.
+            </p>
+          </section>
+          <section>
+            <h3>Création d’une string​</h3>
+            <p>
+              Une string se crée en utilisant des simple quote (') ou des
+              doubles quotes ("). Bien que la notation simple quote soit plus
+              répandue, les deux notations fonctionnent parfaitement. On
+              choisira l'une ou l'autre en fonction de la norme d'écriture de
+              notre projet...​
+            </p>
+            <pre>
+				<code class="javascript">
+const maString = "Hello World!";
+const maDoubleString = "Hello World!";
+maString === maDoubleString // => true
+				</code>
+			</pre>
+            <p style="font-size: 0.6em">
+              Si vous ne connaissez pas le triple égal, il compare le type et la
+              valeur.
+            </p>
+          </section>
+          <section>
+            <h3>Opérations​</h3>
+            <p>L'accès à un élément d'une String se fait via son index :​</p>
+            <pre>
+				<code class="javascript">
+maString[0] // => "H"
+maString[0] = "X"
+maString[0] // => "H"
+				</code>
+			</pre>
+            <p>
+              Comme dit précédemment, une String est immuable. On ne peut
+              changer les valeurs de ses éléments une fois crée.​
+            </p>
+          </section>
+          <section>
+            <h3>Comparaisons de Strings​</h3>
+            <pre>
+				<code class="javascript">
+"déjà" < "demain" 
+// => false; Cette comparaison ne fait pas du tout ce que vous pensez !
+"déjà".localCompare("demain") 
+// => -1; "Déjà" est alphatébiquement avant "demain"
+				</code>
+			</pre>
+            <p>
+              ​Attention aux pièges, les opérateurs "<" et ">" compare les
+              valeur ASCII de la chaîne caractère par caractère. Donc pas
+              d'ordre alphanumérique de cette manière.​ ​ ​
+            </p>
+          </section>
+          <section>
+            <h3>Autres opérations​</h3>
+            <pre>
+				<code class="javascript">
+"déjà !".toLocaleUpperCase() 
+// => "DÉJÀ !"; Renvoie une nouvelle instance en majuscule
+"ÇA POUTRE".toLocaleLowerCase()
+// => "ça poutre"; Renvoie une nouvelle instance en minuscule
+"one,two,three".split(",")
+// => ["one", "two", "three"]; Transformation en tableau selon un séparateur
+"one,,two,three".split(/\>W+/) 
+// => ["one", "two"]; Transformation en tableau selon une expression régulière
+"hello".substring(1)
+// => "ello"; Renvoie une nouvelle instance d'une partie de la chaine
+"hello".sline(1, -2)
+// => "el"; Renvoie une nouvelle instance d'une partie de la chaine
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Interpolation de String​</h3>
+            <p>
+              Depuis l'ES2015, un nouvel opérateur est disponible pour gérer les
+              String. Il s'agit de l'antiquote (`). Celui-ci permet, en plus de
+              pouvoir insérer facilement des quote et double quote dans une
+              String, de faire de l'interpolation de chaîne de caractère.​
+            </p>
+            <pre>
+				<code class="javascript">
+const person = { nom: "Dupont", prenom: "Michou" };​
+const stringAvant = 'Bonjour je suis ' + person.prenom + ' ' + person.nom;​
+const stringApres= `Bonjour je suis ${person.prenom} ${person.nom}.​
+// Et le javascript c'était pas mieux avant!`;​
+				</code>
+			</pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>> Les tableaux</h1>
+          </section>
+          <section>
+            <h3>Présentation​</h3>
+            <p>
+              Un
+              <a
+                href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Indexed_collections"
+                >Array</a
+              >
+              est un ensemble ordonné de valeurs auxquelles on peut faire
+              référence avec un nom et un indice.​
+            </p>
+            <p>
+              JavaScript ne possède pas de type particulier pour représenter un
+              tableau. En revanche, il est possible d'utiliser l'objet natif
+              Array ainsi que ses méthodes pour manipuler des tableaux.​
+            </p>
+          </section>
+          <section>
+            <h3>Création​</h3>
+            <p>Les tableau sont créés via les symboles "[ ]"</p>
+            <pre>
+				<code class="javascript">
+let names = ['John', 'David', 'Rodrigo'];​
+names.length // => 3​
+				</code>
+			</pre>
+            <p>
+              Dès leur création un certain nombre de propriété sont
+              initialisées, comme la propriété length représentant la taille du
+              tableau.​​
+            </p>
+          </section>
+          <section>
+            <h3>Accès et affectation​</h3>
+            <p>
+              On accède à la valeur d'un élément d'un tableau via son index:​
+            </p>
+            <pre>
+				<code class="javascript">
+names[0] // => 'John'​
+// et si on affecte un élément loin dans le tableau ?​
+names[12] = 'Pierre';​
+names.length // => 13​
+names[9] // => undefined (comme de 3 à 11): c'est appelé "sparse array"​
+names; // => ['John', 'David', 'Rodrigo', undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 'Pierre']​
+				</code>
+			</pre>
+            <p>
+              Attention: La propriété length représente la taille du tableau, et
+              pas le nombre d'éléments définis dans le tableau.​
+            </p>
+          </section>
+          <section>
+            <h3>Concaténation​</h3>
+            <p>
+              Il est possible de concaténer deux tableaux via la méthode concat.
+              Cette méthode ne modifie aucun des tableaux utilisés, mais crée
+              une nouvelle instance de tableau et la renvoie en résultat.​
+            </p>
+            <pre>
+				<code class="javascript">
+let data = [1, 2, 3];​
+// arr1.concat(arg…) -> arr2 [déroule sur 1 niveau, ni "shallow" ni "deep"]​
+data.concat(4, 5, 6)     // => [1, 2, 3, 4, 5, 6]​
+data.concat([4, 5, 6])   // => [1, 2, 3, 4, 5, 6]​
+data.concat(4, [5, 6])   // => [1, 2, 3, 4, 5, 6]​
+data.concat([4, [5, 6]]) // => [1, 2, 3, 4, [5, 6]] -- 2 niveaux !​
+data                     // => [1, 2, 3] -- intact !​
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Join​</h3>
+            <p>
+              La méthode join crée une String a partir d'un tableau en liant les
+              élément via le séparateur renseigné. Si aucun séparateur n'est
+              renseigné, une virgule est utilisée par défaut.​
+            </p>
+            <pre>
+				<code class="javascript">
+// arr.join([sep = ',']) -> String​
+data.join()   // => '1,2,3'​
+data.join('') // => '123' -- Fréquent en construisant du HTML​
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Découpage​</h3>
+            <p>
+              La méthode slice découpe un tableau suivant les indexes de début
+              et de fin renseignés. Attention aux valeurs par défaut et à
+              l'utilisation d'indexes négatifs.​
+            </p>
+            <pre>
+				<code class="javascript">
+// arr1.slice(signedBegin[, signedEnd = length]) -> arr2 -- négatif ok partout !​
+data.slice(1)      // => [2, 3]​
+data.slice(1, 1)   // => []​
+data.slice(1, 2)   // => [2]​
+data.slice(1, -1)  // => [2]​
+data.slice(-2)     // => [2, 3]​
+data.slice(-2, 2)  // => [2]​
+data.slice(-2, -1) // => [2]​
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Boucles</h3>
+            <p>
+              Depuis ECMAScript2015, le prototype ARRAY a gagné de nouvelles
+              méthodes d'itération sur les éléments. Nous allons en présenter
+              deux ici:​​
+            </p>
+            <table style="font-size: 0.6em">
+              <tr>
+                <td>map</td>
+                <td>immutabe</td>
+                <td>
+                  Crée un nouveau tableau avec les résultats de l'appel d'une
+                  fonction fournie sur chaque élément du tableau appelant.​
+                </td>
+              </tr>
+              <tr>
+                <td>forEach</td>
+                <td>mutable</td>
+                <td>
+                  Crée un nouveau tableau avec les résultats de l'appel d'une
+                  fonction fournie sur chaque élément du tableau appelant.​
+                </td>
+              </tr>
+            </table>
+            <pre>
+				<code class="javascript">
+const ARRAY = [1,2,3,4];​
+for(let i = 0, _l=ARRAY.length; i < _l; i++ ){console.log(ARRAY[i], i)}​
+ARRAY.forEach(function(element, idx){console.log(element, idx)});​
+ARRAY.map(function(element, idx){console.log(element, idx)});​
+				</code>
+			</pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>> Les dates</h1>
+          </section>
+          <section>
+            <h3>Présentation</h3>
+            <p>
+              JavaScript ne possède pas de type primitif pour représenter des
+              dates. Cependant l'objet Date et ses méthodes permettent de
+              manipuler des dates et des heures au sein d'une application.​
+            </p>
+            <p>
+              L'objet Date possède de nombreuses méthodes pour définir,
+              modifier, obtenir des dates. Il ne possède pas de propriétés.​
+            </p>
+            <p>
+              JavaScript gère les dates de façon similaire à Java. (Donc assez
+              mal...)​
+            </p>
+            <p>
+              Les dates sont représentées selon les nombres de millisecondes
+              écoulées depuis le 1er janvier 1970 à 00h00:00. L'objet Date
+              permet de représenter des dates allant de -100 000 000 jours
+              jusqu'à +100 000 000 jours par rapport au 1er janvier 1970 UTC.​
+            </p>
+          </section>
+          <section>
+            <h3>Création​</h3>
+            <p>On passe simplement par le constructeur de l'objet Date.​</p>
+            <pre>
+				<code class="javascript">
+new Date()                 //  maintenant !​
+new Date(y,m,d[,h,m,s,ms]) // Valeur découpée. (un peu lourd...)​
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Des méthodes pièges​</h3>
+            <p>
+              De manière générale les méthodes de l'objet Date sont peu
+              utilisés, notamment à cause du biais cognitif que provoque le nom
+              de certaine d'entre elle. On pensera notamment au getDate() qui
+              renvoie le jour dans le mois, et pas du tout la date du jour.​
+            </p>
+            <pre>
+				<code class="javascript">
+const noel = new Date() (le 25 décembre 2018)​
 
-	<!--[if lt IE 9]>
-	<script src="lib/js/html5shiv.js"></script>
-	<![endif]-->
-	<link href='https://fonts.googleapis.com/css?family=Merriweather:700|Source+Sans+Pro:300,600,300italic,600italic|Source+Code+Pro:400,600' rel='stylesheet' type='text/css'>
+noel.getDate() // => 25 -_-'​
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Des méthodes pièges​</h3>
+            <pre>
+				<code class="javascript">
+date.getYear()      // JAMAIS #Bug de l'an 2000 exemple: L'année 1976 renverra 76. Mais l'année 2016 renverra 116. -_-'​
+date.getFullYear()  // Mieux mais pas vraiment logique dans le nom...​
+date.getMonth()     // NAZE Java-like qui démarre à… zéro (janvier). #ugly​
+date.getDay()       // PERDUUUU ! C'est le DOW (Day Of Week), 0 = dim., 6 = sam​
+date.getDate()      // Le jour du mois.  Super logique.​
+date.getHours()​
+date.getMinutes()​
+date.getSeconds()​
+date.getMilliseconds() // "Milliseconds", un seul mot : une seule initiale.​
 
-
-</head>
-
-<body>
-
-
-	<div class="reveal">
-		<div class="slides">
-			<section data-background='#ffe599'><h1>Javascript</h1><a href='http://get-focus.github.io/formation-js/#/'>http://get-focus.github.io/formation-js/#/</a></section>
-			<section data-background='https://cdn.nextinpact.com/images/bd/news/124984.png'>
-				<style scoped>
-				      h1#jquery { color: red; font-weight: bold; background-color: yellow;}
-				</style>
-				<h1 id='jquery'>JS !== jQuery</h1>
-			</section>
-			<section>
-				<section data-background='https://media.giphy.com/media/vKZKZ0I9nCAGA/giphy.gif'><h1>Les bases</h1></section>
-				<section data-markdown>
-## Les variables
-
-- `const`  Variable constante qui ne peut plus être modifiée
-- `var`  portée globale ou locale a une fonction
-- `let` portée du block courant `{}`
-
-> A retenir on utilise `const` au maximum et `let` dans les autres cas
-
-				</section>
-				<section>
-					<h2>Les strings</h2>
-					<pre>
-						<code class='javascript'>
-'déjà' < 'demain'              // => false
-'déjà'.localeCompare('demain') // => -1 ('déjà' avant 'demain')
-
-'déjà !'.toLocaleUpperCase()      // => 'DÉJÀ !'
-'ÇA POUTRE'.toLocaleLowerCase()   // => 'ça poutre'
-
-'one,two,three'.split(',')        // => ['one', 'two', 'three']
-'one,,two,three'.split(/\W+/)     // => ['one', 'two']
-
-'hello'.substring(1)      // => 'ello'
-'hello'.slice(1, -2)      // => 'el' -> [1;length-2[
-						</code>
+// Heure locale du navigateur/système.  On a les mêmes en getUTCXxx()…​
+				</code>
+			</pre>
+            <p style="color: pink; font-size: 0.6em">
+              Les Dates JavaScript sont généralement utilisées pour des
+              comparaisons simples en millisecondes par exemple. Pour les cas
+              plus complexe on préfèrera souvent utiliser des librairies du type
+              Moment.js​
+            </p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>> Les opérateurs</h1>
+          </section>
+          <section>
+            <h3>Opérateurs arithmétiques​</h3>
+            <table style="font-size: 0.6em">
+              <tr>
+                <td>+</td>
+                <td>Addition</td>
+                <td>
+                  Somme des opérandes numériques ou bien la concaténation de
+                  chaînes de caractères​
+                </td>
+                <td>
+                  <pre>
+					<code class="javascript">
+1 + 2 // 3 ​
+"toto" + "truc" // "tototruc"
+					</code>
+				  </pre>
+                </td>
+              </tr>
+              <tr>
+                <td>-</td>
+                <td>Soustraction</td>
+                <td>
+                  Soustrait les deux opérandes pour obtenir leur différence.​
+                </td>
+                <td>
+                  <pre>
+					  <code class="javascript">
+3 - 5 // -2 ​
+"toto" - 3 // NaN
+					  </code>
 					</pre>
-				</section>
-				<section>
-					<h2>Les dates</h2>
-					<pre>
-						<code class='javascript'>
-new Date                   //  maintenant !
-new Date(y,m,d[,h,m,s,ms]) // Valeur découpée. (un peu lourd...)
-
-date.getFullYear()  // JAMAIS
-date.getMonth()     // NAZE Java-like qui démarre à… zéro (janvier). #ugly
-date.getDay()       // PERDUUUU ! C'est le DOW (Day Of Week), 0 = dim., 6 = s
-date.getDate()      // Le jour du mois.  Super logique.
-date.getHours()
-date.getMinutes()
-date.getSeconds()
-date.getMilliseconds() // "Milliseconds", un seul mot : une seule initiale.
-
-// Heure locale du navigateur/système.  On a les mêmes en getUTCXxx()…
-						</code>
+                </td>
+              </tr>
+              <tr>
+                <td>/</td>
+                <td>Division</td>
+                <td>
+                  Quotient de ces opérandes avec l'opérande gauche comme
+                  numérateur et l'opérande droit comme dénominateur.​
+                </td>
+                <td>
+                  <pre>
+					  <code class="javascript">
+1 / 2 // renvoie 0.5 ​
+2.0 / 0 // renvoie Infinity
+					  </code>
 					</pre>
-				</section>
-				<section>
-					<h2>Les dates</h2>
-					<pre>
-						<code class='javascript'>
-// "J'ai bien lu la doc"
-date.getTime()  // => ex. 1290852603042
-
-// "#superSmart"
-+date
-
-// Et sinon…
-new Date(1301733937452)
-
-// Mais aussi (car souci pour partir de composantes UTC) :
-Date.UTC(y, m, d, h, mn, s, ms) // => numérique
-
-						</code>
+                </td>
+              </tr>
+            </table>
+          </section>
+          <section>
+            <h3>Opérateurs arithmétiques​</h3>
+            <table style="font-size: 0.6em">
+              <tr>
+                <td>/</td>
+                <td>Division</td>
+                <td>
+                  Quotient de ces opérandes avec l'opérande gauche comme
+                  numérateur et l'opérande droit comme dénominateur.​
+                </td>
+                <td>
+                  <pre>
+					  <code class="javascript">
+1 / 2 // renvoie 0.5 ​
+2.0 / 0 // renvoie Infinity
+					  </code>
 					</pre>
-				</section>
-				<section>
-					<blockquote>
-						A retenir : Momentjs (on voit ça plus tard...)
-					</blockquote>
-				</section>
-
-				<section>
-					<h2>Les objets</h2>
-					<pre>
-						<code class='javascript'>
-let obj = { first: 'David', last: 'Lopez', age: 77 };
-obj.first  // => 'David'
-obj['age'] // => 42
-
-obj.first = 'pierr';
-obj['first'] // => 'pierr'
-
-obj[77] = 'roberto';
-obj[77]   // => 'roberto'
-obj['77'] // => 'roberto'
-obj.77    // => SyntaxError
-						</code>
+                </td>
+              </tr>
+              <tr>
+                <td>*</td>
+                <td>Multiplication</td>
+                <td>Produit des opérandes.​</td>
+                <td>
+                  <pre>
+					  <code class="javascript">
+2 * 2 // 4 ​
+Infinity * 0 // NaN
+					  </code>
 					</pre>
-				</section>
-				<section>
-					<h2>Les objets avec ES6</h2>
-					<pre>
-						<code class='javascript'>
-let defaults = { first: 'John', last: 'Doe', age: 42 };
-let trainer  = { last: 'Smith', age: 35 };
-trainer      = { ...defaults, ...trainer, age: 36 }
-// => { first: 'John', last: 'Smith', age: 36 }
-trainers['a'+ 12] = 'Gino';
-trainers.a12;
-// Gino
-						</code>
-					<pre>
-				</section>
-				<section>
-					<h2>Les tableaux</h2>
-					<pre>
-						<code class='javascript'>
-let names = ['John', 'David', 'Rodrigo'];
-
-names.length
-// => 3. R/W : astuce pour réutiliser un tableau!
-
-names[0]
-// => 'John'
-
-names[12] = 'Pierre';
-names.length
-// => 13
-
-names[9]
-// => undefined (comme 10 et 11): c'est appelé "sparse array"
-						</code>
+                </td>
+              </tr>
+              <tr>
+                <td>%</td>
+                <td>Reste</td>
+                <td>
+                  Renvoie le reste de la division du premier opérande par le
+                  second. Le résultat obtenu a toujours le signe du numérateur​
+                </td>
+                <td>
+                  <pre>
+					  <code class="javascript">
+12 % 5 // 2 ​
+-1 % 2 // -1
+					  </code>
 					</pre>
-				</section>
-				<section>
-					<pre>
-						<h2>Les tableaux</h2>
-						<code class='javascript'>
-let data = [1, 2, 3];
-
-// arr1.concat(arg…) -> arr2 [déroule sur 1 niveau, ni "shallow" ni "deep"]
-data.concat(4, 5, 6)     // => [1, 2, 3, 4, 5, 6]
-data.concat([4, 5, 6])   // => [1, 2, 3, 4, 5, 6]
-data.concat(4, [5, 6])   // => [1, 2, 3, 4, 5, 6]
-data.concat([4, [5, 6]]) // => [1, 2, 3, 4, [5, 6]] -- 2 niveaux !
-data                     // => [1, 2, 3] -- intact !
-
-// arr.join([sep = ',']) -> String
-data.join()   // => '1,2,3'
-data.join('') // => '123' -- Fréquent en construisant du HTML
-
-// arr1.slice(signedBegin[, signedEnd = length]) -> arr2 -- négatif ok partout !
-data.slice(1)      // => [2, 3]
-data.slice(1, 1)   // => []
-data.slice(1, 2)   // => [2]
-data.slice(1, -1)  // => [2]
-data.slice(-2)     // => [2, 3]
-data.slice(-2, 2)  // => [2]
-data.slice(-2, -1) // => [2]
-						</code>
+                </td>
+              </tr>
+              <tr>
+                <td>**</td>
+                <td>Exponantiation</td>
+                <td>
+                  Renvoie le résultat de l'élévation d'un nombre (premier
+                  opérande) à une puissance donnée (deuxième opérande)​
+                </td>
+                <td>
+                  <pre>
+					  <code class="javascript">
+2 ** 3 // 8 ​
+3 ** 2 // 9
+					  </code>
 					</pre>
-				</section>
-				<section>
-					<pre>
-						<h2>Les tableaux en ES6</h2>
-						<code class='javascript'>
+                </td>
+              </tr>
+            </table>
+          </section>
+          <section>
+            <h3>Opérateurs arithmétiques​</h3>
+            <table style="font-size: 0.6em">
+              <tr>
+                <td>++</td>
+                <td>Incrément</td>
+                <td>
+                  Ajoute une unité à son opérande et renvoie une valeur.​
+                  <ul>
+                    <li>
+                      Si l'opérateur est utilisé en suffixe (par exemple : x++),
+                      il renvoie la valeur avant l'incrémentation.​
+                    </li>
+                    <li>
+                      Si l'opérateur est utilisé en préfixe (par exemple : ++x),
+                      il renvoie la valeur après l'incrémentation.
+                    </li>
+                  </ul>
+                </td>
+                <td>
+                  <pre>
+					  <code class="javascript">
+var x = 3; ​
+y = x++; // y = 3, x = 4 ​
 
-let arr1 = ['one', 'two'], arr2 = ['three', 'four'];
-arr1.push(...arr2) // => 4
-arr1                // => ['one', 'two', 'three', 'four']
-//le map 
-arr1.map(element => console.log(element))
-// for…in itère sur LES PROPRIÉTÉS ÉNUMÉRABLES de N’IMPORTE QUEL OBJET
-var arr = ['hello', 'world', , 'cool'];
-for (var k in arr){ console.log(k)}; // => 0, 1, 3
-// for…of itère sur les éléments d'un objet itérable
-for (var k of arr){ console.log(k)}; // => hello, world, undefined, cool
-
-						</code>
+var a = 2; ​
+b = ++a; // a = 3, b = 3
+					  </code>
 					</pre>
-				</section>
-				<section>
-					<pre>
-						<h2>"Déguiser" un objet en tableau<h2>
-						<code class='javascript'>
-// Toi aussi, déguise-toi en tableau !
+                </td>
+              </tr>
+              <tr>
+                <td>--</td>
+                <td>Décrément</td>
+                <td>
+                  Soustrait une unité à son opérande et renvoie une valeur.​
+                  <ul>
+                    <li>
+                      Si l'opérateur est utilisé en suffixe (par exemple : x--),
+                      il renvoie la valeur avant la décrémentation.​
+                    </li>
+                    <li>
+                      Si l'opérateur est utilisé en préfixe (par exemple : --x),
+                      il renvoie la valeur après la décrémentation.
+                    </li>
+                  </ul>
+                </td>
+                <td>
+                  <pre>
+					  <code class="javascript">
+var x = 3; ​
+y = x--; // y = 3, x = 2 ​
 
-var fakeArray = { 0: '!', 1: 'ça torche', 2: 'JavaScript', length: 3 };
-
-fakeArray.join = [].join; fakeArray.reverse = [].reverse;
-fakeArray.reverse().join(' ');
-// => 'JavaScript ça torche !'
-
-// Ou alors :
-fakeArray.__proto__ = Array.prototype;
-fakeArray.reverse().join(' ');
-// => 'JavaScript ça torche !'
-
-// Méthodes « génériques » utilisables: hn
-// concat, join, pop, push, reverse, shift,
-// slice, sort, splice, toString, unshift.
-						</code>
+var a = 2; ​
+b = --a; // a = 1, b = 1
+					  </code>
 					</pre>
-				</section>
-				<section>
-					<h2>Les boucles</h2>
-					<pre>
-						<code class='javascript'>
-const ARRAY = [1,2,3,4];
-for(let i = 0, _l=ARRAY.length; i < _l; i++ ){console.log(ARRAY[i])}
+                </td>
+              </tr>
+            </table>
+          </section>
+          <section>
+            <h3>Opérateur d'affectation​</h3>
+            <table style="font-size: 0.6em">
+              <tr>
+                <td>
+                  <a
+                    href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators#Assignment"
+                    >Affectation</a
+                  >
+                </td>
+                <td>x = y</td>
+                <td>x = y</td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators#Addition_assignment"
+                    >Affectation après addition</a
+                  >
+                </td>
+                <td>x += y</td>
+                <td>x = x + y</td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators#Subtraction_assignment"
+                    >Affectation après soustraction</a
+                  >
+                </td>
+                <td>x -= y</td>
+                <td>x = x - y</td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators#Multiplication_assignment"
+                    >Affectation après multiplication</a
+                  >
+                </td>
+                <td>x *= y</td>
+                <td>x = x * y</td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators#Division_assignment"
+                    >Affectation après division</a
+                  >
+                </td>
+                <td>x /= y</td>
+                <td>x = x / y</td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators#Remainder_assignment"
+                    >Affectation du reste</a
+                  >
+                </td>
+                <td>x %= y</td>
+                <td>x = x % y</td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators#Exponentiation"
+                    >Affectation après exponentiation</a
+                  >
+                </td>
+                <td>x **=y</td>
+                <td>x = x ** y</td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators#Left_shift_assignment"
+                    >Affectation après décalage à gauche</a
+                  >
+                </td>
+                <td>x <<= y</td>
+                <td>x = x << y</td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators#Right_shift_assignment"
+                    >Affectation après décalage à droite</a
+                  >
+                </td>
+                <td>x >>= y</td>
+                <td>x = x >> y</td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators#Unsigned_right_shift_assignment"
+                    >Affectation après décalage à droite non-signé</a
+                  >
+                </td>
+                <td>x >>>= y</td>
+                <td>x = x >>> y</td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators#Bitwise_AND_assignment"
+                    >Affectation après ET binaire</a
+                  >
+                </td>
+                <td>x &= y</td>
+                <td>x = x & y</td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators#Bitwise_XOR_assignment"
+                    >Affectation après OU exclusif binaire</a
+                  >
+                </td>
+                <td>x ^= y</td>
+                <td>x = x ^y</td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators#Bitwise_OR_assignment"
+                    >Affectation après OU binaire</a
+                  >
+                </td>
+                <td>x |= y</td>
+                <td>x = x | y</td>
+              </tr>
+            </table>
+          </section>
+          <section>
+            <h3>Les pièges​</h3>
+            <p>
+              Les opérateurs JavaScripts font des conversions implicites. Le
+              JavaScript ne plantera jamais sur une opération. En revanche, il
+              peut vous renvoyer une valeur native comme Nan, +Infinity etc.​ En
+              voici quelques exemples:​
+            </p>
+            <pre>
+				<code class="javascript">
+!42  => false​
+!!42  => true //pratique pour convertir n'importe quelle valeur en booleen​
++'2'  => 2​
+"lala" + 42 => "lala42"​
+1/0 => Infinity​
+"lala" - 42 => NaN​
 
-ARRAY.forEach(function(element, idx){console.log(element, idx)});
-
-ARRAY.map(function(element, idx){console.log(element, idx)});
-						</code>
-					</pre>
-				</section>
-
-				<section>
-					<h2>Les fonctions</h2>
-					<pre>
-						<code class='javascript'>
-function maFonction() {
-	return 'test';
-}
-maFonction() // test;
-const a = () => 'test';
-a(); //test
-						</code>
-					</pre>
-				</section>
-
-				<section>
-					<h2>Quelques pièges de comparaisons en JS ...</h2>
-					<pre>
-						<code>
-== ou === ?!
-
-42 == '42'        // => true  -- 
-null == undefined // => true  -- 
-null == 0         // => false -- 
-0 == undefined    // => false -- 
-0 == false        // => true  -- 
-1 == true         // => true  -- 
-42 == true        // => false -- 
-'0' == false      // => true  -- 
-'' == false       // => true  -- 
-NaN == NaN        // => false -- 
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h2>Pour éviter les écueils, utiliser ===</h2>
-					<pre>
-						<code>
-// avec ===, fini de jouer : vérif valeur ET TYPE !
-
-42 === '42'        // => false
-null === undefined // => false
-null === 0         // => false
-0 === undefined    // => false
-0 === false        // => false
-'0' === false      // => false
+{} + [] => 0 // Hum ok...​
+[] + {} => "[object Object]" // parce que why not!​
+{} + {} => "[object Object][object Object]" // Bon ça je veux bien​
+[] + [] => "" // Nan mais les gars...​
+[] - {} => NaN // -_-'​
++[] => 0 // Ah ah​
++[] + [] => "0" // Vous l'avez?​
++[] + +[] => 0 // Bon ok j'arrete :=)​
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Opérateurs de comparaison​</h3>
+            <table style="font-size: 0.6em">
+              <tr>
+                <td>==</td>
+                <td>
+                  true si les opérandes sont égaux après conversion en valeurs
+                  de mêmes types​
+                </td>
+              </tr>
+              <tr>
+                <td>!=</td>
+                <td>
+                  true si les opérandes sont différents après conversion en
+                  valeurs de mêmes types.​
+                </td>
+              </tr>
+              <tr>
+                <td>===</td>
+                <td>true si les opérandes sont égaux et de même type.​</td>
+              </tr>
+              <tr>
+                <td>!==</td>
+                <td>
+                  true si les opérandes ne sont pas égaux ou pas de même type.​
+                </td>
+              </tr>
+              <tr>
+                <td>></td>
+                <td>
+                  true si l'opérande gauche est supérieur (strictement) à
+                  l'opérande droit.​
+                </td>
+              </tr>
+              <tr>
+                <td>>=</td>
+                <td>
+                  true si l'opérande gauche est supérieur ou égal à l'opérande
+                  droit.​
+                </td>
+              </tr>
+              <tr>
+                <td><</td>
+                <td>
+                  true si l'opérande gauche est inférieur (strictement) à
+                  l'opérande droit.​
+                </td>
+              </tr>
+              <tr>
+                <td><=</td>
+                <td>
+                  true si l'opérande gauche est inférieur ou égal à l'opérande
+                  droit.​
+                </td>
+              </tr>
+            </table>
+          </section>
+          <section>
+            <h3>Opérateurs de comparaison​</h3>
+            <p>
+              De manière générale, et pour éviter les conversion implicite, on
+              préfèrera utiliser l'opérateur "===" plutôt que "==".​
+            </p>
+            <pre>
+				<code class="javascript">
+42 == '42'        // => true  
+null == undefined // => true  
+null == 0         // => false 
+0 == undefined    // => false 
+0 == false        // => true  
+1 == true         // => true  
+42 == true        // => false 
+'0' == false      // => true  
+'' == false       // => true  
+NaN == NaN        // => false 
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Opérateurs de comparaison​</h3>
+            <p>
+              De manière générale, et pour éviter les conversion implicite, on
+              préfèrera utiliser l'opérateur "===" plutôt que "==".​
+            </p>
+            <p>avec ===, fini de jouer : vérif valeur ET type !​</p>
+            <pre>
+				<code class="javascript">
+42 === '42'        // => false​
+null === undefined // => false​
+null === 0         // => false​
+0 === undefined    // => false​
+0 === false        // => false​
+'0' === false      // => false​
 NaN === NaN        // => false -- rien à faire !
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h2>in et delete</h2>
-					<pre>
-						<code class='javascript'>
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Opérateurs de logique​</h3>
+            <p>
+              Ces opérateurs servent à résoudre des expressions logiques en
+              prenant en compte le caractère "Truthy" ou "Falsy" des valeurs de
+              l'expression​
+            </p>
+            <p>
+              Attention: les opérateurs logiques &&, || et ! fonctionnent
+              différemment des opérateurs binaire &, | et ~.​
+            </p>
+            <p>
+              Pour plus d'info: La doc
+              <a
+                href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Expressions_and_Operators#Op%C3%A9rateurs_binaires"
+                >MDN</a
+              >.​
+            </p>
+          </section>
+          <section>
+            <h3>Opérateurs de logique​</h3>
+            <table style="font-size: 0.6em">
+              <tr>
+                <td>&&</td>
+                <td>ET logique</td>
+                <td>
+                  Vrai si les deux expressions ont des valeur Truthy. S'arrête à
+                  la première valeur Falsy​
+                </td>
+              </tr>
+              <tr>
+                <td>||</td>
+                <td>OU logique</td>
+                <td>
+                  Vrai si une des deux expressions a une valeur Truthy. S'arrête
+                  à la première valeur Truthy​
+                </td>
+              </tr>
+              <tr>
+                <td>!</td>
+                <td>NON logique</td>
+                <td>Faux si l'expression a une valeur Truthy. Vrai sinon.​</td>
+              </tr>
+            </table>
+          </section>
+          <section>
+            <h3>Truthy et Falsy​</h3>
+            <p>
+              Le caractère Truthy ou Falsy d'une variable est déterminé comme
+              suis, si la variable a l'une des valeur suivante :​
+            </p>
+            <p>False / undefined / null / "" / 0 / NaN​</p>
+            <p>Alors elle est Falsy. Sinon elle est Truthy.​</p>
+            <p>Attention, Truthy et falsy sont différent de true et false!​</p>
+          </section>
+          <section>
+            <h3>Truthy et Falsy​</h3>
+            <pre>
+				<code class="javascript">
+"true" == true => false 
+// la chaine de caratère "true" même après conversion n'est pas égale à true.​
+"true" && true => true 
+// la chaine de caratère "true" est Truthy pour ce qui est des expression logique!!​
+				</code>
+			</pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>> Destructuring / Spreading​</h1>
+          </section>
+          <section>
+            <h3>Présentation​</h3>
+            <p>
+              Depuis ES2015, des opérateurs de décomposition (Spread) et
+              d'affectation par décomposition (Destructuring) ont fait leur
+              apparition pour manipuler plus simplement les objets et les
+              collections.​
+            </p>
+            <p>
+              La syntaxe de décomposition permet d'étendre un itérable en lieu
+              et place de plusieurs arguments (pour les appels de fonctions) ou
+              de plusieurs éléments (pour les tableaux) ou de paires
+              clés-valeurs (pour les objets).​
+            </p>
+            <p>
+              L'affectation par décomposition est une expression JavaScript qui
+              permet d'extraire des données d'un tableau ou d'un objet grâce à
+              une syntaxe dont la forme ressemble à la structure du tableau ou
+              de l'objet.​
+            </p>
+          </section>
+          <section>
+            <h3>Utilisation – Les tableaux​</h3>
+            <pre>
+				<code class="javascript">
+// Initialisation d'un array​
+const array = [1, 2, 3];​
 
-let person = { name: 'Joe', langs: ['fr', 'en'] };
+// On crée un nouvel array à partir de l'ancien​
+const array2 = [...array, 4, 5]; // array2 => [1,2,3,4,5]​
 
-'name' in person        // => true
-person.age = 35;
-'age' in person         // => true
-person.age = null;
-'age' in person         // => true
-delete person.age
-'age' in person         // => false
-person.age              // => undefined
+function f(a, b, c) {​
+	return a + b + c;​
+}​
 
-0 in person.langs       // => true
-'0' in person.langs     // => true
-person.langs[3] = 'de';
-2 in person.langs       // => false
-3 in person.langs       // => true
-delete person.langs[3]
-person.langs            // => ['fr', 'en', undefined, undefined]
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h2>Falsy / Truthy</h2>
-				</section>
-				<section>
-					<h2>XML</h2>
-					<pre>
-					<code class='xml'>
-<menu id="file" value="File">
-  <popup>
-    <menuitem value="New" onclick="CreateNewDoc()"></menuitem>
-    <menuitem value="Open" onclick="OpenDoc()" ></menuitem>
-    <menuitem value="Close" onclick="CloseDoc()" ></menuitem>
-  </popup>
-</menu>
-					</code>
-				</pre>
+// On appelle la fonction à partir de l'array​
+f(...array); // => 1+2+3​
 
-				</section>
-				<section>
-					<h2>JSON</h2>
-					<pre>
-					<code class='javascript'>
-{
-    "menu": {
-        "id": "file",
-        "value": "File",
-        "popup": {
-            "menuitem": [
-                { "value": "New", "onclick": "CreateNewDoc()" },
-                { "value": "Open", "onclick": "OpenDoc()" },
-                { "value": "Close", "onclick": "CloseDoc()" }
-            ]
-        }
-    }
+// On récupère des éléments précis d'un array.​
+const [a, b, c, ...rest] = array2; // a=1; b=2, c=3, rest=[4,5]​
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Utilisation – Les objets​</h3>
+            <pre>
+				<code class="javascript">
+// Initialisation d'un objet.​
+const objet = {a: 1, b: 2};​
+
+// On crée un nouvel objet à partir de l'ancien​
+const objet2 = {...objet, c: 3}; // objet2 = {a:1, b:2, c:3}​
+
+// On récupère des éléments précis d'un objet.​
+const {a, b, ...rest} = objet2; // a=1 b=2 rest={c:3}​
+
+// On peut aussi déstructurer directement dans une fonction :​
+function g({a, b, c: c2}) {​
+	return a + b + c2;​
+}​
+
+g(objet2);​
+				</code>
+			</pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>JavaScript</h1>
+            <h2>- La programmation -</h2>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>> Les fonctions</h1>
+          </section>
+          <section>
+            <h3>Présentation​</h3>
+            <p>
+              Les fonctions sont un peu la base de toute programmation... Le
+              JavaScript n'échappe pas à la règle.​
+            </p>
+            <p>
+              En JavaScript, les fonctions sont des objets de première classe.
+              Cela signifie qu'elles peuvent être manipulées et échangées,
+              qu'elles peuvent avoir des propriétés et des méthodes, comme tous
+              les autres objets JavaScript. Les fonctions sont des objets
+              Function​
+            </p>
+            <p>
+              Afin de renvoyer une valeur, la fonction doit comporter une
+              instruction return. Une fonction qui ne renvoie pas de valeur
+              retourne undefined.​
+            </p>
+          </section>
+          <section>
+            <h3>Utilisation</h3>
+            <p>
+              Une fonction est créée avec le mot clé function ou par
+              l'utilisation de la fat-arrow (celle-ci sera présentée en détail
+              par la suite. Pour l'instant, il suffit de savoir qu'il s'agit
+              d'une écriture simplifiée pour créer une fonction). Lors de la
+              création il est possible de renseigner les paramètres utile au
+              sein de la fonction.​ ​ ​
+            </p>
+          </section>
+          <section>
+            <h3>Utilisation</h3>
+            <p></p>
+            <pre>
+				<code class="javascript">
+// Fonction standard​
+function a() {​
+	// this = contexte appelant​
+}​
+
+// Fonction standard avec paramètre​
+function ap(param1, param2) {​
+	// this = contexte appelant​
+}​
+
+// Variable fonction anonyme (ne pas utiliser)​
+const b = function() {​
+	// this = contexte appelant​
 }
-					</code>
-				</pre>
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Utilisation</h3>
+            <pre>
+				<code class="javascript">
+// Variable fonction nommée (usage assez rare)​
+const c = function c() {​
+	// this = contexte appelant​
+}​
 
-				</section>
+// Lambda / "fat arrow" (anonyme)​
+const d = () => {​
+	// this = contexte de la déclaration​
+}​
 
+// Lambda / "fat arrow" (anonyme) avec paramètres​
+const dp = (param1, param2) => {​
+	// this = contexte de la déclaration​
+}​
 
-				<section>
-					<h2>Oublions jQuery</h2>
-					<pre>
-					<code class='javascript'>
-//Avant
-const monElement = $('[data-my-selector]');
+// fonction auto-appelante (usage particulier)​
+(function(){​
+	// this = contexte appelant​
+})()​
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Fonctions de classes / objets​</h3>
+            <pre>
+				<code class="javascript">
+// La syntaxe de a est un raccourci pour celle de b. (usage assez rare)​
+const e = {​
+    a() {​
+        // this = contexte appelant​
+    },​
 
-//Après
-const monElement = document.querySelector('[data-my-selector]');
-					</code>
-				</pre>
+    b: function b() {​
+        // this = contexte appelant​
+    }​
+}​
 
-				</section>
-			</section>
-			<section data-state="theme-color-blue-yellow">
-				<section data-background=''>
-					<h1>Les outils</h1>
-				</section>
-				<section data-background='https://nodejs.org/static/images/logos/nodejs-green.png'>
-				</section>
-				<section>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>Node.js</h2>
-					<ul>
-						<li>JS côté serveur</li>
-						<li>Apporte plein d'outils sous forme de modules</li>
-						<li><a href='npmjs.com'>npm</a> (node package module)</li>
-					</ul>
-				</section>
-				<section >
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>Node.js</h2>
-					<ul>
-						<li>package.json</li>
-						<li>node_modules</li>
-						<li><code>npm install -g ma-dependance-globale</code></li>
-						<li><code>npm install -g rimraf</code></li>
-						<li><code>npm install --save ma-dependance</code></li>
-					</ul>
-				</section>
-				<section data-background='http://www.kolhamevaser.com/wp-content/uploads/2015/05/Schechter.Bavel_.TowerofBavel.jpg'>
-					<h1>Babel</h1>
-				</section>
-				<section data-background='http://jlongster.com/s/upload/webpack-hot1.png'>
-			    		<h1 style='background-color:rgba(1,1,1, 0.5);'><a href='https://webpack.github.io/'>Webpack</a></h1>
-				</section>
+// Dans une classe​
+class G {​
+    a() {​
+        // this = contexte appelant​
+	}​
 
-				<section data-background=''>
-					<h1>Debug</h1>
-				</section>
-			</section>
-			<section data-state="theme-color-blue-yellow">
-				<section data-background='https://media.giphy.com/media/RHUGfUYnjNuMw/giphy.gif'>
-					<h1>Prototypes / Constructor</h1>
-				</section>
-				<section>
-					<h2>Classes ?</h2>
-					<ul>
-						<li>Avant ES6 pas de classe</li>
-						<li>JS est un langage prototypale</li>
-						<li>En JS tout est un objet</li>
-						<li>Une propriété est identifiée par une paire nom / valeur</li>
-						<li>Une propriété peut être une fonction</li>
-					</ul>
-				</section>
-				<section>
-					<h2>Constructeur</h2>
-					<ul>
-					    <li>Fonctions servant à initialiser un nouvel objet. Le nom du constructeur est un peu comme « le nom de la classe »…</li>
-					    <li>Toute fonction peut servir de constructeur : il suffit de l’appeler avec l’opérateur new.</li>
-					    <li>Elle dispose alors d’une variable implicite this, qui représente la nouvelle « instance ».</li>
-					    <li>L’objet créé référence son constructeur : constructor.</li>
-					</ul>
-				</section>
-				<section>
-					<h2>Constructeur</h2>
-					<pre>
-						<code class='javascript'>
-function Person(first, last) {
-  this.first = first;
-  this.last = last;
+	// Variable d'instance​
+    b = () => {​
+        // this = instance de la classe​
+    }​
+}​
+				</code>
+			</pre>
+            <p style="font-size: 0.6em">
+              <b>NB:</b> Les notions de fat-arrow et de contexte sont détaillées
+              plus tard.​
+            </p>
+          </section>
+          <section>
+            <h3>Appel d'une fonction​</h3>
+            <pre>
+				<code class="javascript">
+const addition = (a,b) => {​
+	return a + b;​
+}​
+
+addition(1,2) // => 3​
+
+const objet = {​
+	presentation(nom) {​
+		console.log('Bonjour je suis ' + nom​
+	};​
 }
+​
+objet.presentation('Dupont Michou') 
+// => "Bonjour je suis Dupont Michou"
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Appel d'une fonction​</h3>
+            <p>
+              A noter que si l'on ne renseigne pas les paramètres d'une
+              fonction, celle-ci sera exécuté avec une valeur undefined pour ces
+              paramètres. De la même manière il est possible de renseigner plus
+              de paramètres que nécessaire. Ceux-ci seront simplement ignorés.​
+              ​ ​
+            </p>
+            <pre>
+				<code class="javascript">
+const addition = (a , b) => { return a + b };​
 
-var joeLopezPerson = new Person('Joe', 'Lopez');
-var davidLopezz = new Person('David', 'lopez');
-joeLopezPerson.first // => 'Joe'
-davidLopezz.first   // => 'David'
+addition(1) // => NaN (1 + undefined...)​
 
-// Si on jouait aux cons ?!
-function LopezPerson(first, last) {
-  this.first = first;
-  this.last = last;
-  return { first: 'Anne', last: 'Pas Lopez' };
-}
-var oops = new LopezPerson('Henry', 'Lopez');
-oops.first // => Anne
-						</code>
-					</pre>
-				</section>
+addition(1,2,3) // => 3 (1+2)
+				</code>
+			</pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>> Les variables</h1>
+          </section>
+          <section>
+            <h3>Présentation​</h3>
+            <p>
+              Il existe trois façons de déclarer des variables en javascript:​
+            </p>
+            <ul>
+              <li>
+                <span style="color: pink">var</span>: On déclare une variable
+                dont la portée est celle de la fonction courante, éventuellement
+                en initialisant sa valeur.​
+              </li>
+              <li>
+                <span style="color: pink">let</span>: On déclare une variable
+                dont la portée est celle du bloc courant, éventuellement en
+                initialisant sa valeur.​
+              </li>
+              <li>
+                <span style="color: pink">const</span>: On déclare une constante
+                nommée, dont la portée est celle du bloc courant, accessible en
+                lecture seule.​
+              </li>
+            </ul>
+            <p>
+              <span style="color: pink">var</span> n'est plus vraiment utilisé
+              dans les nouvelles normes. On préfèrera utiliser const dans la
+              majorité des cas, et let dans les cas ou la variables est
+              réaffectable.​
+            </p>
+          </section>
+          <section>
+            <h3>La portée d'une variable​</h3>
+            <p>
+              Les éléments créés en JavaScript ont une portée. Un
+              <a
+                href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Grammar_and_types#Les_port%C3%A9es_de_variables"
+                >Scope</a
+              >.​
+            </p>
+            <p>
+              Lorsqu'une variable est déclarée avec var en dehors des fonctions,
+              elle est appelée variable globale car elle est disponible pour
+              tout le code contenu dans le document. Lorsqu'une variable est
+              déclarée dans une fonction, elle est appelée variable locale car
+              elle n'est disponible qu'au sein de cette fonction.​
+            </p>
+            <p>
+              Avant la norme ECMAScript2015, il n'existait pas d'autre manière
+              de déclarer des variables. Grâce aux mots clés const et let, il
+              est possible de restreindre la portée d'une variable au bloc en
+              cours (un bloc if par exemple).​
+            </p>
+          </section>
+          <section>
+            <h3>La portée d'une variable​</h3>
+            <pre>
+				<code class="javascript">
+// var, i.e. je fais ce que je veux de toute façon je suis crade​
+var a = 'lala';​
+a = 'toto'​
+a; // => toto ​
 
-				<section>
-					<h2>Prototypes</h2>
-					<ul>
-					    <li>Tout constructeur a un prototype : un objet qui définit les propriétés (et donc méthodes) partagées par tous les objets que produit ce constructeur.</li>
-					    <li>Le prototype est « vivant » : si on le triture après l’appel au constructeur, ça marche quand même !</li>
-					    <li>Techniquement, y’a plein d’autres trucs dans un prototype (réf. au constructeur, gestion de propriétés…).</li>
-						<li>On verra, plutôt vous verrez...</li>
-					</ul>
-				</section>
-				<section>
-					<h2>Prototype</h2>
-					<pre>
-						<code class='javascript'>
-function Person(first, last) {
-  this.first = first;
-  this.last = last;
-}
+if (true) { 
+	var x = 5; 
+}​
+console.log(x); // x vaut 5, bref c'est pas top​
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>La portée d'une variable​</h3>
+            <pre>
+				<code class="javascript">
+// let et const c'est mieux!​
+const b = 5;​
+b = 6; // ERROR​
 
-// On augmente l'existant…
-Person.prototype.fullName = function fullName() {
-  return this.first + ' ' + this.last;
-}
-Person.prototype.greet = function greet() {
-  alert('Salut je m’appelle ' + this.first);
-}
+let c = 5;​
+c = 6;​
+c; // => 6​
 
-var john = new Person('John', 'Smith');
-john.fullName() // => 'John Smith'
-john.greet()    // 'Salut je m’appelle John'
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h2>Prototype (Don't)</h2>
-					<pre>
-						<code class='javascript'>
-function Person(first, last) {
-  this.first = first;
-  this.last = last;
-  this.fullName = function fullName() {
-    return this.first + ' ' + this.last;
-  }
-  this.greet = function greet() {
-    alert('Salut je m’appelle ' + this.first);
-  }
-}
-var john = new Person('John', 'Smith');
-john.fullName() // => 'John Smith'
-john.greet()    // 'Salut je m’appelle John'
-						</code>
-					</pre>
-					<blockquote>Mauvaise pratique: on copie la fonction dans chaque constructeur</blockquote>
-				</section>
-				<section>
-					<h2>Les classes ES6</h2>
-					<pre>
-						<code class='javascript'>
-class TodoItem extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      editing: false
-    };
-  }
+if (true) {​
+	let y = 5;​
+	const z = 5​
+}​
 
-  handleDoubleClick() {
-    this.setState({ editing: true });
-  }
-  …
-}
-						</code>
-					</pre>
-					<blockquote class='fragment'>Attention il s'agit de sucre syntaxique pas d'une classe comme en Java ou .NET. Le JS reste un langage prototypale.</blockquote>
-				</section>
-				<section>
-					<h2>La chaîne d'appel d'une méthode</h2>
-					<code>obj.prop</code> ou <code>obj['prop']</code> (c'est équivalent)
-					<ol>
-						<li class='fragment'>On part de l’objet indexé (obj)</li>
-						<li class='fragment'>Si on trouve prop dans ses own properties, on s’arrête là</li>
-						<li class='fragment'>Sinon, on passe sur le prototype du niveau supérieur : celui du constructeur de l’objet en cours*</li>
-						<li class='fragment'>On reprend à l’étape 2, sauf si on était déjà sur Object.prototype, auquel cas le lookup est fini, et échoue (undefined).</li>
-					</ol>
-					<footer>*conceptuellement, <code>constructor.prototype</code> ou <code>__proto__</code></footer>
-				</section>
-				<section data-background=''>
-					<h2>La preuve en live...</h2>
-					<pre>
-						<code class='javascript'>
-function Person(first, last) {
-  this.first = first;
-  this.last = last;
-}
-Person.prototype.fullName = function fullName() {
-  return this.first + ' ' + this.last;
-};
-const davidLopez = new Person('David', 'Lopez');
+console.log(y); // ReferenceError: y is not defined, c'est mieux!​
+console.log(z); // ReferenceError: z is not defined, c'est mieux!​
+				</code>
+			</pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>>Les closures​</h1>
+          </section>
+          <section>
+            <h3>​Présentation​</h3>
+            <p>
+              Il est possible d'imbriquer une fonction au sein d'une fonction.
+              La fonction imbriquée (interne) est privée par rapport à la
+              fonction (externe) qui la contient. Cela forme ce qu'on appelle
+              une Closure.​
+            </p>
+            <p>
+              Étant donné qu'une fonction imbriquée est une closure, cela
+              signifie que la fonction imbriquée peut « hériter » du scope de la
+              fonction parente. Et donc avoir accès aux variables de cette
+              fonction.​
+            </p>
+            <p>
+              De cette manière il est possbile de hierarchiser les portée des
+              variables au sein d'un code JS.​
+            </p>
+            <p>
+              Les closures sont un bon moyen de rendre privée une partie du
+              code. Elles seront très utiles pour créer des modules. Mais on y
+              reviendra plus tard...​
+            </p>
+          </section>
+          <section>
+            <h3>​Utilisation​</h3>
+            <pre>
+				<code class="javascript">
+function externe(x) {​
+	function interne(y) {​
+		return x + y;​
+	}​
 
-davidLopez.first      // => 'David',         own property
-davidLopez.fullName() // => 'David Lopez', Person.prototype
-davidLopez.toString() // => '[object Object]', Object.prototype
+	return interne;​
+}​
 
-Person.prototype.toString = function personToString() {
-  return '#Person ' + this.fullName();
-};
+var fn_interne = externe(3); // fn_interne est donc une fonction qui prend en parametre y en renvoie 3 + y​
+var resultat = fn_interne(5); // donc 8​
 
-davidLopez.toString() // => "#Person David Lopez"
-						</code>
-					</pre>
-				</section>
-			</section>
-			<section>
-				<section data-background=''><h1>Closure</h1></section>
-				<section >
-					<h2>Closure simple</h2>
-					<pre>
-						<code class='javascript'>
-function publicFx() {
-  let dateAppel = Date.now();
-  return function() { console.log(dateAppel); };
-}
-let privilegedFx1 = publicFx();
-// Attendre un bref instant
-let privilegedFx2 = publicFx();
+var resultat1 = externe(3)(5); // renvoie 8​
+				</code>
+			</pre>
+            <p>
+              Dans le cas présenté ci-dessus, on voit que la variable x est
+              connu de la fonction nommé interne, celle-ci peut être utilisée
+              normalement, mais ne sera initialisée qu'à l'appel de la fonction
+              externe.​ Au moment de l'appel externe(3) , x est initialisé, et
+              la variable résultat contient la fonction suivante:​
+            </p>
+            <pre>
+				<code class="javascript">
+function interne(y) {​
+	return 3 + y;​
+}​
+				</code>
+			</pre>
+            <p>Du coup resultat(5) vaut 5+3 donc8!​​</p>
+          </section>
+          <section>
+            <h3>​Utilisation</h3>
+            <pre>
+				<code class="javascript">
+function publicFx() {​
+	let dateAppel = Date.now();​
 
-// privilegedFx(1,2) sont en fait les fonctions internes construites au
-// sein de publicFx, qui grâce aux règles de portée "voient"
-// dateAppel.  Elles sont *closed over* par publicFx, ce qui fait
-// que les valeurs de dateAppel au moment où les fonctions ont été
-// renvoyéees sont préservées
-privilegedFx1(); // => affiche la dateAppel du moment de la création de la fonction privilegedFx1!
-privilegedFx2(); // => affiche la dateAppel d'après !
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h2>Les modules sont une utilisation des closures</h2>
-					<pre><code class="javascript">
-function yourModule(require, module, exports) {
+	return function() { 
+		console.log(dateAppel); 
+	};​
+}​
 
-  let widgets = {};
-  let util = require('util');
-  let Widget = require('widgets/base');
+let privilegedFx1 = publicFx();​
 
-  function CoolWidget(elt) { … }
-  util.inherits(CoolWidget, Widget);
-  // …
+// Attendre un bref instant​
+let privilegedFx2 = publicFx();​
 
-  module.exports = Widget;
-}
-					</code></pre>
-					<blockquote>Dans node on ne voit pas la fonction enrobante...</blockquote>
-				</section>
-				<section data-background='http://995642590.r.lightningbase-cdn.com/wp-content/uploads/2013/05/HR-Double-Bind-article-by-John-Sumser-on-HR-Examiner-425x282px.jpg'>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>Le binding</h2>
+// privilegedFx(1,2) sont en fait les fonctions internes construites au​
+// sein de publicFx, qui grâce aux règles de portée "voient"​
+// dateAppel.  Elles sont *closed over* par publicFx, ce qui fait​
+// que les valeurs de dateAppel au moment où les fonctions ont été​
+// renvoyéees sont préservées​
+privilegedFx1(); // => affiche la dateAppel du moment de la création de la fonction privilegedFx1!​
+privilegedFx2(); // => affiche la dateAppel d'après !​
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Utilisation​</h3>
+            <p>
+              On peut voir ici exactement le même principe mais cette fois
+              illustré avec des dates. On initialise deux fonctions
+              privilegedFx1 et priviledgedFx2 qui contiennent chacune une
+              fonction dans laquelle a été stockée une date correspondant à la
+              date de création de la variable. Au moment de l'exécution les
+              dates seront différente pour privilegedFx1 et privilegedFx2 car
+              celles-ci on été initialisée à des instants différents.​
+            </p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>> Contexte et binding​</h1>
+          </section>
+          <section>
+            <h3>Présentation​</h3>
+            <p>
+              Le contexte d'une fonction est représenté par la variable this. Il
+              est possible de faire appel à cette variable a tout moment dans le
+              code, cependant la valeur de this sera déterminée à partir de la
+              façon dont une fonction est appelée. Il n'est pas possible de lui
+              affecter une valeur lors de l'exécution et sa valeur peut être
+              différente à chaque fois que la fonction est appelée.​
+            </p>
+            <p>
+              Les différentes évolutions du langage ont permis de mieux définir
+              cette variable indépendamment de la façon dont elle est appelée :
+              bind, fat-arrow...​
+            </p>
+          </section>
+          <section>
+            <h3>​Binding implicite​</h3>
+            <p>
+              La valeur de this dépend de la façon dont la fonction qui
+              l'utilise est appelée. De manière générale, lorsque this est
+              utilisé dans une fonction, il aura la valeur de l'appelant de la
+              fonction.​
+            </p>
+          </section>
+          <section>
+            <h3>​​Binding implicite</h3>
+            <p>Le cas qui marche​</p>
+            <pre>
+				<code class="javascript">
+const monObjet = {​
+	firstName: 'Michou',​
+	lastName: 'Dupont',​
 
-				</section>
-				<section data-background='http://995642590.r.lightningbase-cdn.com/wp-content/uploads/2013/05/HR-Double-Bind-article-by-John-Sumser-on-HR-Examiner-425x282px.jpg'>
-					<h2>Le problème</h2>
-					<pre>
-						<code class='javascript'>
-var name = 'Mr X';
-let obj = {
-  name: 'Joe Lopez',
-  greet: function greet(whom) {
-	console.log(this) 
-    console.log(this.name + ' salue ' + whom);
-  },
-  greetAll: function greetAll(first, second, last) {
-	console.log(this)
-    [first, second, last].forEach(this.greet);
-  }
-};
-obj.greet("les lopezs de France");
-// => 'Joe Lopez salut les lopezs de France !'
-let fx = obj.greet;
-fx("l’atelier") // => '"Mr X salue l’atelier"'
-obj.greetAll('David', 'Joe', 'Guénolé'); // => 'Mr X salue David, Mr X salue Joe, Mr X salue undefined'
-						</code>
-					</pre>
-				</section>
-				<section data-background='http://995642590.r.lightningbase-cdn.com/wp-content/uploads/2013/05/HR-Double-Bind-article-by-John-Sumser-on-HR-Examiner-425x282px.jpg'>
-					<h2>Comment faire ? La closure?</h2>
-					<pre>
-						<code class='javascript'>
-const obj = {
-  // …
-  greetAll: function greetAll(first, second, last) {
-    var that = this;
-    [first, second, last].forEach(function(name) {
-      that.greet(name);
-    });
-  }
-}
-						</code>
-					</pre>
-				</section>
-				<section data-background=''>
-					<h2>Comment faire ? ES6 style?</h2>
-					<pre>
-						<code class='javascript'>
-const obj = {
-  // …
-  greetAll(first, second, last) {
-    [first, second, last].forEach(name => this.greet(name));
-	//Ultra fat
-  }
-}
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h2>call et apply</h2>
-					<pre>
-						<code class='javascript'>
+	fullName() {​
+		console.log(this.firstName + ' ' + this.lastName)​
+	},​
+
+	strictFullName() {​
+		"use strict";​
+
+		console.log(this.firstName + ' ' + this.lastName)​
+	}​
+};​
+
+monObjet.fullName(); // => log Michou Dupont. Dans ce cas this === monObjet​
+monObjet.strictFullName(); // => IDEM​
+				</code>
+			</pre>
+            <p>
+              Ici on appel explicitement la méthode fullname() au travers de
+              l'objet monObjet. Donc le contexte (this) au moment de l'exécution
+              de la fonction vaudra l'appelant (i.e. ce qui est devant le ".",
+              i.e. monObjet). La fonction qui s'exécute alors ressemblerait à
+              ça:​​
+            </p>
+            <pre>
+				<code class="javascript">
+console.log(monObjet.firstName + ' ' + monObjet.lastName)​
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Binding implicite​​</h3>
+            <p>Le cas qui marche pas…​</p>
+            <pre>
+				<code class="javascript">
+const newFullName = monObjet.fullname; const newStrictFullName = monObjet.strictFullname;​
+newFullName(); // => log undefined undefined. this vaut window.​
+newStrictFullName(); // => Error!!!!!!!! this vaut undefined​
+				</code>
+			</pre>
+            <p>
+              Ici on définie une variable newFullName qui contient la méthode
+              monObjet.fullName. Il est important de noter que newFullName ne
+              contient pas le résultat, mais la fonction elle-même. newFullName
+              est donc une fonction prête à être appelée.​
+            </p>
+            <p>
+              Au moment de l'appel le javascript tente de lui initialisé son
+              contexte, et regarde donc qui a appelé la fonction. Sauf qu'ici
+              personne ne l'a appelée (i.e. il n'y a pas de point ni d'objet
+              avant la fonction). Ici il existe deux cas:​
+            </p>
+            <p>
+              Le mode non-strict, le contexte vaut le contexte présent de la
+              fonction. Donc ici this vaut window​
+            </p>
+            <p>
+              Le mode strict*, le contexte n'est simplement pas défini! this
+              vaut undefined​
+            </p>
+            <p style="font-size: 0.6em">
+              *Les différences entre mode-strict et mode "non-strict" sont très
+              diverses. Il n'est pas prévu ici d'aborder le sujet en dehors des
+              impactes sur le contexte. Cela pourra notamment expliquer de
+              nombreuses erreurs telles que "impossible de trouvé firstname of
+              undefined"​​
+            </p>
+          </section>
+          <section>
+            <h3>Binding implicite – Le problème​​</h3>
+            <p>
+              Dans une application on ne peut pas toujours certifier de
+              l'appelant d'une fonction. Donc comment faire si je veux utiliser
+              this mais que je ne maitrise pas l'appelant?​
+            </p>
+            <pre>
+				<code class="javascript">
+var name = 'Mr X';​
+
+let obj = {​
+	name: 'Joe Lopez',​
+
+	greet(whom) {​
+		console.log(this);​
+		console.log(this.name + ' salue ' + whom);​
+	},​
+
+	greetAll(first, second, last) {​
+		console.log(this);​
+		[first, second, last].forEach(this.greet);​
+	}​
+};​
+obj.greet("les lopezs de France");​
+// => 'Joe Lopez salut les lopezs de France !'​
+
+let fx = obj.greet;​
+fx("l’atelier") // => '"Mr X salue l’atelier"'​
+obj.greetAll('David', 'Joe', 'Guénolé'); // => 'Mr X salue David, Mr X salue Joe, Mr X salue Guénolé'​
+// Le contexte est perdu au travers du foreach​
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Binding implicite – Le problème​​</h3>
+            <p>
+              Au moment d'exécuter la fonction fx le contexte est perdu bon ça
+              on vient de le voir. Mais plus délicat encore, au moment
+              d'exécuter obj.greetAll, le contexte est lui aussi perdu, alors
+              que là il y a bien quelque chose devant le "." et tout!​
+            </p>
+            <p>Vous aurais-je menti?​</p>
+            <p>
+              Et bien non, c'est le morceau du foreach qui pose problème, le
+              contexte est perdu au moment où l'on renseigne le pointeur de
+              fonction pour le foreach.​
+            </p>
+          </section>
+          <section>
+            <h3>Binding implicite – Les solutions​​​</h3>
+            <p>
+              <b
+                >Solution 1: La closure! (Bah oui, ce module est logique en
+                fait...)​</b
+              >
+            </p>
+            <p>
+              Il suffit de définir une nouvelle variable contenant le ocntexte,
+              et de l'utiliser dans une fonction imbriquée (une closure).​
+            </p>
+            <pre>
+				<code class="javascript">
+const obj = {​
+	// …​
+	greetAll(first, second, last) {​
+		const that = this;​
+		
+		[first, second, last].forEach(function(name) {​
+			that.greet(name);​
+		});​
+	}​
+}​
+				</code>
+			</pre>
+            <p>
+              Ici l'ors de l'exécution on fera un that.greet et that aura été
+              fixé au moment du premier appel, donc vaudra le contexte du moment
+              de l'appel. Tadaaaaaaaaaaaa!​​
+            </p>
+          </section>
+          <section>
+            <h3>​Binding implicite – Les solutions​</h3>
+            <p><b>Solution 2: Bind​</b></p>
+            <p>
+              La fonction bind permet de déterminer le contexte d'une fonction
+              qu'importe la façon dont elle est appelée. On surcharge le
+              contexte quoi qu'il arrive avec l'objet qu'on aura mis en
+              paramètre du bind.​
+            </p>
+            <pre>
+				<code class="javascript">
+const obj = {​
+	// …​
+	greetAll(first, second, last) {​
+		[first, second, last].forEach(this.greet.bind(this));​
+	}​
+}​
+				</code>
+			</pre>
+            <p>Ça marche vraiment bien, mais on a encore mieux!​</p>
+          </section>
+          <section>
+            <h3>Binding implicite – Les solutions​​</h3>
+            <p><b>Solution 3: la fat-arrow () => {}​</b></p>
+            <p>
+              Cette notation permet de "binder" automatiquement le contexte
+              englobant comme contexte de la fonction.​
+            </p>
+            <pre>
+				<code class="javascript">
+const obj = {​
+	// …​
+	greetAll(first, second, last) {​
+		[first, second, last].forEach((name) => this.greet(name));​
+	}​
+}​
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Binding implicite – Les solutions​​</h3>
+            <p>La fat-arrow c'est la vie...​</p>
+            <p>
+              Petit exemple de factorisation de code avec la fat-arrow (avant
+              c'était vraiment moche)​
+            </p>
+            <pre>
+				<code class="javascript">
+['add', 'remove'].forEach((action) => {​
+	['change', 'status', 'error'].forEach((elt) => {​
+		this[`${action}${capitalizeDefinition}${capitalize(elt)}Listener`] = (cb) => {​
+			this[`${action}Listener`](`${def}:${elt}`, cb);​
+		}​
+	})​
+});​
+				</code>
+			</pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>> Call & apply</h1>
+          </section>
+          <section>
+            <h3>Présentation​</h3>
+            <p>
+              Les fonctions call et apply permettent de fixer le contexte au
+              travers du premier argument lors de l'appel. La fonction call
+              prendra par la suite une liste d'argument là ou apply utilisera un
+              tableau.​
+            </p>
+            <p>
+              C'est une alternative au binding, mais qui se fait au moment de
+              l'appel de la fonction, et non au moment de sa déclaration.​
+            </p>
+            <pre>
+				<code class="javascript">
+function ajout(c, d){​
+	return this.a + this.b + c + d;​
+}​
+
+var o = { a:1, b:3 };​
+
+ajout.call(o, 5, 7); // 1 + 3 + 5 + 7 = 16​
+ajout.apply(o, [10, 20]); // 1 + 3 + 10 + 20 = 34​
+				</code>
+			</pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>JavaScript</h1>
+            <h2>- Les JS objet -</h2>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>> Constructeur</h1>
+          </section>
+          <section>
+            <h3>Présentation​</h3>
+            <p>
+              Un constructeur est une fonction servant à initialiser un nouvel
+              objet (jusque là tout va bien...). Le nom du constructeur est un
+              peu comme « le nom de la classe ".​
+            </p>
+            <p>
+              Toute fonction peut servir de constructeur : il suffit de
+              l’appeler avec l’opérateur new. Elle dispose alors d’une variable
+              implicite this, qui représente la nouvelle « instance » (oui
+              encore un contexte initialisé bizarrement)​
+            </p>
+            <p>
+              Une fois créé, le nouvel objet référence son constructeur via le
+              mot clé constructor​
+            </p>
+          </section>
+          <section>
+            <h3>Utilisation</h3>
+            <p>
+              Je crée un constructeur de Person. (Par convention les fonctions
+              constructeurs commence par une majuscule).​
+            </p>
+            <pre>
+				<code class="javascript">
+function Person(first, last) {​
+	this.first = first;​
+	this.last = last;​
+}​
+				</code>
+			</pre>
+            <p>
+              Jusque là ça ressemble à n'importe quel constructeur, à la
+              différence qu'ici les attribut de l'objet son définie
+              dynamiquement dans la fonction. On a pas de classe structurée à
+              proprement parler.​
+            </p>
+            <pre>
+				<code class="javascript">
+var joeLopezPerson = new Person('Joe', 'Lopez');​
+var davidLopezz = new Person('David', 'lopez');​
+
+joeLopezPerson.first // => 'Joe'​
+davidLopezz.first   // => 'David'​
+				</code>
+			</pre>
+            <p>
+              La fonction constructeur retourne donc par défaut une instance de
+              l'objet avec la valeur this.​
+            </p>
+          </section>
+          <section>
+            <h3>Utilisation</h3>
+            <p>Du coup si on retourne un autre objet, il se passe quoi?​</p>
+            <pre>
+				<code class="javascript">
+// Si on jouait aux cons ?!​
+function LopezPerson(first, last) {​
+	this.first = first;​
+	this.last = last;​
+	
+	return { first: 'Anne', last: 'Pas Lopez' };​
+}​
+
+var oops = new LopezPerson('Henry', 'Lopez');​
+oops.first // => Anne​
+				</code>
+			</pre>
+            <p>
+              Bah oui, le constructeur est une fonction comme une autre, on peut
+              donc retourner ce que l'on veut! C'est la valeur retournée par le
+              constructeur qui servira a créer l'objet, peu importe comment vous
+              avez rempli le this.​
+            </p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>> Prototype</h1>
+          </section>
+          <section>
+            <h3>Présentation</h3>
+            <p>
+              Les
+              <a
+                href="https://developer.mozilla.org/fr/docs/Learn/JavaScript/Objects/Object_prototypes"
+                >prototypes</a
+              >
+              sont un mécanisme JavaScript qui permettent l'héritage de
+              propriétés entre objets. Tout constructeur a un prototype, qui
+              définit les propriétés (et donc par ce biais définit les méthodes)
+              partagées par tous les objets issu d'un même constructeur.​
+            </p>
+            <p>
+              Un prototype est vivant, au sens où il est possible de le modifier
+              au runtime. Si on le triture après l’appel au constructeur, ça
+              marche quand même !​
+            </p>
+            <p>
+              Techniquement, y’a plein d’autres trucs dans un prototype (réf. au
+              constructeur, gestion de propriétés…), le but n'est pas de
+              détailler cela, mais d'expliquer le principe général du
+              prototype.​
+            </p>
+          </section>
+          <section>
+            <h3>Utilisation​</h3>
+            <p>On repart de notre constructeur de Person vu précédemment.​</p>
+            <pre>
+				<code class="javascript">
+function Person(first, last) {​
+	this.first = first;​
+	this.last = last;​
+}​
+				</code>
+			</pre>
+            <p>Puis on ajoute des méthodes au prototype du constructeur​</p>
+            <pre>
+				<code class="javascript">
+// On augmente l'existant…​
+Person.prototype.fullName = function fullName() {​
+	return this.first + ' ' + this.last;​
+}​
+				</code>
+			</pre>
+            <p>
+              A partir de maintenant, tous les objets ayant été créé à partir du
+              constructeur Person auront accès à une méthode fullName qui
+              renvoie le nom complet de la personne.​
+            </p>
+            <pre>
+				<code class="javascript">
+var john = new Person('John', 'Smith');​
+john.fullName() // => 'John Smith'​
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Utilisation</h3>
+            <p>
+              Il est aussi possible d'ajouter des méthodes a posteriori de la
+              création de l'objet.​
+            </p>
+            <pre>
+				<code class="javascript">
+// Voici Kevin​
+var kevin = new Person('Kevin', 'DuTrenteQuatre');​
+
+// On ajoute une méthode​
+Person.prototype.greet = function greet() {​
+	alert('Salut je m’appelle ' + this.first);​
+}​
+
+// Kevin sait se présenter. Bravo Kevin!​
+kevin.greet(); // => 'Salut je m’appelle Kevin'​
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Les mauvaises pratiques :(​</h3>
+            <p>
+              Le JavaScript est très permissif. Aussi la syntaxe de prototype
+              peut paraitre complexe au début. Il semblerait tout naturel de
+              renseigner les fonction directement comme propriété de l'objet au
+              moment de la construction.​
+            </p>
+            <p>
+              FAUX! c'est exactement l'exemple d'une chose à ne PAS faire! (oui
+              je te vois venir avec tes idées bizarre! J'ai l’œil moi!)​
+            </p>
+            <pre>
+				<code class="javascript">
+function Person(first, last) {​
+	this.first = first;​
+	this.last = last;​
+	
+	this.fullName = function fullName() {​
+		return this.first + ' ' + this.last;​
+	}​
+
+	this.greet = function greet() {​
+		alert('Salut je m’appelle ' + this.first);​
+	}​
+}​
+
+var john = new Person('John', 'Smith');​
+john.fullName() // => 'John Smith'​
+john.greet()    // 'Salut je m’appelle John'​
+				</code>
+			</pre>
+            <p>
+              Le problème ici est que les fonctions greet et fullName sont
+              intégralement recopiées dans chaque instance de Person créée.
+              C'est un gâchis pur et simple de mémoire...​
+            </p>
+          </section>
+          <section>
+            <h3>"Déguiser" un objet en tableau​</h3>
+            <p>
+              Un petit exemple pour aller plus loin, on fabrique un objet qui
+              ressemble fortement à un tableau, puis on s'amuse avec les
+              protoypes:​
+            </p>
+            <pre>
+				<code class="javascript">
+var fakeArray = { 0: '!', 1: 'ça torche', 2: 'JavaScript', length: 3 };​
+fakeArray.join = [].join; fakeArray.reverse = [].reverse;​
+
+fakeArray.reverse().join(' ');​
+// => 'JavaScript ça torche !'​
+
+// Ou alors :​
+fakeArray.__proto__ = Array.prototype;​
+fakeArray.reverse().join(' ');​
+// => 'JavaScript ça torche !'​
+
+// Méthodes « génériques » utilisables: 
+// concat, join, pop, push, reverse, shift,​
+// slice, sort, splice, toString, unshift.​
+				</code>
+			</pre>
+            <p>
+              Ça peut paraitre inutile, mais c'est exactement ce principe qui a
+              permis de créer les polyfill, très utiles pour coder sous IE9 avec
+              le confort des nouvelles versions du langage :)​
+            </p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>> Clase</h1>
+          </section>
+          <section>
+            <h3>Présentation</h3>
+            <p>
+              Bon, depuis ES2015 on a tout de même un équivalent de classe. Ce
+              n'est que du sucre syntaxique, mais c'est quand même vachement
+              bien!​
+            </p>
+            <pre>
+				<code class="javascript">
+class TodoItem extends Component {​
+	constructor(props, context) {​
+		super(props, context);​
+		
+		this.state = {​
+			editing: false​
+		};​
+	}​
 
 
-//let fx = obj.greet;
-fx.call(obj, 'les singes') // Joe Lopez salue les singes
+	handleDoubleClick() {​
+		this.setState({ editing: true });​
+	}
+}​
+				</code>
+			</pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>> La chaîne d'appel</h1>
+          </section>
+          <section>
+            <h3>Présentation</h3>
+            <p>
+              Ici on va entrer un peu plus dans le détail du fonctionnement du
+              JavaScript. On va s'intéresser à la façon dont le JavaScript
+              résous un appel. Supposons que je fasse l'appel suivant :​
+            </p>
+            <pre>
+				<code class="javascript">
+obj.prop
+				</code>
+			</pre>
+            <p>Quelle valeur va s'afficher, et comment est-elle résolue?​</p>
+            <ul>
+              <li>On part de l'objet indexé obj​</li>
+              <li>
+                Si la propriété prop se trouve parmi les propriété d'obj alors
+                on renvoie la valeur contenu dans prop puis on s’arrête là​
+              </li>
+              <li>
+                Sinon on passe sur le prototype du niveau supérieur: celui du
+                constructeur de l’objet en cours (on le trouve sous:
+                constructor.prototype ou __proto__)​
+              </li>
+              <li>
+                De là on reprend à l'étape 2, sauf si on était déjà sur
+                Object.prototype (dernier maillon de la chaine), auquel cas le
+                lookup est fini, et échoue. On renvoie alors undefined.​
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h3>La preuve en live​</h3>
+            <pre>
+				<code class="javascript">
+function Person(first, last) {​
+	this.first = first;​
+	this.last = last;​
+}​
 
+Person.prototype.fullName = function fullName() {​
+	return this.first + ' ' + this.last;​
+};​
 
-let xy = { 0: 'Zero', 1: 'One', length: 2 };
-Array.prototype.join.call(xy, '-') // 'Zero-One'
+const davidLopez = new Person('David', 'Lopez');​
 
+davidLopez.first      // => 'David',         own property​
+davidLopez.fullName() // => 'David Lopez', Person.prototype​
+davidLopez.toString() // => '[object Object]', Object.prototype​
 
-fx.apply(obj, ['']) // => 'Joe salue l’atelier'
-Array.prototype.push.apply(xy, ['Two', 'Three', 'Four']) // => 5
-xy // => { 0: 'Zero', 1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', length: 5 }
-</code>
-</pre>
+Person.prototype.toString = function personToString() {​
+	return '#Person ' + this.fullName();​
+};​
 
-				</section>
-			</section>
-			<section >
-				<section data-background='http://104.236.204.173/wp-content/uploads/2015/05/async.jpg'>
-					<h1 style='background-color:rgba(1,1,1, 0.5);'>JS et asynchronisme</h1>
-				</section>
-				<section>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>Callback</h2>
-					<pre>
-						<code>
-function delayedAlert() {
-  window.setTimeout(slowAlert, 2000);
-}
+davidLopez.toString() // => "#Person David Lopez"​
+			  	</code>
+			</pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>> Les modules</h1>
+          </section>
+          <section>
+            <h3>Présentation</h3>
+            <p>
+              Pendant de nombreuse années le JavaScript était un langage destiné
+              à rendre dynamique des page HTML. Il était donc utilisé de manière
+              ponctuelle à l'endroit désiré. L'évolution du web a fait que le
+              JavaScript doit maintenant gérer des cas beaucoup plus complexe.​
+            </p>
+            <p>
+              Les modules JavaScripts permettent d'isoler votre code du reste de
+              l'application, d'organiser votre code, d'éviter les collision de
+              noms etc. Grâce à eux il est possible de faire des application
+              complexe, multi-fichiers de manière organisée. Bon ok, ça
+              révolutionne pas l'informatique, mais on se rend bien comte que
+              c'est vite indispensable.​
+            </p>
+          </section>
+          <section>
+            <h3>Avant ES2015​</h3>
+            <p>Imaginons une architecture fichier comme suit:​</p>
+            <pre>
+				<code>
+/app/​
+	fichier1.js​
+	fichier2.js​
+			  	</code>
+			</pre>
+            <p>
+              Le fichier1.js publie une partie de sont contenu via l'instruction
+              module.exports. Dans l'exemple suivant seul l'objet monObjet est
+              publié vers l'extérieur. La variable private est utilisable au
+              sein du fichiers JS pour tout calcul, mais n'est pas publié sur
+              l'extérieur. On vient de rendre une partie du code privé.​
+            </p>
+            <pre>
+				<code class="javascript">
+// fichier1.js​
+const private = 5;​
 
-function slowAlert() {
-  alert("That was really slow!");
-}
-					</code></pre>
-				</section>
-				<section>
-					<h2>Les promesses</h2>
-					<p>
-						Une promesse a un état (pending, fullfilled, rejected).<br>
-						Elle est asynchrone, et se termine soit par un succès soit par une erreur et renvoie une nouvelle promesse.
-					</p>
-					<code class='javascript'>promise.then(successCb,errorCb).then(otherSuccess, otherCb).catch(errorHandlingFn)</code>
+const monObjet = {​
+	name: "lala",​
+	age: 42 + private,​
+	awesomeness: true​
+}​
 
-				</section>
-				<section>
-					<h2>Les promesses</h2>
-					<pre><code class='javascript'>
-const myPromise = new Promise((resolve, reject) => {
-	ajaxCall({success: resolve, error: reject});
-})
+module.exports = monObjet;​
+			  	</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Avant ES2015​</h3>
+            <p>
+              On accède au contenu d'un module via l'instruction require qui
+              prend en argument le chemin du fichier qui exporte le module.​
+            </p>
+            <pre>
+				<code class="javascript">
+// fichier2.js​
+const lala = require('./fichier1.js');​
+lala.awesomeness; // true;​
 
-Promise.resolve([1,2,3,4]);
+private; // undefined​
+lala.age; // 47​
+				</code>
+			</pre>
+            <p>
+              Cette méthode est bien pratique pour exposer les partie du code
+              que l'on veut, cependant elle reste assez limitée. On ne peut
+              exposer qu'un seul objet par fichier par exemple.​
+            </p>
+          </section>
+          <section>
+            <h3>Après ES2015​</h3>
+            <p>
+              Avec l'évolution du langage la création et l'utilisation de module
+              s'est simplifiée, tant dans l'écriture que dans les fonctionnalité
+              proposées.​
+            </p>
+            <p>On reprend la même structure:​</p>
+            <pre>
+				<code>
+/app/​
+	fichier1.js​
+	fichier2.js​
+				</code>
+			</pre>
+            <p>
+              On utilise directement l'instruction export, qui nous permet
+              notamment de définir un nom au moment de l'export. Il est possible
+              d'exporter plusieurs objets.​
+            </p>
+            <pre>
+				<code class="javascript">
+// fichier1.js​
+export monObjet = {​
+	name: "lala",​
+	age: 42​
+}​
 
-Promise.reject('ma super erreur')
+export monObjet2 = {​
+	name: "lola",​
+	age: 8​
+}​
+				</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Après ES2015​</h3>
+            <p>
+              A l'import on peut choisir de n'importer qu'un fragment du fichier
+              global (ça évite de tirer des dépendances inutile, et allège les
+              fichiers js après transpilage). On peut aussi renommer à la volé
+              le module importer etc.​
+            </p>
+            <pre>
+				<code class="javascript">
+// fichier2.js​
+import { monObjet, monObjet2 as renommage } from "./fichier1.js";​
 
-					</code></pre>
+monObjet.age; // 42​
+renommage.age; // 8​
+				</code>
+			</pre>
+            <p>
+              En réalité il existe différentes manières d'exporter et d'importer
+              des choses via module. Le mieux reste d'aller voir la
+              <a
+                hre="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Statements/import"
+                >doc</a
+              >
+              ;)​
+            </p>
+          </section>
+          <section>
+            <h3>Après ES2015​</h3>
+            <pre>
+				<code class="javascript">
+// fichier1.js​
+export default {​
+	name: "lala",​
+	age: 42​
+}​
 
-				</section>
-				<section>
-					<H2 style='background-color:rgba(1,1,1, 0.5);'>Les promesses</H2>
-					<pre class='javascript'><code>
-fetch('/users.json')
-  .then(function(response) {
-    return response.json()
-  }).then(function(json) {
-    console.log('parsed json', json)
-  }).catch(function(ex) {
-    console.log('parsing failed', ex)
-  })					</code></pre>
-				</section>
-			</section>
-			<section >
-				<section data-background=''>
-					<h1>ES6 / 2015</h1>
-				</section>
-				<section>
-					<h2>Les modules de node</h2>
-					<pre>
-						<code class='javascript'>
-//Dans un fichier
-module.exports = monObjetAExporter;
+export const lolo = 28​,
+			  	</code>
+			</pre>
+            <pre>
+				<code class="javascript">
+// fichier2.js​
 
-//Utilisation
-require('./mon_module_locale');
-//Utilisation d'un module npm
-require('mon_module');
-</code>
+import lala from "./fichier1.js";​
+import * as monModule from './fichier1.js';​
 
+lala.age; // 42​
+monModule.lolo; // 28​
+			  	</code>
+			</pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>> JS asynchrone</h1>
+          </section>
+          <section>
+            <h3>Présentation​</h3>
+            <p>
+              Dans une application JS, vous aurez à gérer de l'asynchrone. Ne
+              serait-ce que pour faire des appels à une API. Il existe plusieurs
+              manière de gérer cela.​
+            </p>
+          </section>
+          <section>
+            <h3>Les callbacks​</h3>
+            <p>
+              Il s'agit de de la manière la plus simple de gérer l'asynchrone.
+              Au moment de l'appel de la fonction asynchrone, on donne
+              simplement une fonction appelée callback qui s'exécutera une fois
+              la première fonction résolue. Voici un exemple avec la fonction
+              setTimout. Il s'agit simplement d'une fonction qui ne fait rien,
+              mais vous rend la main immédiatement et au bout du temps renseigné
+              en deuxième paramètre exécute la callback renseignée en premier
+              paramètre.​
+            </p>
+            <pre>
+				<code class="javascript">
+function delayedAlert() {​
+	window.setTimeout(slowAlert, 2000);​
+}​
 
-					</pre>
-				</section>
-				<section>
-					<h2>Les modules de Papa</h2>
-					<pre>
-						<code class='javascript'>
-import * as types from '../constants/ActionTypes';
+function slowAlert() {​
+	alert("That was really slow!");​
+}​
+				  </code>
+			</pre>
+            <p style="color: pink">
+              Attention le code de la callback est exécuté dans un contexte
+              complètement différent! (je vous renvoie au module sur la
+              programmation en JS pour les notions de contexte)​
+            </p>
+          </section>
+          <section>
+            <h3>Les promesses​</h3>
+            <p>
+              L'objet
+              <a
+                hre="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Promise"
+                >Promise</a
+              >
+              est utilisé pour réaliser des traitements de façon asynchrone. Une
+              promesse représente une valeur qui peut être disponible
+              maintenant, dans le futur voire jamais.​
+            </p>
+            <p>
+              Une promesse a un état (pending, fullfilled, rejected). En
+              fonction de sa résolution, elle appellera la callback associée via
+              l'instruction then, qui renverra elle aussi une promesse.​
+            </p>
+            <pre>
+				<code class="javascript">
+promise.then(successCb,errorCb).then(otherSuccess, otherCb).catch(errorHandlingFn);​
+			  	</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Les promesses​</h3>
+            <p>
+              Voici le même exemple que précédemment géré avec des promesses:​
+            </p>
+            <pre>
+				<code class="javascript">
+var promise1 = new Promise(function(resolve, reject) {​
+	setTimeout(function() {​
+		resolve('foo');​
+	}, 300);​
+});​
 
-export function addTodo(text) {
-  return { type: types.ADD_TODO, text };
-}
-import React, { PropTypes, Component } from 'react';
-import classnames from 'classnames';
-import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../constants/TodoFilters';
-import 'http://material.js'
-…
-export default Footer;
-export const ADD_TODO = 'ADD_TODO';
-export const DELETE_TODO = 'DELETE_TODO';
-export const EDIT_TODO = 'EDIT_TODO';
+promise1.then(function(value) {​
+	console.log(value);​
+	// expected output: "foo"​
+});​
+			  	</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Chaîne de promesses​</h3>
+            <pre>
+				<code class="javascript">
+fetch('/users.json')​
+	.then(function(response) {​
+		return response.json()​
+	})
+	.then(function(json) {​
+		console.log('parsed json', json)​
+	})
+	.catch(function(ex) {​
+		console.log('parsing failed', ex)​
+	});​
+			  	</code>
+			</pre>
+          </section>
+          <section>
+            <h3>Async / Await​</h3>
+            <p>
+              La déclaration async function définit une fonction asynchrone qui
+              renvoie un objet AsyncFunction.​ Une fonction asynchrone est une
+              fonction qui s'exécute de façon asynchrone grâce à la boucle
+              d'évènement en utilisant une promesse (Promise) comme valeur de
+              retour.​
+            </p>
+            <p>
+              L'opérateur await permet d'attendre la résolution d'une promesse.
+              Il ne peut être utilisé qu'au sein d'une fonction asynchrone.​
+            </p>
+            <p>Au final, c'est un sucre syntaxique autour d'une promesse!!​</p>
+          </section>
+          <section>
+            <h3>Async / Await​</h3>
+            <pre>
+				<code class="javascript">
+function resolveAfter2Seconds(x) {​
+	return new Promise(resolve => {​
+		setTimeout(() => {​
+			resolve(x);​
+		}, 2000);​
+	});​
+}​
 
-</code>
+async function f1() {​
+	var x = await resolveAfter2Seconds(10);​
 
+	console.log(x); // 10​
+}​
 
-					</pre>
-				</section>
+f1();​
+			  	</code>
+			</pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>JavaScript</h1>
+            <h2>- L'éco-système -</h2>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3>Présentation</h3>
+            <p>
+              Il existe probablement une librairie ou un utilitaire js pour
+              l'intégralité des mots existants et inexistants. Il m'est même
+              arrivé de taper une fois​
+            </p>
+            <pre>
+				<code class="bash">
+npm install internet​
+				</code>
+			</pre>
+            <p>
+              Bref, nous allons présenté ici quelques utilitaires JavaScript
+              bien pratique ;)​
+            </p>
+          </section>
+          <section>
+            <h3>Lodash</h3>
+            <p>
+              <a href="https://lodash.com/docs/4.17.15">Lodash</a> est la
+              librairie utilitaire la plus utilisée du monde JavaScript. Si vous
+              voulez manipuler des objets, des collections etc. Lodash a
+              certainement la fonction qu'il vous faut.​
+            </p>
+            <ul>
+              <li>
+                Est ce que ma variable est un nombre / function / tableau =>
+                lodash/lang​
+              </li>
+              <li>
+                Filtrer, trier, réduire, etc. =>
+                lodash/{collection/object/array}​
+              </li>
+              <li>Plein de fonctions prêtes à l'emploi => lodash/function​</li>
+            </ul>
+            <p>C'est un peu la bibliothèque standard du JS ;)​</p>
+          </section>
+          <section>
+            <h3>Moment</h3>
+            <p>
+              Les dates en JS, c'est pas vraiment la joie... Du coup on utilise
+              moment. C'est bien plus pratique!​
+            </p>
+            <ul>
+              <li>Formater des dates moment().format('L')​</li>
+              <li>Manipuler des dates moment(maDate).add('days', 1)​</li>
+              <li>Gestion des timezone​</li>
+            </ul>
+          </section>
+          <section>
+            <h3>i18n</h3>
+            <p>
+              <a href="https://www.i18next.com/">i18n</a> vous sera utile pour
+              gérer l'internationalisation de votre application. L'intégralité
+              de vos ressources textuelles passeront par cette librairie pour
+              pouvoir gérer le multilinguisme.​
+            </p>
+          </section>
+          <section>
+            <h3>Node.JS​</h3>
+            <p>
+              <a href="https://nodejs.org/en/">Node.js</a> vous permet de créer
+              des applicatifs écrits en javascript, et notamment des serveurs.
+              On l'utilisera notamment pour éxécuter l'intégralité de la
+              toolchain d'un projet SPA.​ ​ ​
+            </p>
+          </section>
+          <section>
+            <h3>Babel</h3>
+            <p>
+              <a href="https://babeljs.io/">Babel</a> est le traducteur
+              universelle du javascript. Il permet de transpiler le langage
+              écrit dans une version évoluée d'ECMAScript en une version
+              compréhensible pour n'importe quel navigateur.​ ​ ​
+            </p>
+          </section>
+          <section>
+            <h3>Webpack</h3>
+            <p>
+              Webpack est un ordonnanceur javascript utilisé pour builder les
+              projets javascript. Il permet d'ajouter plusieurs modules à un
+              pipeline de build.​
+            </p>
+            <p>
+              Au travers de ce pipeline de build, on passe d'un projet complexe
+              avec des modules, des librairies etc. à un livrable composé de
+              fichiers statiques à intégrer dans une page web.​
+            </p>
+            <p>
+              transpilage --> obfuscation --> compréssion --> postCss --> ...​
+            </p>
+          </section>
+          <section>
+            <h3>Npm​</h3>
+            <p>
+              <a href="https://www.npmjs.com/">Npm</a> (Node Package Manager)
+              est le gestionnaire de paquet qui vient avec Node.js. Il vous
+              servira à gérer l'intégralité de vos dépendances javascripts.​ ​ ​
+            </p>
+          </section>
+        </section>
+      </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
 
-				<section>
-					<h2>Destruct</h2>
-					<pre>
-						<code class='javascript'>
-const { activeCount } = this.props;
-…
-const { filter: selectedFilter, onShow } = this.props;
-const [, filters] = output.props.children;
-…
-const [,, clear] = output.props.children;
-var { op: a, lhs: { op: b }, rhs: c } = getASTNode();
-Détails
-</code>
+    <script>
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: "slide", // none/fade/slide/convex/concave/zoom
+        // Optional reveal.js plugins
+        dependencies: [
+          {
+            src: "lib/js/classList.js",
+            condition: function () {
+              return !document.body.classList;
+            },
+          },
+          {
+            src: "plugin/markdown/marked.js",
+            condition: function () {
+              return !!document.querySelector("[data-markdown]");
+            },
+          },
+          {
+            src: "plugin/markdown/markdown.js",
+            condition: function () {
+              return !!document.querySelector("[data-markdown]");
+            },
+          },
+          {
+            src: "plugin/highlight/highlight.js",
+            async: true,
+            condition: function () {
+              return !!document.querySelector("pre code");
+            },
+            callback: function () {
+              hljs.initHighlightingOnLoad();
+            },
+          },
+          { src: "plugin/zoom-js/zoom.js", async: true },
+          { src: "plugin/notes/notes.js", async: true },
+        ],
+      });
+    </script>
+    <script>
+      (function (i, s, o, g, r, a, m) {
+        i["GoogleAnalyticsObject"] = r;
+        (i[r] =
+          i[r] ||
+          function () {
+            (i[r].q = i[r].q || []).push(arguments);
+          }),
+          (i[r].l = 1 * new Date());
+        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m);
+      })(
+        window,
+        document,
+        "script",
+        "//www.google-analytics.com/analytics.js",
+        "ga"
+      );
 
-
-					</pre>
-				</section>
-				<section>
-					<h2>Les strings interpolation et multi lignes</h2>
-					<pre>
-						<code class='javascript'>
-const person = { first: 'Thomas', last: 'Anderson', age: 25, nickname: 'Neo' };
-
-// Interpolation de JS quelconque
-console.log(`${person.first} aka ${person.nickname}`)
-// => 'Thomas aka Neo'
-
-// Multi-ligne !
-const markup = `<li>
-${person.first} ${person.last}, age ${person.age}
-</li>`;
-
-					</code>
-
-
-					</pre>
-				</section>
-				<section>
-					<h2>Valeur par défaut dans une fonction</h2>
-					<pre>
-						<code class='javascript'>
-function add(source, numToAdd = 1){
-	return source + numToAdd;
-}
-						</code>
-
-
-					</pre>
-				</section>
-				<section>
-					<h2>Les objets</h2>
-					<pre>
-						<code class='javascript'>
-function editTodo(id, text) {
-  return { type: types.EDIT_TODO, id, text };
-  //On créé un objet avec pour clef le nom de la variable.
-}
-const FILTERS = {
-  [maVar1]: 'All',
-  [maVar2]: 'Active',
-  [maVar3]: 'Completed'
-};
-						</code>
-
-
-					</pre>
-				</section>
-			</section>
-			<section >
-				<section data-background=''>
-					<h1 style='background-color:rgba(1,1,1, 0.5);'>LODASH / UNDERSCORE</h1>
-
-				</section>
-				<section>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>on ne réinvente pas la roue</h2>
-				</section>
-				<section>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>Les trucs utiles</h2>
-					<ul>
-						<li>Est ce que ma variable est un nombre / function / tableau <code>lodash/lang</code></li>
-						<li>Filtrer, trier, reduce.... <code>lodash/{collection/object/array}</code></li>
-						<li>Plein de fonctions prêtes à l'emploi <code>lodash/function</code></li>
-					</ul>
-				</section>
-			</section>
-			<section >
-				<section data-background='http://cdn.londonandpartners.com/visit/london-organisations/big-ben/63602-640x360-bigben_tilt_640.jpg'>
-					<h1 style='background-color:rgba(1,1,1, 0.5);'><a href='http://momentjs.com'>MOMENT</a></h1>
-				</section>
-				<section>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>on ne réinvente pas la roue</h2>
-		        	<iframe webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src="http://momentjs.com/" src="http://momentjs.com/" height='50%'  width='80%'></iframe>
-				</section>
-				<section>
-					<h2 style='background-color:rgba(1,1,1, 0.5);'>Les trucs utiles</h2>
-					<ul>
-						<li>formatter des dates <code>moment().format('L')</code></li>
-						<li>Manipuler des dates <code>moment(maDate).add('days', 1)</code></li>
-						<li>Timezone...</li>
-					</ul>
-					<blockquote>Si tu manipules des dates tu utilises momentjs</blockquote>
-				</section>
-			</section>
-			<section >
-				<section>
-					<h1 style='background-color:rgba(1,1,1, 0.5);'><a href='https://github.com/get-focus/formation-js/tree/master/exercices'>Exercices</a></h1>
-				</section>
-			</section>
-		</div>
-	</div>
-	<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
-
-		<script>
-			// Full list of configuration options available at:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
-				// Optional reveal.js plugins
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true }
-				]
-			});
-		</script>
-		<script>
-          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-          ga('create', 'UA-70256271-2', 'auto');
-          ga('send', 'pageview');
-
-        </script>
-
-
-</body>
+      ga("create", "UA-70256271-2", "auto");
+      ga("send", "pageview");
+    </script>
+  </body>
 </html>
