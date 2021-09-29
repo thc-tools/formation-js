@@ -10,3 +10,7 @@
 .reveal h3 {
     border-bottom: 1px solid pink;
 }
+
+.reveal strong {
+    color: pink;
+}
